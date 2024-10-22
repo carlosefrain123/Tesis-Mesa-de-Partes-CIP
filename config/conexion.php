@@ -9,7 +9,7 @@ session_start();
         protected function Conexion(){
             try {
                 //TODO: Intenta establecer la conexión utilizando PDO
-                $conectar=$this->dbh=new PDO("mysql:local=localhost;dbname=mesadepartes","root","");
+                $conectar = $this->dbh = new PDO("mysql:host=localhost;port=3305;dbname=mesadepartes", "root", "");
                 return $conectar;
             } catch (Exception $e) {
                 //TODO: En caso de error, muestra el mensaje de error y termina la ejecución del script
@@ -19,7 +19,7 @@ session_start();
         }
         //TODO: Método para establecer el juego de caracteres a UTF-8
         public function set_names(){
-            return $this->dbh->query("SET NAME'utf8'");
+            return $this->dbh->query("SET NAMES'utf8'");
         }
         //TODO: Ruta del proyecto
         public static function ruta(){
