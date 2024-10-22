@@ -10,6 +10,7 @@ session_start();
             try {
                 //TODO: Intenta establecer la conexión utilizando PDO
                 $conectar=$this->dbh=new PDO("mysql:local=localhost;dbname=mesadepartes","root","");
+                return $conectar;
             } catch (Exception $e) {
                 //TODO: En caso de error, muestra el mensaje de error y termina la ejecución del script
                 print "Error BD:".$e->getMessage()."<br>";
