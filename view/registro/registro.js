@@ -67,7 +67,7 @@ function registrar(e) {
         contentType: false,
         processData: false,
         success: function(datos) {
-            console.log("Guardado"+datos);
+            console.log(/* "Guardado"+ */datos);
         }
     });
 }

@@ -12,4 +12,15 @@ class Usuario extends Conectar
         $sql->bindValue(3,$usu_pass);
         $sql->execute();
     }
+    //TODO: Detecta si no se repite el correo
+    public function get_usuario_correo($usu_correo){
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "SELECT * FROM tm_usuario
+        WHERE usu_correo=?";
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1,$usu_correo);
+        $sql->execute(); 
+        return $sql->fetchAll();
+    }
 }
