@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
-
+    <!-- Sweet Alert-->
+    <link href="../../assets/css/sweetalert2.min.css" rel="stylesheet" type="text/css">
     <!-- preloader css -->
     <link rel="stylesheet" href="../../assets/css/preloader.min.css" type="text/css">
 
@@ -250,9 +251,9 @@
     <script src="../../assets/js/feather.min.js"></script>
     <!-- pace js -->
     <script src="../../assets/js/pace.min.js"></script>
-
+    <!-- Sweet Alerts js -->
+    <script src="../../assets/js/sweetalert2.min.js"></script>
     <!-- validation init -->
-    <!--     <script src="../../assets/js/validation.init.js"></script>-->
     <!--https://cdnjs.com/libraries/validator-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.12.0/validator.min.js" integrity="sha512-cAPfLsKbargeKjN/NYR9ZSEdkF+MBAcxNqdALGHTJn6u0Pnf4lucJExyaw3eHy44jRPp9pIRhHbL5N4jQBeI9w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="registro.js"></script>
