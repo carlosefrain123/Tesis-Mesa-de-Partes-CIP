@@ -45,16 +45,14 @@
                                         <div class="mb-3">
                                             <label for="usu_correo" class="form-label">Correo Electrónico</label>
                                             <input type="email" class="form-control" id="usu_correo" name="usu_correo" placeholder="Enter email" required="">
-                                            <div class="invalid-feedback">
-                                                Ingrese correo eléctronico
+                                            <div class="validation-error text-danger">
                                             </div>
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="usu_nomape" class="form-label">Nombres y Apellidos</label>
                                             <input type="text" class="form-control" id="usu_nomape" name="usu_nomape" placeholder="Ingrese nombre" required="">
-                                            <div class="invalid-feedback">
-                                                Ingrese nombre
+                                            <div class="validation-error text-danger">
                                             </div>
                                         </div>
                                         <!-- <div class="mb-3">
@@ -70,15 +68,13 @@
                                             <input type="password" class="form-control" id="usu_pass"
                                                 name="usu_pass"
                                                 placeholder="Enter password" required="">
-                                            <div class="invalid-feedback">
-                                                Ingrese Contraseña
+                                            <div class="validation-error text-danger">
                                             </div>
                                         </div>
                                         <div class="mb-3">
                                             <label for="usu_pass_confir" class="form-label">Confirmar Contraseña</label>
                                             <input type="password" class="form-control" id="usu_pass_confir" name="usu_pass_confir" placeholder="Enter password" required="">
-                                            <div class="invalid-feedback">
-                                                Confirmar Contraseña
+                                            <div class="validation-error text-danger">
                                             </div>
                                         </div>
                                         <div class="mb-4">
@@ -256,8 +252,9 @@
     <script src="../../assets/js/pace.min.js"></script>
 
     <!-- validation init -->
-    <script src="../../assets/js/validation.init.js"></script>
-
+    <!--     <script src="../../assets/js/validation.init.js"></script>-->
+    <!--https://cdnjs.com/libraries/validator-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.12.0/validator.min.js" integrity="sha512-cAPfLsKbargeKjN/NYR9ZSEdkF+MBAcxNqdALGHTJn6u0Pnf4lucJExyaw3eHy44jRPp9pIRhHbL5N4jQBeI9w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="registro.js"></script>
 
 </body>
