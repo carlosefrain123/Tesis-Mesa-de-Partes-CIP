@@ -34,13 +34,13 @@
                             <div class="d-flex flex-column h-100">
                                 <div class="mb-4 mb-md-5 text-center">
                                     <a href="index.html" class="d-block auth-logo">
-                                        <img src="../../assets/picture/logo-sm.svg" alt="" height="28"> <span class="logo-txt">Minia</span>
+                                        <img src="../../assets/picture/LogoCIP.png" alt="" height="70"> 
                                     </a>
                                 </div>
                                 <div class="auth-content my-auto">
                                     <div class="text-center">
-                                        <h5 class="mb-0">Register Account</h5>
-                                        <p class="text-muted mt-2">Get your free Minia account now.</p>
+                                        <h5 class="mb-0">REGISTRESE</h5>
+                                        <!-- <p class="text-muted mt-2">Get your free Minia account now.</p> -->
                                     </div>
                                     <form id="mnt_form" class="needs-validation custom-form mt-4 pt-2" novalidate="" action="index.html">
                                         <div class="mb-3">
