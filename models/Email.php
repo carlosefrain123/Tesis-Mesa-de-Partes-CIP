@@ -12,7 +12,7 @@ class Email extends PHPMailer{
 
     public function registrar($usu_id){
         $this->isSMTP();
-        $this->Port=587;
+        $this->Port=465;
         $this->SMTPAuth=true;
         $this->SMTPSecure='tls';
         
@@ -21,12 +21,12 @@ class Email extends PHPMailer{
         $this->setFrom($this->gCorreo,"Registro en mesa de partes Efrain");
 
         $this->CharSet='UTF8';
-        $this->addAddress("Carloschallo1@hotmail.com");
+        $this->addAddress("carlosefrainchallo1@gmail.com");
         $this->isHTML(true);
         $this->Subject='Registro en Mesa de Partes';
 
         $cuerpo=file_get_contents("../assets/email/registrar.html");
-        $cuerpo=str_replace("xusuariocorreo",$$usu_id,$cuerpo);
+        $cuerpo=str_replace("xusuariocorreo",$usu_id,$cuerpo);
 
         $this->Body=$cuerpo;
         $this->AltBody=strip_tags("Confirmar Registro");
