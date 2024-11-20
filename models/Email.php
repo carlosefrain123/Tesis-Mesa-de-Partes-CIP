@@ -11,6 +11,7 @@ class Email extends PHPMailer{
     protected $gContrasena='Mesadepartes@7';
 
     public function registrar($usu_correo){
+        $conexion=new Conectar();
         $this->IsSMTP();
         $this->Host='smtp.hostinger.com';
         $this->Port=465;
@@ -27,7 +28,7 @@ class Email extends PHPMailer{
         $this->Subject="Registro en mesa de partes Efrain";
 
         $cuerpo=file_get_contents("../assets/email/registrar.html");
-        $cuerpo=str_replace('xusuariocorreo',$usu_correo,$cuerpo);
+        $cuerpo=str_replace('xlinkcorreourl',$conexion->ruta(),$cuerpo);
 
         $this->Body=$cuerpo;
         $this->AltBody=strip_tags("Confirmar Registro");
