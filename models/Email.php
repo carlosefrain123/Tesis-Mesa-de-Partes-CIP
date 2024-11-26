@@ -10,8 +10,10 @@ class Email extends PHPMailer{
     protected $gCorreo='carlosefrain777@limpiobe.net';
     protected $gContrasena='Mesadepartes@7';
 
-    public function registrar($usu_id){
+    public function registrar($user_id){
         $conexion=new Conectar();
+        $usuario=new Usuario();
+        $datos=$usuario->get_usuario_id($user_id);
         $this->IsSMTP();
         $this->Host='smtp.hostinger.com';
         $this->Port=465;
@@ -24,12 +26,12 @@ class Email extends PHPMailer{
 
         $this->CharSet='UTF8';
         /* $this->addAddress($usu_correo); */
-        $this->addAddress("Carloschallo1@hotmail.com");
+        $this->addAddress($datos[0]["usu_correo"]);
         $this->IsHTML(true);
         $this->Subject="Registro en mesa de partes Efrain";
 
         $cuerpo=file_get_contents("../assets/email/registrar.html");
-        $url=$conexion->ruta().'view/confirmar/?id='.$usu_id;
+        $url=$conexion->ruta().'view/confirmar/?id='.$user_id;
         $cuerpo=str_replace('xlinkcorreourl',$url,$cuerpo);
 
         $this->Body=$cuerpo;
