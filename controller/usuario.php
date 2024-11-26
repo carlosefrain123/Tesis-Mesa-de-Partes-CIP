@@ -10,9 +10,9 @@
     case 'registrar':
         $datos=$usuario->get_usuario_correo($_POST["usu_correo"]);
         if (is_array($datos)==true and count($datos)==0) {
-            $usuario->registrar_usuario($_POST["usu_nomape"],$_POST["usu_correo"],$_POST["usu_pass"]);
+            $datos1=$usuario->registrar_usuario($_POST["usu_nomape"],$_POST["usu_correo"],$_POST["usu_pass"]);
             //Email
-            $email->registrar($_POST["usu_correo"]); //Reemplazar con el ID del usuario registrado
+            $email->registrar($datos1[0]["usu_id"]); //Reemplazar con el ID del usuario registrado
             //Identificado
             echo "1";
         }else{
