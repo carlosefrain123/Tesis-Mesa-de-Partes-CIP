@@ -28,7 +28,8 @@ class Email extends PHPMailer{
         $this->Subject="Registro en mesa de partes Efrain";
 
         $cuerpo=file_get_contents("../assets/email/registrar.html");
-        $cuerpo=str_replace('xlinkcorreourl',$conexion->ruta(),$cuerpo);
+        $url=$conexion->ruta().'view/confirmar/';
+        $cuerpo=str_replace('xlinkcorreourl',$url,$cuerpo);
 
         $this->Body=$cuerpo;
         $this->AltBody=strip_tags("Confirmar Registro");
