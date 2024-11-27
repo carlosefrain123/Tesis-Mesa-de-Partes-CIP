@@ -10,8 +10,8 @@ class Email extends PHPMailer{
     protected $gCorreo='carlosefrain777@limpiobe.net';
     protected $gContrasena='Mesadepartes@7';
     //Muy importante
-    protected $key="MesaDePartesCIP";
-    protected $cipher="aes-256-cbc";
+    private $key="MesaDePartesCIP";
+    private $cipher="aes-256-cbc";
     public function registrar($user_id){
         $conexion=new Conectar();
         $usuario=new Usuario();
