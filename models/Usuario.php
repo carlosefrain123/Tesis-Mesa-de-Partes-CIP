@@ -5,13 +5,16 @@ class Usuario extends Conectar
     private $cipher="aes-256-cbc";
     public function registrar_usuario($usu_nomape, $usu_correo, $usu_pass)
     {
+        $iv=openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->cipher));
+        $cifrado=openssl_encrypt($usu_pass,$this->cipher,$this->key,OPENSSL_RAW_DATA,$iv);
+        $textoCifrado=base64_encode($iv.$cifrado);
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "INSERT INTO tm_usuario (usu_nomape,usu_correo,usu_pass) VALUES (?,?,?)";
         $sql=$conectar->prepare($sql);
         $sql->bindValue(1,$usu_nomape);
         $sql->bindValue(2,$usu_correo);
-        $sql->bindValue(3,$usu_pass);
+        $sql->bindValue(3,$textoCifrado);
         $sql->execute();
 
         $sql1="select last_insert_id() as 'usu_id'";
