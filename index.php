@@ -53,7 +53,7 @@
                                                 </div>
                                                 <div class="flex-shrink-0">
                                                     <div class="">
-                                                        <a href="auth-recoverpw-1.html" class="text-muted">Olvidaste tu contraseña</a>
+                                                        <a href="view/recuperar/index.php" class="text-muted">Olvidaste tu contraseña</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -240,7 +240,7 @@
     <script src="assets/js/bootstrap.bundle.min-1.js"></script>
     <script src="assets/js/metisMenu.min-1.js"></script>
     <script src="assets/js/simplebar.min-1.js"></script>
-    <script src="assets/js/waves.min-1.js"></script>
+    <script src="assets/js/waves.min.js"></script>
     <script src="assets/js/feather.min-1.js"></script>
     <!-- pace js -->
     <script src="assets/js/pace.min-1.js"></script>
