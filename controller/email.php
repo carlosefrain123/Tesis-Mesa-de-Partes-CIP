@@ -13,7 +13,7 @@
         if (is_array($datos)==true and count($datos)==0) { 
             echo "0";
         }else{
-            echo "1";
+            echo "1"; 
         }
         break;
  }
