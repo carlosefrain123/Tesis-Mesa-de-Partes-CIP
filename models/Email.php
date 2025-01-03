@@ -80,6 +80,8 @@ class Email extends PHPMailer{
 
         $xpassusu=$this->generarXPassUsu();
 
+        $usuario->recuperar_usuario($usu_correo,$xpassusu);
+
         $cuerpo=file_get_contents("../assets/email/recuperar.html");
         $cuerpo=str_replace('xpassusu',$xpassusu,$cuerpo);
         $cuerpo=str_replace('xlinksistema',$url,$cuerpo);

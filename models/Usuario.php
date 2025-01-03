@@ -56,4 +56,19 @@ class Usuario extends Conectar
         $sql->bindValue(1,$textoDecifrado);
         $sql->execute(); 
     }
+    public function recuperar_usuario($usu_correo,$usu_pass){
+        $iv=openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->cipher));
+        $cifrado=openssl_encrypt($usu_pass,$this->cipher,$this->key,OPENSSL_RAW_DATA,$iv);
+        $textoCifrado=base64_encode($iv.$cifrado);
+
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "UPDATE tm_usuario SET usu_pass=?
+        WHERE
+            usu_correo=?";
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1,$textoCifrado);
+        $sql->bindValue(2,$usu_correo);
+        $sql->execute(); 
+    }
 }
