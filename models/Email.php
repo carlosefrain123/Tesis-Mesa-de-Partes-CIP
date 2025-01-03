@@ -74,11 +74,13 @@ class Email extends PHPMailer{
         /* $this->addAddress($usu_correo); */
         $this->addAddress($datos[0]["usu_correo"]);
         $this->IsHTML(true);
-        $this->Subject="Registro en mesa de partes Efrain";
+        $this->Subject="Mesa de Partes";
+
         $url=$conexion->ruta();
+
         $xpassusu=$this->generarXPassUsu();
-        $cuerpo=file_get_contents("../assets/email/registrar.html");
-        
+
+        $cuerpo=file_get_contents("../assets/email/recuperar.html");
         $cuerpo=str_replace('xpassusu',$xpassusu,$cuerpo);
         $cuerpo=str_replace('xlinksistema',$url,$cuerpo);
 
@@ -94,8 +96,9 @@ class Email extends PHPMailer{
     }
     private function generarXPassUsu(){
         $parteAlfanumerica=substr(md5(rand()),0,3);
-        $parteNumerica=str_pad(floor(rand()*1000),3,'0',STR_PAD_LEFT);
-        return $parteAlfanumerica.$parteNumerica;
+        $parteNumerica=str_pad(rand(0,999),3,'0',STR_PAD_LEFT);
+        $resultado=$parteAlfanumerica.$parteNumerica;
+        return substr($resultado,0,6);
     }
 }
 ?>
