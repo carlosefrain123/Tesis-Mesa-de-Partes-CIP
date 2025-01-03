@@ -48,10 +48,10 @@
                                     <form class="custom-form mt-4">
                                         <div class="mb-3">
                                             <label class="form-label">Correo electronico</label>
-                                            <input type="text" class="form-control" id="usu_correo" id="usu_name" placeholder="Ingrese Correo electronico">
+                                            <input type="text" class="form-control" id="usu_correo" name="usu_correo" placeholder="Ingrese Correo electronico">
                                         </div>
                                         <div class="mb-3 mt-4">
-                                            <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Recuperar</button>
+                                            <a class="btn btn-primary w-100 waves-effect waves-light"  id="btnrecuperar">Recuperar</a>
                                         </div>
                                     </form>
 
