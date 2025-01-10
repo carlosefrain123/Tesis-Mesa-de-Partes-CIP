@@ -1,3 +1,11 @@
+<?php
+require_once("config/conexion.php");
+if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
+    require_once("models/Usuario.php");
+    $usuario = new Usuario();
+    $usuario->login();
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -42,10 +50,47 @@
                                         <p class="text-muted mt-2">Inicia sesión para continuar en el Sistema de Mesa de Partes del CIP.</p>
                                     </div>
 
-                                    <form class="custom-form mt-4 pt-2">
+                                    <form class="custom-form mt-4 pt-2" action="" method="post">
+                                        <?php
+                                        if (isset($_GET["m"])) {
+                                            switch ($_GET["m"]) {
+                                                case "1":
+                                        ?>
+                                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                        <i class="mdi mdi-block-helper me-2"></i>
+                                                        Correo eléctronico no encontrado
+                                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                    </div>
+                                                <?php
+                                                    break;
+                                                case "2":
+                                                ?>
+                                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                        <i class="mdi mdi-block-helper me-2"></i>
+                                                        Campos vacios.
+                                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                    </div>
+                                                <?php
+                                                    break;
+                                                case "3":
+                                                ?>
+                                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                        <i class="mdi mdi-block-helper me-2"></i>
+                                                        Contraseña es incorrecta.
+                                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                    </div>
+                                        <?php
+                                                    break;
+                                                default:
+                                                    # code...
+                                                    break;
+                                            }
+                                        }
+                                        ?>
+
                                         <div class="mb-3">
                                             <label class="form-label">Correo Eléctronico</label>
-                                            <input type="email" class="form-control" id="usu_correo" placeholder="Ingrese correo Eléctrónico">
+                                            <input type="email" class="form-control" id="usu_correo" name="usu_correo" placeholder="Ingrese correo Eléctrónico" required>
                                         </div>
                                         <div class="mb-3">
                                             <div class="d-flex align-items-start">
@@ -60,7 +105,7 @@
                                             </div>
 
                                             <div class="input-group auth-pass-inputgroup">
-                                                <input type="password" class="form-control" placeholder="Ingreses Contraseña" aria-label="Password" aria-describedby="password-addon">
+                                                <input type="password" class="form-control" id="usu_pass" name="usu_pass" placeholder="Ingrese Contraseña" aria-label="Password" aria-describedby="password-addon" required>
                                                 <button class="btn btn-light shadow-none ms-0" type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                             </div>
                                         </div>
@@ -76,6 +121,7 @@
 
                                         </div>
                                         <div class="mb-3">
+                                            <input type="hidden" name="enviar" value="si">
                                             <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Acceder</button>
                                         </div>
                                     </form>

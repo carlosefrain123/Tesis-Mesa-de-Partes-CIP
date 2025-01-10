@@ -1,74 +1,119 @@
 <?php
 class Usuario extends Conectar
 {
-    private $key="MesaDePartesCIP";
-    private $cipher="aes-256-cbc";
+    private $key = "MesaDePartesCIP";
+    private $cipher = "aes-256-cbc";
+    public function login()
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        if (isset($_POST["enviar"])) {
+            $correo = $_POST["usu_correo"];
+            $pass = $_POST["usu_pass"];
+            if (empty($correo) and empty($pass)) {
+                header("Location:" . conectar::ruta() . "index.php?m=2");
+                exit();
+            } else {
+                $sql = "SELECT * FROM tm_usuario
+                WHERE usu_correo=?";
+                $sql = $conectar->prepare($sql);
+                $sql->bindValue(1, $correo);
+                $sql->execute();
+                $resultado = $sql->fetch();
+                if ($resultado) {
+                    $textoCifrado = $resultado["usu_pass"];
+                    $iv_dec = substr(base64_decode($textoCifrado), 0, openssl_cipher_iv_length($this->cipher));
+                    $cifradoSinIV = substr(base64_decode($textoCifrado), openssl_cipher_iv_length($this->cipher));
+                    $textoDecifrado = openssl_decrypt($cifradoSinIV, $this->cipher, $this->key, OPENSSL_RAW_DATA, $iv_dec);
+
+                    if ($textoDecifrado == $pass) {
+                        if (is_array($resultado) and count($resultado) > 0) {
+                            $_SESSION["user_id"] = $resultado["user_id"];
+                            $_SESSION["usu_nomape"] = $resultado["usu_nomape"];
+                            $_SESSION["usu_correo"] = $resultado["usu_correo"];
+                            header("Location:" . Conectar::ruta() . "view/Home/");
+                            exit();
+                        }
+                    } else {
+                        header("Location: " . Conectar::ruta() . "index.php?m=3");
+                        exit();
+                    }
+                } else {
+                    header("Location:" . Conectar::ruta() . "index.php?m=1");
+                    exit();
+                }
+            }
+        }
+    }
     public function registrar_usuario($usu_nomape, $usu_correo, $usu_pass)
     {
-        $iv=openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->cipher));
-        $cifrado=openssl_encrypt($usu_pass,$this->cipher,$this->key,OPENSSL_RAW_DATA,$iv);
-        $textoCifrado=base64_encode($iv.$cifrado);
+        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->cipher));
+        $cifrado = openssl_encrypt($usu_pass, $this->cipher, $this->key, OPENSSL_RAW_DATA, $iv);
+        $textoCifrado = base64_encode($iv . $cifrado);
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "INSERT INTO tm_usuario (usu_nomape,usu_correo,usu_pass) VALUES (?,?,?)";
-        $sql=$conectar->prepare($sql);
-        $sql->bindValue(1,$usu_nomape);
-        $sql->bindValue(2,$usu_correo);
-        $sql->bindValue(3,$textoCifrado);
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_nomape);
+        $sql->bindValue(2, $usu_correo);
+        $sql->bindValue(3, $textoCifrado);
         $sql->execute();
 
-        $sql1="select last_insert_id() as 'usu_id'";
-        $sql1=$conectar->prepare($sql1);
+        $sql1 = "select last_insert_id() as 'usu_id'";
+        $sql1 = $conectar->prepare($sql1);
         $sql1->execute();
         return $sql1->fetchAll();
-
     }
     //TODO: Detecta si no se repite el correo
-    public function get_usuario_correo($usu_correo){
+    public function get_usuario_correo($usu_correo)
+    {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "SELECT * FROM tm_usuario
         WHERE usu_correo=?";
-        $sql=$conectar->prepare($sql);
-        $sql->bindValue(1,$usu_correo);
-        $sql->execute(); 
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_correo);
+        $sql->execute();
         return $sql->fetchAll();
     }
-    public function get_usuario_id($user_id){
+    public function get_usuario_id($user_id)
+    {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "SELECT * FROM tm_usuario 
         WHERE user_id=?";
-        $sql=$conectar->prepare($sql);
-        $sql->bindValue(1,$user_id);
-        $sql->execute(); 
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $user_id);
+        $sql->execute();
         return $sql->fetchAll();
     }
-    public function activar_usuario($user_id){
-        $iv_dec=substr(base64_decode($user_id),0,openssl_cipher_iv_length($this->cipher));
-        $cifradoSinIV=substr(base64_decode($user_id),openssl_cipher_iv_length($this->cipher));
-        $textoDecifrado=openssl_decrypt($cifradoSinIV,$this->cipher,$this->key,OPENSSL_RAW_DATA,$iv_dec);
+    public function activar_usuario($user_id)
+    {
+        $iv_dec = substr(base64_decode($user_id), 0, openssl_cipher_iv_length($this->cipher));
+        $cifradoSinIV = substr(base64_decode($user_id), openssl_cipher_iv_length($this->cipher));
+        $textoDecifrado = openssl_decrypt($cifradoSinIV, $this->cipher, $this->key, OPENSSL_RAW_DATA, $iv_dec);
 
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "UPDATE tm_usuario SET est=1, fech_acti=NOW() WHERE user_id=?";
-        $sql=$conectar->prepare($sql);
-        $sql->bindValue(1,$textoDecifrado);
-        $sql->execute(); 
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $textoDecifrado);
+        $sql->execute();
     }
-    public function recuperar_usuario($usu_correo,$usu_pass){
-        $iv=openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->cipher));
-        $cifrado=openssl_encrypt($usu_pass,$this->cipher,$this->key,OPENSSL_RAW_DATA,$iv);
-        $textoCifrado=base64_encode($iv.$cifrado);
+    public function recuperar_usuario($usu_correo, $usu_pass)
+    {
+        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->cipher));
+        $cifrado = openssl_encrypt($usu_pass, $this->cipher, $this->key, OPENSSL_RAW_DATA, $iv);
+        $textoCifrado = base64_encode($iv . $cifrado);
 
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "UPDATE tm_usuario SET usu_pass=?
         WHERE
             usu_correo=?";
-        $sql=$conectar->prepare($sql);
-        $sql->bindValue(1,$textoCifrado);
-        $sql->bindValue(2,$usu_correo);
-        $sql->execute(); 
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $textoCifrado);
+        $sql->bindValue(2, $usu_correo);
+        $sql->execute();
     }
 }
