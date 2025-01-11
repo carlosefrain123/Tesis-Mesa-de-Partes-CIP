@@ -54,14 +54,16 @@ switch ($_GET["op"]) {
                 ];
                 $datos = $usuario->get_usuario_correo($email);
                 if (is_array($datos) == true and count($datos) == 0) {
-                    /* $user_id = $datos[0]["user_id"];
+                    echo json_encode("registrar");
+                } else {
+                    $user_id = $datos[0]["user_id"];
+                    echo json_encode("ingreso");
                     $_SESSION["user_id"] = $user_id;
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
                     header("Location:" . Conectar::ruta() . "view/Home/");
-                    exit(); */
-                } else {
-                    echo json_encode($datos);
+                    exit();
+                    
                 }
             } else {
                 echo json_encode(['error' => '¡Los datos de la cuenta no están disponibles!']);
