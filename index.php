@@ -126,29 +126,34 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                                         </div>
                                     </form>
 
-                                    <!-- <div class="mt-4 pt-2 text-center">
+                                    <div class="mt-4 pt-2 text-center">
                                         <div class="signin-other-title">
                                             <h5 class="font-size-14 mb-3 text-muted fw-medium">- Acceder con -</h5>
                                         </div>
 
                                         <ul class="list-inline mb-0">
                                             <li class="list-inline-item">
-                                                <a href="javascript:void()" class="social-list-item bg-primary text-white border-primary">
-                                                    <i class="mdi mdi-facebook"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="javascript:void()" class="social-list-item bg-info text-white border-info">
-                                                    <i class="mdi mdi-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="javascript:void()" class="social-list-item bg-danger text-white border-danger">
-                                                    <i class="mdi mdi-google"></i>
-                                                </a>
+                                                <!-- Botón "Iniciar sesión con Google" con atributos de datos -->
+                                                <div id="g_id_onload"
+                                                    data-client_id="1086297007236-76btgk1hsnv9n7oaodou4oifiior9ms3.apps.googleusercontent.com"
+                                                    data-context="signin"
+                                                    data-ux_mode="popup"
+                                                    data-callback="handleCredentialResponse"
+                                                    data-auto_prompt="false">
+                                                </div>
+                                                TODO<!-- : Configuración del botón de inicio de sesión con Google -->
+                                                <div class="g_id_signin"
+                                                    data-type="standard"
+                                                    data-shape="rectangular"
+                                                    data-theme="outline"
+                                                    data-text="signin_with"
+                                                    data-size="large"
+                                                    data-logo_alignment="left">
+
+                                                </div>
                                             </li>
                                         </ul>
-                                    </div> -->
+                                    </div>
 
                                     <div class="mt-5 text-center">
                                         <p class="text-muted mb-0">Aún no tienes cuentas<a href="view/registro/" class="text-primary fw-semibold"> Signup now </a> </p>
@@ -275,6 +280,10 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
     <!-- password addon init -->
     <script src="assets/js/pass-addon.init-1.js"></script>
 
+    <!-- TODO: Script para cargar la API de Google Sing-In de manera asincrona -->
+    <script src="https://accounts.google.com/gsi/client" async></script>
+
+    <script type="text/javascript" src="acceso.js"></script>
 </body>
 
 </html>
