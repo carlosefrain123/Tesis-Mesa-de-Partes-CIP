@@ -32,7 +32,28 @@
 
             if (!empty($jsonObj->request_type)&&$jsonObj->request_type=='user_auth') {
                 $credential=!empty($jsonObj->credential)?$jsonObj->credential:'';
-                echo json_encode($credential);
+                
+                //TODO: Decodificar el payload de la respuesta desde el token JWT
+                $parts=explode(".",$credential);
+                $header=base64_decode($parts[0]);
+                $payload=base64_decode($parts[1]);
+                $signature=base64_decode($parts[2]);
+
+                $responsePayload=json_decode($payload);
+
+                if (!empty($responsePayload)) {
+                    //TODO: Información del perfil del usuario
+                    $nombre=!empty($responsePayload->name)?$responsePayload->name:'';
+                    $email=!empty($responsePayload->email)?$responsePayload->email:'';
+                    $imagen=!empty($responsePayload->picture)?$responsePayload->picture:'';
+                }
+                $output=[
+                    'nombre'=>$nombre,
+                    'email'=>$email,
+                    'imagen'=>$imagen
+                ];
+
+                echo json_encode($output);
             }else{
                 echo json_encode(['error' =>'¡Los datos de la cuenta no están disponibles!']);
             }
