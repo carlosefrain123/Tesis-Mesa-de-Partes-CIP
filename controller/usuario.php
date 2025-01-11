@@ -24,5 +24,19 @@
     case "activar":
         $usuario->activar_usuario($_POST["user_id"]);
         break;
+
+    case "registrargoogle":
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SERVER["CONTENT_TYPE"] == "application/json")  {
+            $jsonStr=file_get_contents('php://input');
+            $jsonObj=json_decode($jsonStr);
+
+            if (!empty($jsonObj->request_type)&&$jsonObj->request_type=='user_auth') {
+                $credential=!empty($jsonObj->credential)?$jsonObj->credential:'';
+                echo json_encode($credential);
+            }else{
+                echo json_encode(['error' =>'¡Los datos de la cuenta no están disponibles!']);
+            }
+        }
+        break;
  }
 ?>
