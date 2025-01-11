@@ -17,7 +17,11 @@ function handleCredentialResponse(response) {
     }),
     success: function (data) {
       /* var data=JSON.parse(data); */
+        /* console.log(data); */
         console.log(data);
+        if (data==="0") {
+          window.location.href='view/home'
+        }
     }
   })
   if (response && response.credential) {
