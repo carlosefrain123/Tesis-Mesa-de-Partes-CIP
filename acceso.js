@@ -16,7 +16,7 @@ function handleCredentialResponse(response) {
         credential: response.credential
     }),
     success: function (data) {
-      var data=JSON.parse(data);
+      /* var data=JSON.parse(data); */
         console.log(data);
     }
   })
