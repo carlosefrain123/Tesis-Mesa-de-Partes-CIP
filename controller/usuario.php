@@ -10,7 +10,7 @@ switch ($_GET["op"]) {
     case 'registrar':
         $datos = $usuario->get_usuario_correo($_POST["usu_correo"]);
         if (is_array($datos) == true and count($datos) == 0) {
-            $datos1 = $usuario->registrar_usuario($_POST["usu_nomape"], $_POST["usu_correo"], $_POST["usu_pass"],"");
+            $datos1 = $usuario->registrar_usuario($_POST["usu_nomape"], $_POST["usu_correo"], $_POST["usu_pass"],"",2);
             //Email
             $email->registrar($datos1[0]["user_id"]); //Reemplazar con el ID del usuario registrado. Tambien se cambio
             //Identificado
@@ -50,7 +50,7 @@ switch ($_GET["op"]) {
                 
                 $datos = $usuario->get_usuario_correo($email);
                 if (is_array($datos) == true and count($datos) == 0) {
-                    $datos1=$usuario->registrar_usuario($nombre, $email,"",$imagen);
+                    $datos1=$usuario->registrar_usuario($nombre, $email,"",$imagen,1);
                     $_SESSION["user_id"] = $datos1[0]["user_id"];
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
