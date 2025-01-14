@@ -31,6 +31,7 @@ class Usuario extends Conectar
                             $_SESSION["user_id"] = $resultado["user_id"];
                             $_SESSION["usu_nomape"] = $resultado["usu_nomape"];
                             $_SESSION["usu_correo"] = $resultado["usu_correo"];
+                            $_SESSION["usu_img"] = $resultado["usu_img"];
                             header("Location:" . Conectar::ruta() . "view/Home/");
                             exit();
                         }

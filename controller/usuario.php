@@ -54,12 +54,14 @@ switch ($_GET["op"]) {
                     $_SESSION["user_id"] = $datos1[0]["user_id"];
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
+                    $_SESSION["usu_img"] = $imagen;
                     echo "1";
                 } else {
                     $user_id = $datos[0]["user_id"];
                     $_SESSION["user_id"] = $user_id;
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
+                    $_SESSION["usu_img"] = $imagen;
                     echo "0";                  
                 }
             } else {

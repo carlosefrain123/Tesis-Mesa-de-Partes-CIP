@@ -64,8 +64,8 @@
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item bg-soft-light border-start border-end" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="../../assets/picture/avatar-1.jpg" alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1 fw-medium">Shawn L.</span>
+                    <img class="rounded-circle header-profile-user" src="<?php echo $_SESSION["usu_img"]?>" alt="Header Avatar">
+                    <span class="d-none d-xl-inline-block ms-1 fw-medium"><?php echo $_SESSION["usu_nomape"]?></span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
