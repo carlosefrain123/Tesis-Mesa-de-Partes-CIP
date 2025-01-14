@@ -21,6 +21,8 @@ function handleCredentialResponse(response) {
         console.log(data);
         if (data==="0") {
           window.location.href='view/home'
+        }else if(data==="1"){
+          window.location.href='view/home'
         }
     }
   })

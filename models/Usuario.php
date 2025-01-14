@@ -45,21 +45,22 @@ class Usuario extends Conectar
             }
         }
     }
-    public function registrar_usuario($usu_nomape, $usu_correo, $usu_pass)
+    public function registrar_usuario($usu_nomape, $usu_correo, $usu_pass, $usu_img)
     {
         $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->cipher));
         $cifrado = openssl_encrypt($usu_pass, $this->cipher, $this->key, OPENSSL_RAW_DATA, $iv);
         $textoCifrado = base64_encode($iv . $cifrado);
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO tm_usuario (usu_nomape,usu_correo,usu_pass) VALUES (?,?,?)";
+        $sql = "INSERT INTO tm_usuario (usu_nomape,usu_correo,usu_pass,usu_img) VALUES (?,?,?,?)";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_nomape);
         $sql->bindValue(2, $usu_correo);
         $sql->bindValue(3, $textoCifrado);
+        $sql->bindValue(4, $usu_img);
         $sql->execute();
 
-        $sql1 = "select last_insert_id() as 'usu_id'";
+        $sql1 = "select last_insert_id() as 'user_id'";/* CAMBIO */
         $sql1 = $conectar->prepare($sql1);
         $sql1->execute();
         return $sql1->fetchAll();
