@@ -1,5 +1,7 @@
 <?php
     require_once("../../config/conexion.php");
+    if (isset($_SESSION["user_id"])) {
+        # code...
 ?>
 <!doctype html>
 <html lang="es">
@@ -68,3 +70,8 @@
 </body>
 
 </html>
+<?php
+    }else{
+        header("Location:".Conectar::ruta()."index.php");
+    }
+?>
