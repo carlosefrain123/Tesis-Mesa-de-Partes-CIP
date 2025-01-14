@@ -93,19 +93,24 @@
 
                                         <ul class="list-inline mb-0">
                                             <li class="list-inline-item">
-                                                <a href="javascript:void()" class="social-list-item bg-primary text-white border-primary">
-                                                    <i class="mdi mdi-facebook"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="javascript:void()" class="social-list-item bg-info text-white border-info">
-                                                    <i class="mdi mdi-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="javascript:void()" class="social-list-item bg-danger text-white border-danger">
-                                                    <i class="mdi mdi-google"></i>
-                                                </a>
+                                                <!-- Botón "Iniciar sesión con Google" con atributos de datos -->
+                                                <div id="g_id_onload"
+                                                    data-client_id="1086297007236-76btgk1hsnv9n7oaodou4oifiior9ms3.apps.googleusercontent.com"
+                                                    data-context="signin"
+                                                    data-ux_mode="popup"
+                                                    data-callback="handleCredentialResponse"
+                                                    data-auto_prompt="false">
+                                                </div>
+                                                TODO<!-- : Configuración del botón de inicio de sesión con Google -->
+                                                <div class="g_id_signin"
+                                                    data-type="standard"
+                                                    data-shape="rectangular"
+                                                    data-theme="outline"
+                                                    data-text="signin_with"
+                                                    data-size="large"
+                                                    data-logo_alignment="left">
+
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
@@ -148,6 +153,10 @@
     <!-- validation init -->
     <!--https://cdnjs.com/libraries/validator-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.12.0/validator.min.js" integrity="sha512-cAPfLsKbargeKjN/NYR9ZSEdkF+MBAcxNqdALGHTJn6u0Pnf4lucJExyaw3eHy44jRPp9pIRhHbL5N4jQBeI9w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <!-- TODO: Script para cargar la API de Google Sing-In de manera asincrona -->
+    <script src="https://accounts.google.com/gsi/client" async></script>
+
     <script src="registro.js"></script>
 
 </body>
