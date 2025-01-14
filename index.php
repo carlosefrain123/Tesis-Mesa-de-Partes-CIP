@@ -156,7 +156,7 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                                     </div>
 
                                     <div class="mt-5 text-center">
-                                        <p class="text-muted mb-0">Aún no tienes cuentas<a href="view/registro/" class="text-primary fw-semibold"> Signup now </a> </p>
+                                        <p class="text-muted mb-0">Aún no tienes cuentas<a href="view/registro/" class="text-primary fw-semibold"> ¡Registrate! </a> </p>
                                     </div>
                                 </div>
                                 <div class="mt-4 mt-md-5 text-center">

@@ -29,7 +29,7 @@
         <div class="container-fluid p-0">
             <div class="row g-0">
                 <div class="col-xxl-3 col-lg-4 col-md-5">
-                    <div class="auth-full-page-content d-flex p-sm-5 p-4">
+                    <div class="auth-full-page-content d-flex p-sm-5 p-4" style="padding: 2rem!important;">
                         <div class="w-100">
                             <div class="d-flex flex-column h-100">
                                 <div class="mb-4 mb-md-5 text-center">
@@ -40,7 +40,7 @@
                                 <div class="auth-content my-auto">
                                     <div class="text-center">
                                         <h5 class="mb-0">REGISTRESE</h5>
-                                        <!-- <p class="text-muted mt-2">Get your free Minia account now.</p> -->
+                                        <p class="text-muted mt-2" style="margin-bottom: -1rem !important;">Registre sus datos en el portal</p>
                                     </div>
                                     <form id="mnt_form" class="needs-validation custom-form mt-4 pt-2" novalidate="" action="index.html">
                                         <div class="mb-3">
@@ -115,11 +115,11 @@
                                         </ul>
                                     </div>
 
-                                    <div class="mt-5 text-center">
+                                    <div class="mt-5 text-center" style="margin-top: 0rem!important;">
                                         <p class="text-muted mb-0">Ya tienes una cuenta?<a href="../../index.php" class="text-primary fw-semibold"> Acceder </a> </p>
                                     </div>
                                 </div>
-                                <div class="mt-4 mt-md-5 text-center">
+                                <div class="mt-4 mt-md-5 text-center" style="margin-top: 1rem!important;">
                                     <p class="mb-0">© <script>
                                             document.write(new Date().getFullYear())
                                         </script> Todos los derechos reservados: <b>CIP CDL</b></p>
