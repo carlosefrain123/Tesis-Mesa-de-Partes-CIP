@@ -10,14 +10,14 @@
                 <li class="menu-title" data-key="t-menu">Menu</li>
 
                 <li>
-                    <a href="index.html">
+                    <a href="../home/">
                         <i data-feather="home"></i>
                         <span data-key="t-dashboard">Inicio</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="javascript: void(0);">
+                    <a href="../NuevoTramite/">
                         <i data-feather="grid"></i>
                         <span data-key="t-apps">Nuevo Trámite</span>
                     </a>
@@ -25,7 +25,7 @@
                 </li>
 
                 <li>
-                    <a href="javascript: void(0);">
+                    <a href="../ConsultarTramite/">
                         <i data-feather="users"></i>
                         <span data-key="t-authentication">Consultar Trámite</span>
                     </a>
