@@ -101,7 +101,27 @@ if (isset($_SESSION["user_id"])) {
                                                 <div class="col-lg-12">
                                                     <div class="mb-3">
                                                         <label for="form-label" class="form-label">Descripción (*)</label>
-                                                        <textarea class="form-control" type="text" rows="3" value="" id="example-text-input"></textarea>
+                                                        <textarea class="form-control" type="text" rows="2" value="" id="example-text-input"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <form action="#" class="dropzone">
+                                                        <div class="fallback">
+                                                            <input name="file" type="file" multiple="multiple">
+                                                        </div>
+                                                        <div class="dz-message needsclick">
+                                                            <div class="mb-3">
+                                                                <i class="display-4 text-muted bx bx-cloud-upload"></i>
+                                                            </div>
+
+                                                            <h5>Drop files here or click to upload.</h5>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="d-flex flex-wrap gap-2 mt-4">
+                                                        <button type="button" class="btn btn-secondary waves-effect waves-light">Limpiar</button>
+                                                        <button type="button" class="btn btn-primary waves-effect waves-light">Guardar</button>
                                                     </div>
                                                 </div>
                                             </div>
