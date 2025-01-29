@@ -58,7 +58,7 @@ if (isset($_SESSION["user_id"])) {
                                                     <div class="mb-3">
                                                         <label for="area_id" class="form-label">Area (*)</label>
                                                         <select class="form-select" name="area_id" id="area_id" placeholder="Seleccionar">
-                                                            <option value="">This is a placeholder</option>
+                                                            <option value="">Seleccionar</option>
                                                             <option value="Choice 1">Choice 1</option>
                                                             <option value="Choice 2">Choice 2</option>
                                                             <option value="Choice 3">Choice 3</option>
