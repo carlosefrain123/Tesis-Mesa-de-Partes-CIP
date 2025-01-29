@@ -65,7 +65,7 @@ if (isset($_SESSION["user_id"])) {
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-9">
+                                                <div class="col-lg-6">
                                                     <div class="mb-3">
                                                         <label for="example-text-input" class="form-label">Tramite (*)</label>
                                                         <select class="form-select" name="tra_id" id="tra_id" placeholder="Seleccionar">
@@ -74,6 +74,12 @@ if (isset($_SESSION["user_id"])) {
                                                             <option value="Choice 2">Choice 2</option>
                                                             <option value="Choice 3">Choice 3</option>
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="mb-3">
+                                                        <label for="form-label" class="form-label">Nro Externo (*)</label>
+                                                        <input class="form-control" type="text" id="example-text-input">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
