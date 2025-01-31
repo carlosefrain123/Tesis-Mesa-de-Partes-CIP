@@ -56,12 +56,9 @@ if (isset($_SESSION["user_id"])) {
                                             <div class="row">
                                                 <div class="col-lg-3">
                                                     <div class="mb-3">
-                                                        <label for="area_id" class="form-label">Area (*)</label>
+                                                        <label for="form-label" class="form-label">Area (*)</label>
                                                         <select class="form-select" name="area_id" id="area_id" placeholder="Seleccionar">
                                                             <option value="">Seleccionar</option>
-                                                            <option value="Choice 1">Choice 1</option>
-                                                            <option value="Choice 2">Choice 2</option>
-                                                            <option value="Choice 3">Choice 3</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -69,10 +66,7 @@ if (isset($_SESSION["user_id"])) {
                                                     <div class="mb-3">
                                                         <label for="example-text-input" class="form-label">Tramite (*)</label>
                                                         <select class="form-select" name="tra_id" id="tra_id" placeholder="Seleccionar">
-                                                            <option value="">This is a placeholder</option>
-                                                            <option value="Choice 1">Choice 1</option>
-                                                            <option value="Choice 2">Choice 2</option>
-                                                            <option value="Choice 3">Choice 3</option>
+                                                            <option value="">Seleccionar</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -153,6 +147,8 @@ if (isset($_SESSION["user_id"])) {
             <!-- Right bar overlay-->
             <div class="rightbar-overlay"></div>
             <?php require_once("../html/js.php") ?>
+            <script type="text/javascript" src="nuevotramite.js"></script>
+
 
     </body>
 
