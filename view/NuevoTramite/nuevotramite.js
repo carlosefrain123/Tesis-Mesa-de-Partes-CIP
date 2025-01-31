@@ -9,5 +9,9 @@ $(document).ready(function() {
         $('#tra_id').html(data);
         /* console.log(data); */
     });
+    $.post("../../controller/tipo.php?op=combo",function(data){
+        $('#tipo_id').html(data);
+        /* console.log(data); */
+    });
     /* $('#area_id').select2(); */
 });

@@ -79,10 +79,8 @@ if (isset($_SESSION["user_id"])) {
                                                 <div class="col-lg-3">
                                                     <div class="mb-3">
                                                         <label for="form-label" class="form-label">Tipo (*)</label>
-                                                        <select class="form-select" name="tip_id" id="tip_id" placeholder="Seleccionar">
+                                                        <select class="form-select" name="tipo_id" id="tipo_id" placeholder="Seleccionar">
                                                             <option value="">Seleccionar</option>
-                                                            <option value="Choice 1">Natural</option>
-                                                            <option value="Choice 2">Jurídico</option>
                                                         </select>
                                                     </div>
                                                 </div>
