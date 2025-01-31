@@ -53,57 +53,59 @@ if (isset($_SESSION["user_id"])) {
                                             <p class="card-title-desc">(*)Datos obligatorios</p>
                                         </div>
                                         <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-lg-3">
-                                                    <div class="mb-3">
-                                                        <label for="form-label" class="form-label">Area (*)</label>
-                                                        <select class="form-select" name="area_id" id="area_id" placeholder="Seleccionar">
-                                                            <option value="">Seleccionar</option>
-                                                        </select>
+                                            <form action="" method="post" id="documento_form">
+
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <div class="mb-3">
+                                                            <label for="form-label" class="form-label">Area (*)</label>
+                                                            <select class="form-select" name="area_id" id="area_id" placeholder="Seleccionar" requeridad>
+                                                                <option value="">Seleccionar</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label for="example-text-input" class="form-label">Tramite (*)</label>
-                                                        <select class="form-select" name="tra_id" id="tra_id" placeholder="Seleccionar">
-                                                            <option value="">Seleccionar</option>
-                                                        </select>
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label for="example-text-input" class="form-label">Tramite (*)</label>
+                                                            <select class="form-select" name="tra_id" id="tra_id" placeholder="Seleccionar" requeridad>
+                                                                <option value="">Seleccionar</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="mb-3">
-                                                        <label for="form-label" class="form-label">Nro Externo (*)</label>
-                                                        <input class="form-control" type="text" id="example-text-input">
+                                                    <div class="col-lg-3">
+                                                        <div class="mb-3">
+                                                            <label for="form-label" class="form-label">Nro Externo (*)</label>
+                                                            <input class="form-control" type="text" name="doc_externo" id="doc_externo">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="mb-3">
-                                                        <label for="form-label" class="form-label">Tipo (*)</label>
-                                                        <select class="form-select" name="tipo_id" id="tipo_id" placeholder="Seleccionar">
-                                                            <option value="">Seleccionar</option>
-                                                        </select>
+                                                    <div class="col-lg-3">
+                                                        <div class="mb-3">
+                                                            <label for="form-label" class="form-label">Tipo (*)</label>
+                                                            <select class="form-select" name="tip_id" id="tip_id" placeholder="Seleccionar" requeridad>
+                                                                <option value="">Seleccionar</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="mb-3">
-                                                        <label for="form-label" class="form-label">DNI / RUC (*)</label>
-                                                        <input class="form-control" type="number" value="Artisanal Kale" id="example-text-input">
+                                                    <div class="col-lg-3">
+                                                        <div class="mb-3">
+                                                            <label for="form-label" class="form-label">DNI / RUC (*)</label>
+                                                            <input class="form-control" type="text" name="doc_dni" id="doc_dni" requeridad>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label for="form-label" class="form-label">Nombre / Razón Social (*)</label>
-                                                        <input class="form-control" type="text" value="" id="example-text-input">
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label for="form-label" class="form-label">Nombre / Razón Social (*)</label>
+                                                            <input class="form-control" type="text" value="" name="doc_nom" id="doc_nom" requeridad>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="mb-3">
-                                                        <label for="form-label" class="form-label">Descripción (*)</label>
-                                                        <textarea class="form-control" type="text" rows="2" value="" id="example-text-input"></textarea>
+                                                    <div class="col-lg-12">
+                                                        <div class="mb-3">
+                                                            <label for="form-label" class="form-label">Descripción (*)</label>
+                                                            <textarea class="form-control" type="text" rows="2" value="" name="doc_descrip" id="doc_descrip" requeridad></textarea>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <form action="#" class="dropzone">
+                                                    <div class="col-lg-12">
+                                                        <!-- <form action="#" class="dropzone"> -->
                                                         <div class="fallback">
                                                             <input name="file" type="file" multiple="multiple">
                                                         </div>
@@ -114,15 +116,16 @@ if (isset($_SESSION["user_id"])) {
 
                                                             <h5>Drop files here or click to upload.</h5>
                                                         </div>
-                                                    </form>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="d-flex flex-wrap gap-2 mt-4">
-                                                        <button type="button" class="btn btn-secondary waves-effect waves-light">Limpiar</button>
-                                                        <button type="button" class="btn btn-primary waves-effect waves-light">Guardar</button>
+                                                        <!-- </form> -->
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="d-flex flex-wrap gap-2 mt-4">
+                                                            <button type="button" class="btn btn-secondary waves-effect waves-light">Limpiar</button>
+                                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Guardar</button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
