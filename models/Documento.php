@@ -1,7 +1,7 @@
 <?php
 class Documento extends Conectar
 {
-    public function registrar_documento($area_id,$tra_id,$doc_externo,$tip_id,$doc_dni,$doc_nom,$doc_descrip,$user_id)
+    public function registrar_documento($area_id, $tra_id, $doc_externo, $tip_id, $doc_dni, $doc_nom, $doc_descrip, $user_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -21,5 +21,18 @@ class Documento extends Conectar
         $sql1 = $conectar->prepare($sql1);
         $sql1->execute();
         return $sql1->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function insert_documento_detalle($doc_id,$det_nom,$user_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "INSERT INTO td_documento_detalle(doc_id,det_nom,user_id) VALUES (?,?,?);";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $doc_id);
+        $sql->bindValue(2, $det_nom);
+        $sql->bindValue(3, $user_id);
+        $sql->execute();
+
+        
     }
 }

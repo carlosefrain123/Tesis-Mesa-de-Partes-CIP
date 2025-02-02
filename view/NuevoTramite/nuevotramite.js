@@ -1,4 +1,4 @@
-let arrImages = [];
+let arrDocument = [];
 Dropzone.autoDiscover = false;
 let myDropzone = new Dropzone(".dropzone", {
   url: "../../assets/document",
@@ -17,7 +17,7 @@ myDropzone.on("maxfilesexceeded", function (file) {
   });
   myDropzone.removeFile(file);
 });
-myDropzone.on('addfile',function (file){
+myDropzone.on('addedfile',function (file){
   if (file.size>2*1024*1024) {
     swal.fire({
       title: "Mesa de Partes",
@@ -28,6 +28,13 @@ myDropzone.on('addfile',function (file){
     myDropzone.removeFile(file);
   }
 })
+myDropzone.on('addedfile',file=>{
+  arrDocument.push(file);
+})
+myDropzone.on('removedfile',file=>{
+  let i=arrDocument.indexOf(file);
+  arrDocument.splice(i,1);//ACA
+});
 function init() {
   $("#documento_form").on("submit", function (e) {
     guardar(e);
@@ -36,6 +43,10 @@ function init() {
 function guardar(e) {
   e.preventDefault();
   var formData = new FormData($("#documento_form")[0]);
+  var totalfiles=arrDocument.length;
+  for (var i = 0; i < totalfiles; i++) {
+    formData.append("file[]",arrDocument[i]);
+  }
   $.ajax({
     url: "../../controller/documento.php?op=registrar",
     type: "POST",
