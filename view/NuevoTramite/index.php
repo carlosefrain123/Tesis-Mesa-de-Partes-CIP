@@ -110,6 +110,8 @@ if (isset($_SESSION["user_id"])) {
                                                                 <button class="dz-button" type="button">
                                                                     <img src="../../assets/image/upload.png" alt="">
                                                                 </button>
+                                                                <div class="dz-message" data-dz-dz-message><span> Arrastra y suelta archivos aqui o haz click para seleccionar archivos.,
+                                                                    </span></div>
                                                             </div>
                                                         </div>
                                                         <!-- <form action="#" class="dropzone"> -->

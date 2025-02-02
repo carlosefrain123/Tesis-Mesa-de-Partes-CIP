@@ -1,14 +1,33 @@
 let arrImages = [];
+Dropzone.autoDiscover = false;
 let myDropzone = new Dropzone(".dropzone", {
   url: "../../assets/document",
-  maxFilesize: 5,
+  maxFilesize: 2,
   maxFiles: 5,
   acceptedFiles: "application/pdf",
   addRemoveLinks: true,
   dictRemoveFile: "Quitar",
-  dictDefaultMessage:
-    "Arrastra y suelta archivos aqui o haz click para seleccionar archivos.",
 });
+myDropzone.on("maxfilesexceeded", function (file) {
+  Swal.fire({
+    title: "Mesa de Partes",
+    text: "Solo se permiten un máximo de 5 archivos",
+    icon: "error",
+    confirmButtonColor: "#5156be",
+  });
+  myDropzone.removeFile(file);
+});
+myDropzone.on('addfile',function (file){
+  if (file.size>2*1024*1024) {
+    swal.fire({
+      title: "Mesa de Partes",
+      text: 'El archivo"'+file.name+'" excede el tamaño máximo de 2 mb',
+      icon: "error",
+      confirmButtonColor: "#5156be",
+    });
+    myDropzone.removeFile(file);
+  }
+})
 function init() {
   $("#documento_form").on("submit", function (e) {
     guardar(e);

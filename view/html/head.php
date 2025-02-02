@@ -2,6 +2,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
 <meta content="Themesbrand" name="author">
+<!-- Sweet Alert-->
+<link href="../../assets/css/sweetalert2.min.css" rel="stylesheet" type="text/css">
 <!-- dropzone css -->
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 <!-- choices css -->
