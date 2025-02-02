@@ -20,6 +20,6 @@ class Documento extends Conectar
         $sql1 = "select last_insert_id() as 'doc_id'";/* CAMBIO */
         $sql1 = $conectar->prepare($sql1);
         $sql1->execute();
-        return $sql1->fetchAll();
+        return $sql1->fetchAll(PDO::FETCH_ASSOC);
     }
 }

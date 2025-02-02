@@ -105,8 +105,15 @@ if (isset($_SESSION["user_id"])) {
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
+                                                        <div class="dropzone">
+                                                            <div class="dz-default dz-message">
+                                                                <button class="dz-button" type="button">
+                                                                    <img src="../../assets/image/upload.png" alt="">
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                         <!-- <form action="#" class="dropzone"> -->
-                                                        <div class="fallback">
+                                                        <!-- <div class="fallback">
                                                             <input name="file" type="file" multiple="multiple">
                                                         </div>
                                                         <div class="dz-message needsclick">
@@ -115,7 +122,7 @@ if (isset($_SESSION["user_id"])) {
                                                             </div>
 
                                                             <h5>Drop files here or click to upload.</h5>
-                                                        </div>
+                                                        </div> -->
                                                         <!-- </form> -->
                                                     </div>
                                                     <div class="card-body">

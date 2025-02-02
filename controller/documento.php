@@ -15,5 +15,6 @@ switch ($_GET["op"]) {
             //No identificado
             echo "0";
         }
+       /* echo json_encode($datos); */
         break;
 }
