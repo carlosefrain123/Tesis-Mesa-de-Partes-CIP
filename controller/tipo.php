@@ -12,7 +12,7 @@ switch ($_GET["op"]) {
         $html.="<option value=''>Seleccionar</option>";
         if (is_array($datos)==true and count($datos)>0) {
             foreach ($datos as $row) {
-                $html.="<option value='".$row['tipo_id']."'>".$row['tipo_nom']."</option>";
+                $html.="<option value='".$row['tip_id']."'>".$row['tip_nom']."</option>";
             }
             echo $html;
         }

@@ -56,7 +56,7 @@ function guardar(e) {
     success: function (data) {
       $('#documento_form')[0].reset();
       Dropzone.forElement('.dropzone').removeAllFiles(true);
-      data=JSON.parse(data);
+      /* data=JSON.parse(data); */
       console.log(data);
       Swal.fire({
         title: "Mesa de Partes",
