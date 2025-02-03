@@ -54,12 +54,13 @@ function guardar(e) {
     contentType: false,
     processData: false,
     success: function (data) {
+      $('#documento_form')[0].reset();
       Dropzone.forElement('.dropzone').removeAllFiles(true);
       data=JSON.parse(data);
       console.log(data);
       Swal.fire({
         title: "Mesa de Partes",
-        text: 'Su tramite a sido registrado con éxito Nro° ' + data[0].doc_id+"" ,
+        text: 'Su tramite a sido registrado con éxito Nro° ' + data/* data[0].doc_id */+"" ,
         icon: "success",
         confirmButtonColor: "#5156be",
       });

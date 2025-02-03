@@ -21,8 +21,10 @@ switch ($_GET["op"]) {
             } */
         } else {
             //Identificado
-            echo json_encode($datos);
-            
+            /* echo json_encode($datos); */
+            $mes=date("m");
+            $anio=date("Y");
+            echo $mes.".".$anio."-".$datos[0]["doc_id"];
             if (empty($_FILES['file']['name'])) {
                 
             }else{
