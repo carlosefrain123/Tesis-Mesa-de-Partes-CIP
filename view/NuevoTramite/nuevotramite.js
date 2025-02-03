@@ -17,23 +17,23 @@ myDropzone.on("maxfilesexceeded", function (file) {
   });
   myDropzone.removeFile(file);
 });
-myDropzone.on('addedfile',function (file){
-  if (file.size>2*1024*1024) {
+myDropzone.on("addedfile", function (file) {
+  if (file.size > 2 * 1024 * 1024) {
     swal.fire({
       title: "Mesa de Partes",
-      text: 'El archivo"'+file.name+'" excede el tamaño máximo de 2 mb',
+      text: 'El archivo"' + file.name + '" excede el tamaño máximo de 2 mb',
       icon: "error",
       confirmButtonColor: "#5156be",
     });
     myDropzone.removeFile(file);
   }
-})
-myDropzone.on('addedfile',file=>{
+});
+myDropzone.on("addedfile", (file) => {
   arrDocument.push(file);
-})
-myDropzone.on('removedfile',file=>{
-  let i=arrDocument.indexOf(file);
-  arrDocument.splice(i,1);//ACA
+});
+myDropzone.on("removedfile", (file) => {
+  let i = arrDocument.indexOf(file);
+  arrDocument.splice(i, 1); //ACA
 });
 function init() {
   $("#documento_form").on("submit", function (e) {
@@ -43,9 +43,9 @@ function init() {
 function guardar(e) {
   e.preventDefault();
   var formData = new FormData($("#documento_form")[0]);
-  var totalfiles=arrDocument.length;
+  var totalfiles = arrDocument.length;
   for (var i = 0; i < totalfiles; i++) {
-    formData.append("file[]",arrDocument[i]);
+    formData.append("file[]", arrDocument[i]);
   }
   $.ajax({
     url: "../../controller/documento.php?op=registrar",
@@ -54,7 +54,15 @@ function guardar(e) {
     contentType: false,
     processData: false,
     success: function (data) {
+      Dropzone.forElement('.dropzone').removeAllFiles(true);
+      data=JSON.parse(data);
       console.log(data);
+      Swal.fire({
+        title: "Mesa de Partes",
+        text: 'Su tramite a sido registrado con éxito Nro° ' + data[0].doc_id+"" ,
+        icon: "success",
+        confirmButtonColor: "#5156be",
+      });
     },
   });
 }
