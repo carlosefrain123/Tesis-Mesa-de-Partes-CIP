@@ -42,6 +42,9 @@ function init() {
 }
 function guardar(e) {
   e.preventDefault();
+  $("#btnguardar").prop("disabled", true);
+  $("#btnguardar").html('<i class="bx bx-hourglass bx-spin font-size-16 align-middle me-2"></i>Espere..');
+  
   var formData = new FormData($("#documento_form")[0]);
   var totalfiles = arrDocument.length;
   for (var i = 0; i < totalfiles; i++) {
@@ -54,16 +57,21 @@ function guardar(e) {
     contentType: false,
     processData: false,
     success: function (data) {
-      $('#documento_form')[0].reset();
-      Dropzone.forElement('.dropzone').removeAllFiles(true);
+      $("#documento_form")[0].reset();
+      Dropzone.forElement(".dropzone").removeAllFiles(true);
       /* data=JSON.parse(data); */
       console.log(data);
       Swal.fire({
         title: "Mesa de Partes",
-        text: 'Su tramite a sido registrado con éxito Nro° ' + data/* data[0].doc_id */+"" ,
+        html:
+          "Su tramite a sido registrado con éxito Nro° <br><strong>" +
+          data /* data[0].doc_id */ +
+          "</strong>",
         icon: "success",
         confirmButtonColor: "#5156be",
       });
+      $("#btnguardar").prop("disabled", false);
+      $("#btnguardar").html('Guardar');
     },
   });
 }

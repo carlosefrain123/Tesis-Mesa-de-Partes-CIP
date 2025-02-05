@@ -140,7 +140,7 @@ class Email extends PHPMailer{
         $cuerpo=str_replace('xarea',$datos[0]["area_nom"],$cuerpo);
         $cuerpo=str_replace('xtramite',$datos[0]["tra_nom"],$cuerpo);
         $cuerpo=str_replace('xnroexterno',$datos[0]["doc_externo"],$cuerpo);
-        $cuerpo=str_replace('xtipo',$datos[0]["tip_id"],$cuerpo);
+        $cuerpo=str_replace('xtipo',$datos[0]["tip_nom"],$cuerpo);
         $cuerpo=str_replace('xcant',$datos[0]["cant"],$cuerpo);
 
 
