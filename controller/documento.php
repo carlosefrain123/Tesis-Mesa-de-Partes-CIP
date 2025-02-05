@@ -20,6 +20,8 @@ switch ($_GET["op"]) {
                 $ruta="../assets/document/"-$datos[0]["doc_id"]."/";
             } */
         } else {
+            //TODO: Enviar alerta por Email
+            $email->enviar_registro($datos[0]["doc_id"]);
             //Identificado
             /* echo json_encode($datos); */
             $mes=date("m");
@@ -42,7 +44,7 @@ switch ($_GET["op"]) {
                     }
                 }
             }
-        }
+         }
        /* echo json_encode($datos); */
         break;
 }

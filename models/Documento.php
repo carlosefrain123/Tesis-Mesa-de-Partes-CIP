@@ -36,7 +36,7 @@ class Documento extends Conectar
     public function get_documento_x_id($doc_id){
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT tm_documento.area_id, tm_area.area_nom, tm_area.area_correo,tm_documento.doc_externo,tm_documento.doc_dni,tm_documento.doc_nom,tm_documento.doc_descrip,tm_documento.tra_id,tm_tramite.tra_nom,tm_documento.tip_id,tm_tipo.tip_nom,tm_documento.user_id,tm_usuario.usu_nomape,tm_usuario.usu_correo from tm_documento INNER join tm_area on tm_documento.area_id=tm_area.area_id INNER JOIN tm_tramite on tm_documento.tra_id=tm_tramite.tra_id INNER JOIN tm_tipo on tm_documento.tip_id=tm_tipo.tip_id INNER JOIN tm_usuario on tm_documento.user_id=tm_usuario.user_id WHERE tm_documento.doc_id=?;";
+        $sql = "CALL sp_l_documento_01(?);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $doc_id);
         $sql->execute(); 
