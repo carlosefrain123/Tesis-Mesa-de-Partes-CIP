@@ -42,4 +42,13 @@ class Documento extends Conectar
         $sql->execute(); 
         return $sql->fetchAll(PDO::FETCH_ASSOC); 
     }
+    public function get_documento_x_user($user_id){
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "CALL sp_l_documento_02(?);";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $user_id);
+        $sql->execute(); 
+        return $sql->fetchAll(PDO::FETCH_ASSOC); 
+    }
 }
