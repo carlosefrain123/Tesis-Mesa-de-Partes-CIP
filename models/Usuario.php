@@ -15,7 +15,7 @@ class Usuario extends Conectar
                 exit();
             } else {
                 $sql = "SELECT * FROM tm_usuario
-                WHERE usu_correo=?";
+                WHERE usu_correo=? AND rol_id=1";
                 $sql = $conectar->prepare($sql);
                 $sql->bindValue(1, $correo);
                 $sql->execute();
@@ -69,14 +69,15 @@ class Usuario extends Conectar
         return $sql1->fetchAll();
     }
     //TODO: Detecta si no se repite el correo
-    public function get_usuario_correo($usu_correo)
+    public function get_usuario_correo($usu_correo,$rol_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "SELECT * FROM tm_usuario
-        WHERE usu_correo=?";
+        WHERE usu_correo=? AND rol_id=?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_correo);
+        $sql->bindValue(2, $rol_id);
         $sql->execute();
         return $sql->fetchAll();
     }
@@ -119,5 +120,49 @@ class Usuario extends Conectar
         $sql->bindValue(1, $textoCifrado);
         $sql->bindValue(2, $usu_correo);
         $sql->execute();
+    }
+    public function login_colaborador()
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        if (isset($_POST["enviar"])) {
+            $correo = $_POST["usu_correo"];
+            $pass = $_POST["usu_pass"];
+            if (empty($correo) and empty($pass)) {
+                header("Location:" . conectar::ruta() . "index.php?m=2");
+                exit();
+            } else {
+                $sql = "SELECT * FROM tm_usuario
+                WHERE usu_correo=? AND rol_id=2";
+                $sql = $conectar->prepare($sql);
+                $sql->bindValue(1, $correo);
+                $sql->execute();
+                $resultado = $sql->fetch();
+                if ($resultado) {
+                    $textoCifrado = $resultado["usu_pass"];
+                    $iv_dec = substr(base64_decode($textoCifrado), 0, openssl_cipher_iv_length($this->cipher));
+                    $cifradoSinIV = substr(base64_decode($textoCifrado), openssl_cipher_iv_length($this->cipher));
+                    $textoDecifrado = openssl_decrypt($cifradoSinIV, $this->cipher, $this->key, OPENSSL_RAW_DATA, $iv_dec);
+
+                    if ($textoDecifrado == $pass) {
+                        if (is_array($resultado) and count($resultado) > 0) {
+                            $_SESSION["user_id"] = $resultado["user_id"];
+                            $_SESSION["usu_nomape"] = $resultado["usu_nomape"];
+                            $_SESSION["usu_correo"] = $resultado["usu_correo"];
+                            $_SESSION["usu_img"] = $resultado["usu_img"];
+                            $_SESSION["rol_id"] = $resultado["rol_id"];
+                            header("Location:" . Conectar::ruta() . "view/Home/");
+                            exit();
+                        }
+                    } else {
+                        header("Location: " . Conectar::ruta() . "index.php?m=3");
+                        exit();
+                    }
+                } else {
+                    header("Location:" . Conectar::ruta() . "index.php?m=1");
+                    exit();
+                }
+            }
+        }
     }
 }

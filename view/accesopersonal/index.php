@@ -1,9 +1,9 @@
 <?php
-require_once("config/conexion.php");
+require_once("../../config/conexion.php");
 if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
-    require_once("models/Usuario.php");
+    require_once("../../models/Usuario.php");
     $usuario = new Usuario();
-    $usuario->login();
+    $usuario->login_colaborador();
 }
 ?>
 <!doctype html>
@@ -12,20 +12,20 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
 <head>
 
     <meta charset="utf-8">
-    <title>Acceso | Colegio de Ingenieros - Mesa de Partes</title>
+    <title>Colaborador de la empresa | Colegio de Ingenieros - Mesa de Partes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
 
     <!-- preloader css -->
-    <link rel="stylesheet" href="assets/css/preloader.min-1.css" type="text/css">
+    <link rel="stylesheet" href="../../assets/css/preloader.min-1.css" type="text/css">
 
     <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap.min-1.css" id="bootstrap-style" rel="stylesheet" type="text/css">
+    <link href="../../assets/css/bootstrap.min-1.css" id="bootstrap-style" rel="stylesheet" type="text/css">
     <!-- Icons Css -->
-    <link href="assets/css/icons.min-1.css" rel="stylesheet" type="text/css">
+    <link href="../../assets/css/icons.min-1.css" rel="stylesheet" type="text/css">
     <!-- App Css-->
-    <link href="assets/css/app.min-1.css" id="app-style" rel="stylesheet" type="text/css">
+    <link href="../../assets/css/app.min-1.css" id="app-style" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -41,13 +41,13 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                             <div class="d-flex flex-column h-100">
                                 <div class="mb-4 mb-md-5 text-center">
                                     <a href="index.html" class="d-block auth-logo">
-                                        <img src="assets/picture/LogoCIP.png" alt="" height="70">
+                                        <img src="../../assets/picture/LogoCIP.png" alt="" height="70">
                                     </a>
                                 </div>
                                 <div class="auth-content my-auto">
                                     <div class="text-center">
                                         <h5 class="mb-0">¡Bienvenido de nuevo!</h5>
-                                        <p class="text-muted mt-2">Inicia sesión para continuar en el Sistema de Mesa de Partes del CIP.</p>
+                                        <p class="text-muted mt-2">Ingrese sus credenciales del Colaborador.</p>
                                     </div>
 
                                     <form class="custom-form mt-4 pt-2" action="" method="post">
@@ -154,12 +154,6 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                                             </li>
                                         </ul>
                                     </div>
-
-                                    <div class="mt-5 text-center">
-                                        <p class="text-muted mb-0">Aún no tienes cuentas<a href="view/registro/" class="text-primary fw-semibold"> ¡Registrate! </a> </p>
-                                        <p class="text-muted mb-0">Acceso colaborador?<a href="view/accesopersonal/" class="text-primary fw-semibold"> Acceso </a> </p>
-
-                                    </div>
                                 </div>
                                 <div class="mt-4 mt-md-5 text-center">
                                     <p class="mb-0">© <script>
@@ -207,7 +201,7 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                                                     <div class="mt-4 pt-3 pb-5">
                                                         <div class="d-flex align-items-start">
                                                             <div class="flex-shrink-0">
-                                                                <img src="assets/picture/avatar-1-1.jpg" class="avatar-md img-fluid rounded-circle" alt="...">
+                                                                <img src="../../assets/picture/avatar-1-1.jpg" class="avatar-md img-fluid rounded-circle" alt="...">
                                                             </div>
                                                             <div class="flex-grow-1 ms-3 mb-4">
                                                                 <h5 class="font-size-18 text-white">Richard Drews</h5>
@@ -226,7 +220,7 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                                                     <div class="mt-4 pt-3 pb-5">
                                                         <div class="d-flex align-items-start">
                                                             <div class="flex-shrink-0">
-                                                                <img src="assets/picture/avatar-2-1.jpg" class="avatar-md img-fluid rounded-circle" alt="...">
+                                                                <img src="../../assets/picture/avatar-2-1.jpg" class="avatar-md img-fluid rounded-circle" alt="...">
                                                             </div>
                                                             <div class="flex-grow-1 ms-3 mb-4">
                                                                 <h5 class="font-size-18 text-white">Rosanna French</h5>
@@ -244,7 +238,7 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                                                     <h4 class="mt-4 fw-medium lh-base text-white">“Con el sistema de Mesa de Partes, el proceso de registro y seguimiento de documentos es mucho más sencillo y transparente. Es un gran apoyo para nuestra labor profesional.”</h4>
                                                     <div class="mt-4 pt-3 pb-5">
                                                         <div class="d-flex align-items-start">
-                                                            <img src="assets/picture/avatar-3-1.jpg" class="avatar-md img-fluid rounded-circle" alt="...">
+                                                            <img src="../../assets/picture/avatar-3-1.jpg" class="avatar-md img-fluid rounded-circle" alt="...">
                                                             <div class="flex-grow-1 ms-3 mb-4">
                                                                 <h5 class="font-size-18 text-white">Ilse R. Eaton</h5>
                                                                 <p class="mb-0 text-white-50">Gerente de Proyectos</p>
@@ -271,21 +265,21 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
 
 
     <!-- JAVASCRIPT -->
-    <script src="assets/js/jquery.min-1.js"></script>
-    <script src="assets/js/bootstrap.bundle.min-1.js"></script>
-    <script src="assets/js/metisMenu.min-1.js"></script>
-    <script src="assets/js/simplebar.min-1.js"></script>
-    <script src="assets/js/waves.min.js"></script>
-    <script src="assets/js/feather.min-1.js"></script>
+    <script src="../../assets/js/jquery.min-1.js"></script>
+    <script src="../../assets/js/bootstrap.bundle.min-1.js"></script>
+    <script src="../../assets/js/metisMenu.min-1.js"></script>
+    <script src="../../assets/js/simplebar.min-1.js"></script>
+    <script src="../../assets/js/waves.min.js"></script>
+    <script src="../../assets/js/feather.min-1.js"></script>
     <!-- pace js -->
-    <script src="assets/js/pace.min-1.js"></script>
+    <script src="../../assets/js/pace.min-1.js"></script>
     <!-- password addon init -->
-    <script src="assets/js/pass-addon.init-1.js"></script>
+    <script src="../../assets/js/pass-addon.init-1.js"></script>
 
     <!-- TODO: Script para cargar la API de Google Sing-In de manera asincrona -->
     <script src="https://accounts.google.com/gsi/client" async></script>
 
-    <script type="text/javascript" src="acceso.js"></script>
+    <script type="text/javascript" src="accesopersonal.js"></script>
 </body>
 
 </html>

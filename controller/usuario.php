@@ -8,7 +8,7 @@ $usuario = new Usuario();
 $email = new Email();
 switch ($_GET["op"]) {
     case 'registrar':
-        $datos = $usuario->get_usuario_correo($_POST["usu_correo"]);
+        $datos = $usuario->get_usuario_correo($_POST["usu_correo"],1);
         if (is_array($datos) == true and count($datos) == 0) {
             $datos1 = $usuario->registrar_usuario($_POST["usu_nomape"], $_POST["usu_correo"], $_POST["usu_pass"],"",2);
             //Email
@@ -48,7 +48,7 @@ switch ($_GET["op"]) {
                     $imagen = !empty($responsePayload->picture) ? $responsePayload->picture : '';
                 }
                 
-                $datos = $usuario->get_usuario_correo($email);
+                $datos = $usuario->get_usuario_correo($email,1);
                 if (is_array($datos) == true and count($datos) == 0) {
                     $datos1=$usuario->registrar_usuario($nombre, $email,"",$imagen,1);
                     $_SESSION["user_id"] = $datos1[0]["user_id"];
