@@ -99,7 +99,7 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                                                 </div>
                                                 <div class="flex-shrink-0">
                                                     <div class="">
-                                                        <a href="view/recuperar/index.php" class="text-muted">Olvidaste tu contraseña</a>
+                                                        <a href="../../view/recuperar/index.php" class="text-muted">Olvidaste tu contraseña</a>
                                                     </div>
                                                 </div>
                                             </div>

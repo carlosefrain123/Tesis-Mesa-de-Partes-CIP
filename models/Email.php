@@ -56,7 +56,7 @@ class Email extends PHPMailer{
     public function recuperar($usu_correo){
         $conexion=new Conectar();
         $usuario=new Usuario();
-        $datos=$usuario->get_usuario_correo($usu_correo);
+        $datos=$usuario->get_usuario_correo($usu_correo,1);
 
         /* $iv=openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->cipher));
         $cifrado=openssl_encrypt($user_id,$this->cipher,$this->key,OPENSSL_RAW_DATA,$iv);

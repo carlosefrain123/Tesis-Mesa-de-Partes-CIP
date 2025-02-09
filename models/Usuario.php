@@ -129,7 +129,7 @@ class Usuario extends Conectar
             $correo = $_POST["usu_correo"];
             $pass = $_POST["usu_pass"];
             if (empty($correo) and empty($pass)) {
-                header("Location:" . conectar::ruta() . "index.php?m=2");
+                header("Location:" . conectar::ruta() . "view/accesopersonal/index.php?m=2");
                 exit();
             } else {
                 $sql = "SELECT * FROM tm_usuario
@@ -155,11 +155,11 @@ class Usuario extends Conectar
                             exit();
                         }
                     } else {
-                        header("Location: " . Conectar::ruta() . "index.php?m=3");
+                        header("Location: " . Conectar::ruta() . "view/accesopersonal/index.php?m=3");
                         exit();
                     }
                 } else {
-                    header("Location:" . Conectar::ruta() . "index.php?m=1");
+                    header("Location:" . Conectar::ruta() . "view/accesopersonal/index.php?m=1");
                     exit();
                 }
             }
