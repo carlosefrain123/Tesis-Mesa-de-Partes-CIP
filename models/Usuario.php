@@ -32,6 +32,7 @@ class Usuario extends Conectar
                             $_SESSION["usu_nomape"] = $resultado["usu_nomape"];
                             $_SESSION["usu_correo"] = $resultado["usu_correo"];
                             $_SESSION["usu_img"] = $resultado["usu_img"];
+                            $_SESSION["rol_id"] = $resultado["rol_id"];
                             header("Location:" . Conectar::ruta() . "view/Home/");
                             exit();
                         }
@@ -53,7 +54,7 @@ class Usuario extends Conectar
         $textoCifrado = base64_encode($iv . $cifrado);
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO tm_usuario (usu_nomape,usu_correo,usu_pass,usu_img,est) VALUES (?,?,?,?,?)";
+        $sql = "INSERT INTO tm_usuario (usu_nomape,usu_correo,usu_pass,usu_img,rol_id,est) VALUES (?,?,?,?,1,?)";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_nomape);
         $sql->bindValue(2, $usu_correo);

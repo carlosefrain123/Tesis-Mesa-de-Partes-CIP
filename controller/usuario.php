@@ -55,6 +55,7 @@ switch ($_GET["op"]) {
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
                     $_SESSION["usu_img"] = $imagen;
+                    $_SESSION["rol_id"] = 1;
                     echo "1";
                 } else {
                     $user_id = $datos[0]["user_id"];
@@ -62,6 +63,7 @@ switch ($_GET["op"]) {
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
                     $_SESSION["usu_img"] = $imagen;
+                    $_SESSION["rol_id"] = 1;
                     echo "0";                  
                 }
             } else {
