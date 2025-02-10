@@ -63,6 +63,7 @@
             </div>
 
             <input type="hidden" id="user_idx" value="<?php echo $_SESSION["user_id"]?>">
+            <input type="hidden" id="rol_idx" value="<?php echo $_SESSION["rol_id"]?>">
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item bg-soft-light border-start border-end" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
