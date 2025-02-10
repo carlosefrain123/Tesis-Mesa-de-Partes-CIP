@@ -41,7 +41,7 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                         <div class="w-100">
                             <div class="d-flex flex-column h-100">
                                 <div class="mb-4 mb-md-5 text-center">
-                                    <a href="index.html" class="d-block auth-logo">
+                                    <a href="index.php" class="d-block auth-logo">
                                         <img src="assets/picture/LogoCIP.png" alt="" height="70">
                                     </a>
                                 </div>

@@ -12,7 +12,7 @@ $(document).on("click", "#btnrecuperar", function () {
   } else {
     $.post(
       "../../controller/email.php?op=recuperar",
-      { usu_correo: usu_correo,rol_id:1},
+      { usu_correo: usu_correo,rol_id:2 },
       function (datos) {
         if (datos == 1) {
           Swal.fire({
