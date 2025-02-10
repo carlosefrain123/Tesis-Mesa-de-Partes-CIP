@@ -106,6 +106,7 @@ switch ($_GET["op"]) {
                     $_SESSION["usu_img"] = $imagen;
                     $_SESSION["rol_id"] = 2;
                     echo "0";
+                    
                 }
             } else {
                 echo json_encode(['error' => '¡Los datos de la cuenta no están disponibles!']);
