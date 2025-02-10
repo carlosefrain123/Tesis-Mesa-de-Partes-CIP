@@ -8,9 +8,9 @@ $usuario = new Usuario();
 $email = new Email();
 switch ($_GET["op"]) {
     case 'registrar':
-        $datos = $usuario->get_usuario_correo($_POST["usu_correo"],1);
+        $datos = $usuario->get_usuario_correo($_POST["usu_correo"], 1);
         if (is_array($datos) == true and count($datos) == 0) {
-            $datos1 = $usuario->registrar_usuario($_POST["usu_nomape"], $_POST["usu_correo"], $_POST["usu_pass"],"",2);
+            $datos1 = $usuario->registrar_usuario($_POST["usu_nomape"], $_POST["usu_correo"], $_POST["usu_pass"], "", 2);
             //Email
             $email->registrar($datos1[0]["user_id"]); //Reemplazar con el ID del usuario registrado. Tambien se cambio
             //Identificado
@@ -47,10 +47,10 @@ switch ($_GET["op"]) {
                     $email = !empty($responsePayload->email) ? $responsePayload->email : '';
                     $imagen = !empty($responsePayload->picture) ? $responsePayload->picture : '';
                 }
-                
-                $datos = $usuario->get_usuario_correo($email,1);
+
+                $datos = $usuario->get_usuario_correo($email, 1);
                 if (is_array($datos) == true and count($datos) == 0) {
-                    $datos1=$usuario->registrar_usuario($nombre, $email,"",$imagen,1);
+                    $datos1 = $usuario->registrar_usuario($nombre, $email, "", $imagen, 1);
                     $_SESSION["user_id"] = $datos1[0]["user_id"];
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
@@ -64,7 +64,48 @@ switch ($_GET["op"]) {
                     $_SESSION["usu_correo"] = $email;
                     $_SESSION["usu_img"] = $imagen;
                     $_SESSION["rol_id"] = 1;
-                    echo "0";                  
+                    //Cambio
+                    echo "0";
+                }
+            } else {
+                echo json_encode(['error' => '¡Los datos de la cuenta no están disponibles!']);
+            }
+        }
+        break;
+    case "colaboradorgoogle":
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SERVER["CONTENT_TYPE"] == "application/json") {
+            $jsonStr = file_get_contents('php://input');
+            $jsonObj = json_decode($jsonStr);
+
+            if (!empty($jsonObj->request_type) && $jsonObj->request_type == 'user_auth') {
+                $credential = !empty($jsonObj->credential) ? $jsonObj->credential : '';
+
+                //TODO: Decodificar el payload de la respuesta desde el token JWT
+                $parts = explode(".", $credential);
+                $header = base64_decode($parts[0]);
+                $payload = base64_decode($parts[1]);
+                $signature = base64_decode($parts[2]);
+
+                $responsePayload = json_decode($payload);
+
+                if (!empty($responsePayload)) {
+                    //TODO: Información del perfil del usuario
+                    $nombre = !empty($responsePayload->name) ? $responsePayload->name : '';
+                    $email = !empty($responsePayload->email) ? $responsePayload->email : '';
+                    $imagen = !empty($responsePayload->picture) ? $responsePayload->picture : '';
+                }
+
+                $datos = $usuario->get_usuario_correo($email, 2);
+                if (is_array($datos) == true and count($datos) == 0) {
+                    echo "1";
+                } else {
+                    $user_id = $datos[0]["user_id"];
+                    $_SESSION["user_id"] = $user_id;
+                    $_SESSION["usu_nomape"] = $nombre;
+                    $_SESSION["usu_correo"] = $email;
+                    $_SESSION["usu_img"] = $imagen;
+                    $_SESSION["rol_id"] = 2;
+                    echo "0";
                 }
             } else {
                 echo json_encode(['error' => '¡Los datos de la cuenta no están disponibles!']);

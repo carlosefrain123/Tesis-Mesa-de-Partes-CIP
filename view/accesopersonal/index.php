@@ -16,7 +16,8 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
-
+    <!-- Sweet Alert-->
+    <link href="../../assets/css/sweetalert2.min.css" rel="stylesheet" type="text/css">
     <!-- preloader css -->
     <link rel="stylesheet" href="../../assets/css/preloader.min-1.css" type="text/css">
 
@@ -40,7 +41,7 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                         <div class="w-100">
                             <div class="d-flex flex-column h-100">
                                 <div class="mb-4 mb-md-5 text-center">
-                                    <a href="index.html" class="d-block auth-logo">
+                                    <a href="../../index.php" class="d-block auth-logo">
                                         <img src="../../assets/picture/LogoCIP.png" alt="" height="70">
                                     </a>
                                 </div>
@@ -278,6 +279,8 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
 
     <!-- TODO: Script para cargar la API de Google Sing-In de manera asincrona -->
     <script src="https://accounts.google.com/gsi/client" async></script>
+    <!-- Sweet Alerts js -->
+    <script src="../../assets/js/sweetalert2.min.js"></script>
 
     <script type="text/javascript" src="accesopersonal.js"></script>
 </body>

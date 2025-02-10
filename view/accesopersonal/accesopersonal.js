@@ -6,9 +6,9 @@ function startGoogleSignIn() {
   }
   
   function handleCredentialResponse(response) {
-    /* $.ajax({
+    $.ajax({
       type:'POST',
-      url:'controller/usuario.php?op=registrargoogle',
+      url:'../../controller/usuario.php?op=colaboradorgoogle',
       contentType:'application/json',
       headers:{"Content-Type": "application/json"},
       data: JSON.stringify({
@@ -19,12 +19,18 @@ function startGoogleSignIn() {
        
           console.log(data);
           if (data==="0") {
-            window.location.href='view/home'
+            window.location.href='../../view/home'
           }else if(data==="1"){
-            window.location.href='view/home'
+            /* window.location.href='../../view/home' */
+            Swal.fire({
+              title: "Ingreso Colaborador",
+              text: "Su cuenta no tiene acceso",
+              icon: "error",
+              confirmButtonColor: "#5156be",
+            });
           }
       }
-    }) */
+    })
     if (response && response.credential) {
       /* console.log(response); */
       const credentialToken = response.credential;
