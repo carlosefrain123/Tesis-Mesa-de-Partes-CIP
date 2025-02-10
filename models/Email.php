@@ -78,7 +78,12 @@ class Email extends PHPMailer{
         $this->IsHTML(true);
         $this->Subject="Mesa de Partes";
 
-        $url=$conexion->ruta();
+        if ($rol_id==1) {
+            $url=$conexion->ruta();
+        } elseif($rol_id==2) {
+            $url=$conexion->ruta()."view/accesopersonal/";
+        }
+        
 
         $xpassusu=$this->generarXPassUsu();
 
