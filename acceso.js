@@ -23,6 +23,14 @@ function handleCredentialResponse(response) {
           window.location.href='view/home'
         }else if(data==="1"){
           window.location.href='view/home'
+        }else if(data==="2"){
+          /* window.location.href='../../view/home' */
+          Swal.fire({
+            title: "Ingreso Colaborador",
+            text: "Su cuenta no tiene acceso",
+            icon: "error",
+            confirmButtonColor: "#5156be",
+          });
         }
     }
   })

@@ -47,7 +47,7 @@ class Usuario extends Conectar
             }
         }
     }
-    public function registrar_usuario($usu_nomape, $usu_correo, $usu_pass, $usu_img,$est)
+    public function registrar_usuario($usu_nomape, $usu_correo, $usu_pass, $usu_img, $est)
     {
         $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->cipher));
         $cifrado = openssl_encrypt($usu_pass, $this->cipher, $this->key, OPENSSL_RAW_DATA, $iv);
@@ -69,18 +69,30 @@ class Usuario extends Conectar
         return $sql1->fetchAll();
     }
     //TODO: Detecta si no se repite el correo
-    public function get_usuario_correo($usu_correo,$rol_id)
+    //Cambio
+    public function get_usuario_correo($usu_correo, $rol_id = null)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tm_usuario
-        WHERE usu_correo=? AND rol_id=?";
-        $sql = $conectar->prepare($sql);
-        $sql->bindValue(1, $usu_correo);
-        $sql->bindValue(2, $rol_id);
+
+        if ($rol_id === null) {
+            // Si no se proporciona rol_id, busca solo por correo
+            $sql = "SELECT * FROM tm_usuario WHERE usu_correo=?";
+            $sql = $conectar->prepare($sql);
+            $sql->bindValue(1, $usu_correo);
+        } else {
+            // Si se proporciona rol_id, busca por correo y rol
+            $sql = "SELECT * FROM tm_usuario WHERE usu_correo=? AND rol_id=?";
+            $sql = $conectar->prepare($sql);
+            $sql->bindValue(1, $usu_correo);
+            $sql->bindValue(2, $rol_id);
+        }
+
         $sql->execute();
         return $sql->fetchAll();
     }
+
+    //Fin cambio
     public function get_usuario_id($user_id)
     {
         $conectar = parent::conexion();

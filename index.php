@@ -16,7 +16,8 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
-
+    <!-- Sweet Alert-->
+    <link href="assets/css/sweetalert2.min.css" rel="stylesheet" type="text/css">
     <!-- preloader css -->
     <link rel="stylesheet" href="assets/css/preloader.min-1.css" type="text/css">
 
@@ -284,7 +285,8 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
 
     <!-- TODO: Script para cargar la API de Google Sing-In de manera asincrona -->
     <script src="https://accounts.google.com/gsi/client" async></script>
-
+    <!-- Sweet Alerts js -->
+    <script src="assets/js/sweetalert2.min.js"></script>
     <script type="text/javascript" src="acceso.js"></script>
 </body>
 
