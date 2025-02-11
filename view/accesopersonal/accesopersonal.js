@@ -19,7 +19,7 @@ function startGoogleSignIn() {
        
           console.log(data);
           if (data==="0") {
-            window.location.href='../../view/home'
+            window.location.href='../../view/homecolaborador'
           }else if(data==="1"){
             /* window.location.href='../../view/home' */
             Swal.fire({
