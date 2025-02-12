@@ -8,7 +8,7 @@ $usuario = new Usuario();
 $email = new Email();
 switch ($_GET["op"]) {
     case 'registrar':
-        $datos = $usuario->get_usuario_correo($_POST["usu_correo"], 1);
+        $datos = $usuario->get_usuario_correo($_POST["usu_correo"]);
         if (is_array($datos) == true and count($datos) == 0) {
             $datos1 = $usuario->registrar_usuario($_POST["usu_nomape"], $_POST["usu_correo"], $_POST["usu_pass"], "", 2);
             //Email
@@ -48,7 +48,7 @@ switch ($_GET["op"]) {
                     $imagen = !empty($responsePayload->picture) ? $responsePayload->picture : '';
                 }
                 //CAMBIO
-                $datos = $usuario->get_usuario_correo($email,1);
+                $datos = $usuario->get_usuario_correo($email);
 
                 if (is_array($datos) && count($datos) == 0) {
                     $datos1=$usuario->registrar_usuario($nombre,$email,"",$imagen,1);
@@ -57,7 +57,7 @@ switch ($_GET["op"]) {
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
                     $_SESSION["usu_img"] = $imagen;
-                    $_SESSION["rol_id"] = 1;
+                    $_SESSION["rol_id"] = $datos[0]["rol_id"];
 
                     echo "1"; // Acceso permitido
                 } else {
@@ -66,7 +66,7 @@ switch ($_GET["op"]) {
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
                     $_SESSION["usu_img"] = $imagen;
-                    $_SESSION["rol_id"] = 1;
+                    $_SESSION["rol_id"] = $datos[0]["rol_id"];
 
                     echo "0"; // Nuevo usuario registrado
                 }
@@ -101,7 +101,7 @@ switch ($_GET["op"]) {
                     $imagen = !empty($responsePayload->picture) ? $responsePayload->picture : '';
                 }
                 //Por el momento todo tranqui
-                $datos = $usuario->get_usuario_correo($email, 2);
+                $datos = $usuario->get_usuario_correo($email);
                 if (is_array($datos) && count($datos) == 0) {
                     echo "1"; // Acceso permitido
                 } else {
@@ -110,7 +110,7 @@ switch ($_GET["op"]) {
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
                     $_SESSION["usu_img"] = $imagen;
-                    $_SESSION["rol_id"] = 2;
+                    $_SESSION["rol_id"] = $datos[0]["rol_id"];
 
                     echo "0"; // Nuevo usuario registrado
                 }

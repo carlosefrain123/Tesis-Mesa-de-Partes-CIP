@@ -58,8 +58,9 @@ class Usuario extends Conectar
                 header("Location:" . conectar::ruta() . "view/accesopersonal/index.php?m=2");
                 exit();
             } else {
+                //TODO CAMBIO para el rol 3
                 $sql = "SELECT * FROM tm_usuario
-                WHERE usu_correo=? AND rol_id = 2";
+                WHERE usu_correo=? AND rol_id IN (2,3)";
                 $sql = $conectar->prepare($sql);
                 $sql->bindValue(1, $correo);
                 $sql->execute();
@@ -114,14 +115,13 @@ class Usuario extends Conectar
     }
     //TODO: Detecta si no se repite el correo
     //Cambio
-    public function get_usuario_correo($usu_correo, $rol_id)
+    public function get_usuario_correo($usu_correo)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tm_usuario WHERE usu_correo=? AND rol_id=?";
+        $sql = "SELECT * FROM tm_usuario WHERE usu_correo=?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_correo);
-        $sql->bindValue(2, $rol_id);
         $sql->execute();
         return $sql->fetchAll();
     }
