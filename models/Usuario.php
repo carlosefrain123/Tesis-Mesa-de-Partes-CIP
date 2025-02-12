@@ -59,7 +59,7 @@ class Usuario extends Conectar
                 exit();
             } else {
                 $sql = "SELECT * FROM tm_usuario
-                WHERE usu_correo=? AND rol_id IN (2,3)";
+                WHERE usu_correo=? AND rol_id IN 2";
                 $sql = $conectar->prepare($sql);
                 $sql->bindValue(1, $correo);
                 $sql->execute();
@@ -114,24 +114,14 @@ class Usuario extends Conectar
     }
     //TODO: Detecta si no se repite el correo
     //Cambio
-    public function get_usuario_correo($usu_correo, $rol_id = null)
+    public function get_usuario_correo($usu_correo, $rol_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
-
-        if ($rol_id === null) {
-            // Si no se proporciona rol_id, busca solo por correo
-            $sql = "SELECT * FROM tm_usuario WHERE usu_correo=?";
-            $sql = $conectar->prepare($sql);
-            $sql->bindValue(1, $usu_correo);
-        } else {
-            // Si se proporciona rol_id, busca por correo y rol
-            $sql = "SELECT * FROM tm_usuario WHERE usu_correo=? AND rol_id=?";
-            $sql = $conectar->prepare($sql);
-            $sql->bindValue(1, $usu_correo);
-            $sql->bindValue(2, $rol_id);
-        }
-
+        $sql = "SELECT * FROM tm_usuario WHERE usu_correo=? AND rol_id=?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_correo);
+        $sql->bindValue(2, $rol_id);
         $sql->execute();
         return $sql->fetchAll();
     }

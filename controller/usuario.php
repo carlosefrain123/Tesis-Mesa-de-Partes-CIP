@@ -48,33 +48,27 @@ switch ($_GET["op"]) {
                     $imagen = !empty($responsePayload->picture) ? $responsePayload->picture : '';
                 }
                 //CAMBIO
-                $datos = $usuario->get_usuario_correo($email);
+                $datos = $usuario->get_usuario_correo($email,1);
 
-                if (is_array($datos) && count($datos) > 0) {
-                    $user_id = $datos[0]["user_id"];
-                    $rol_id = $datos[0]["rol_id"]; // Obtener rol del usuario
+                if (is_array($datos) && count($datos) == 0) {
+                    $datos1=$usuario->registrar_usuario($nombre,$email,"",$imagen,1);
 
-                    if ($rol_id == 2 || $rol_id == 3) {
-                        echo "2"; // Usuario con rol_id 2 o 3 no puede acceder
-                        exit;
-                    }
-
-                    $_SESSION["user_id"] = $user_id;
-                    $_SESSION["usu_nomape"] = $nombre;
-                    $_SESSION["usu_correo"] = $email;
-                    $_SESSION["usu_img"] = $imagen;
-                    $_SESSION["rol_id"] = $rol_id;
-
-                    echo "0"; // Acceso permitido
-                } else {
-                    $datos1 = $usuario->registrar_usuario($nombre, $email, "", $imagen, 1);
                     $_SESSION["user_id"] = $datos1[0]["user_id"];
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
                     $_SESSION["usu_img"] = $imagen;
                     $_SESSION["rol_id"] = 1;
 
-                    echo "1"; // Nuevo usuario registrado
+                    echo "1"; // Acceso permitido
+                } else {
+                    $user_id=$datos[0]["user_id"];
+                    $_SESSION["user_id"] = $user_id;
+                    $_SESSION["usu_nomape"] = $nombre;
+                    $_SESSION["usu_correo"] = $email;
+                    $_SESSION["usu_img"] = $imagen;
+                    $_SESSION["rol_id"] = 1;
+
+                    echo "0"; // Nuevo usuario registrado
                 }
 
 
@@ -106,18 +100,19 @@ switch ($_GET["op"]) {
                     $email = !empty($responsePayload->email) ? $responsePayload->email : '';
                     $imagen = !empty($responsePayload->picture) ? $responsePayload->picture : '';
                 }
-
+                //Por el momento todo tranqui
                 $datos = $usuario->get_usuario_correo($email, 2);
-                if (is_array($datos) == true and count($datos) == 0) {
-                    echo "1";
+                if (is_array($datos) && count($datos) == 0) {
+                    echo "1"; // Acceso permitido
                 } else {
-                    $user_id = $datos[0]["user_id"];
+                    $user_id=$datos[0]["user_id"];
                     $_SESSION["user_id"] = $user_id;
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
                     $_SESSION["usu_img"] = $imagen;
                     $_SESSION["rol_id"] = 2;
-                    echo "0";
+
+                    echo "0"; // Nuevo usuario registrado
                 }
             } else {
                 echo json_encode(['error' => '¡Los datos de la cuenta no están disponibles!']);

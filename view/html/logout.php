@@ -2,6 +2,7 @@
     require_once("../../config/conexion.php");
     
     session_start(); // Asegurar que la sesión está iniciada
+    //TODO: Esto se puede borrar. Haber si no interfiere
 
     $rol_id = isset($_SESSION["rol_id"]) ? $_SESSION["rol_id"] : null; // Guardar rol antes de destruir la sesión
 
