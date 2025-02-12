@@ -8,7 +8,7 @@ $usuario = new Usuario();
 $email = new Email();
 switch ($_GET["op"]) {
     case 'recuperar':
-        $datos = $usuario->get_usuario_correo($_POST["usu_correo"], /* $_POST["rol_id"] */1);
+        $datos = $usuario->get_usuario_correo($_POST["usu_correo"], $_POST["rol_id"]);
 /*         echo json_encode($datos);
  */        if (is_array($datos) == true and count($datos) == 0) {
             echo "0";

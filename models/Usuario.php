@@ -59,7 +59,7 @@ class Usuario extends Conectar
                 exit();
             } else {
                 $sql = "SELECT * FROM tm_usuario
-                WHERE usu_correo=? AND rol_id IN 2";
+                WHERE usu_correo=? AND rol_id = 2";
                 $sql = $conectar->prepare($sql);
                 $sql->bindValue(1, $correo);
                 $sql->execute();
