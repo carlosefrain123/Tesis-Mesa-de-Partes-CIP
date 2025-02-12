@@ -54,8 +54,8 @@ switch ($_GET["op"]) {
                     $user_id = $datos[0]["user_id"];
                     $rol_id = $datos[0]["rol_id"]; // Obtener rol del usuario
 
-                    if ($rol_id == 2) {
-                        echo "2"; // Usuario con rol_id=2 no puede acceder
+                    if ($rol_id == 2 || $rol_id == 3) {
+                        echo "2"; // Usuario con rol_id 2 o 3 no puede acceder
                         exit;
                     }
 
