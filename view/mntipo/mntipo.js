@@ -51,6 +51,9 @@ $(document).ready(function () {
     })
     .DataTable();
 });
+$(document).on("click","#btnnuevo",function(){
+    $("#mnt_modal").modal('show');
+});
 function editar(doc_id) {
     console.log(doc_id);
 }
