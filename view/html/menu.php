@@ -82,7 +82,7 @@
                     <li>
                         <a href="../mntipo/">
                             <i data-feather="users"></i>
-                            <span data-key="t-authentication">Mnt.T</span>
+                            <span data-key="t-authentication">Mnt.Tipo</span>
                         </a>
                     </li>
                 <?php
