@@ -1,4 +1,28 @@
 var tabla;
+function init() {
+  $("#mnt_form").on("submit", function (e) {
+    guardaryeditar(e);
+  });
+}
+function guardaryeditar(e) {
+  e.preventDefault();
+  var formData = new FormData($("#mnt_form")[0]);
+  
+  $.ajax({
+    url: "../../controller/tipo.php?op=guardaryeditar",
+    type: "POST",
+    data: formData,
+    contentType: false,
+    processData: false,
+    success: function (data) {
+      /* data=JSON.parse(data); */
+      console.log(data);
+      $("#mnt_form")[0].reset();
+      $("#listado_table").DataTable().ajax.reload();
+      $("#mnt_modal").modal('hide');
+    },
+  });
+}
 $(document).ready(function () {
   tabla = $("#listado_table")
     .dataTable({
@@ -51,12 +75,14 @@ $(document).ready(function () {
     })
     .DataTable();
 });
-$(document).on("click","#btnnuevo",function(){
-    $("#mnt_modal").modal('show');
+$(document).on("click", "#btnnuevo", function () {
+  $("#mnt_form")[0].reset();
+  $("#mnt_modal").modal("show");
 });
 function editar(doc_id) {
-    console.log(doc_id);
+  console.log(doc_id);
 }
 function eliminar(doc_id) {
-    console.log(doc_id);
+  console.log(doc_id);
 }
+init();

@@ -11,4 +11,23 @@ class Tipo extends Conectar
         $sql->execute();
         return $sql->fetchAll();
     }
+    public function insert_tipo($tip_nom)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "INSERT INTO tm_tipo (tip_nom) VALUES (?)";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $tip_nom);
+        $sql->execute();
+    }
+    public function update_tipo($tip_id,$tip_nom)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "UPDATE tm_tipo SET tip_nom=?, fech_modi=NOW() WHERE tip_id=?;";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $tip_nom);
+        $sql->bindValue(2, $tip_id);
+        $sql->execute();
+    }
 }

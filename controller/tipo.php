@@ -37,4 +37,13 @@ switch ($_GET["op"]) {
         );
         echo json_encode($results);
         break;
+    case "guardaryeditar":
+        if (empty($_POST["tip_id"])) {
+            $tipo->insert_tipo($_POST["tip_nom"]);
+            echo "1"; 
+        }else{
+            $tipo->update_tipo($_POST["tip_id"], $_POST["tip_nom"]);
+            echo "1";
+        }
+        break;
 }
