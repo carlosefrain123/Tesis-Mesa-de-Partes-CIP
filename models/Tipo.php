@@ -30,4 +30,14 @@ class Tipo extends Conectar
         $sql->bindValue(2, $tip_id);
         $sql->execute();
     }
+    public function get_tipo_nombre($tip_nom)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "SELECT * FROM tm_tipo WHERE tip_nom=?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $tip_nom);
+        $sql->execute();
+        return $sql->fetchAll();
+    }
 }

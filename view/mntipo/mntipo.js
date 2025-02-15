@@ -7,19 +7,36 @@ function init() {
 function guardaryeditar(e) {
   e.preventDefault();
   var formData = new FormData($("#mnt_form")[0]);
-  
+
   $.ajax({
     url: "../../controller/tipo.php?op=guardaryeditar",
     type: "POST",
     data: formData,
     contentType: false,
     processData: false,
-    success: function (data) {
+    success: function (datos) {
       /* data=JSON.parse(data); */
-      console.log(data);
-      $("#mnt_form")[0].reset();
-      $("#listado_table").DataTable().ajax.reload();
-      $("#mnt_modal").modal('hide');
+      console.log(datos);
+      if (datos == 1) {
+        $("#mnt_form")[0].reset();
+        $("#listado_table").DataTable().ajax.reload();
+        $("#mnt_modal").modal("hide");
+        Swal.fire({
+          title: "Mesa de Partes",
+          html:
+            "Se registro con éxito",
+          icon: "success",
+          confirmButtonColor: "#5156be",
+        });
+      } else if (datos == 0) {
+        Swal.fire({
+          title: "Mesa de Partes",
+          html:
+            "Registro ya existe, por favor validar",
+          icon: "error",
+          confirmButtonColor: "#5156be",
+        });
+      }
     },
   });
 }
