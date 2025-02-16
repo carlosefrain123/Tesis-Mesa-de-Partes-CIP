@@ -4,10 +4,11 @@
         <form action="post" id="mnt_form">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">Mantenimiento</h5>
+                    <h5 class="modal-title" id="myModalLabel"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" id="tip_id" name="tip_id">
                     <div class="mb-3">
                         <label for="form-label" class="form-label">Nombre (*)</label>
                         <input class="form-control" type="text" name="tip_nom" id="tip_nom" requeridad>

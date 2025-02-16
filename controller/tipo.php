@@ -42,14 +42,28 @@ switch ($_GET["op"]) {
         if (is_array($datos) == true and count($datos) == 0) {
             if (empty($_POST["tip_id"])) {
                 $tipo->insert_tipo($_POST["tip_nom"]);
-                echo "1"; 
-            }else{
-                $tipo->update_tipo($_POST["tip_id"], $_POST["tip_nom"]);
                 echo "1";
+            } else {
+                $tipo->update_tipo($_POST["tip_id"], $_POST["tip_nom"]);
+                echo "2";
             }
-        }else{
+        } else {
             echo "0";
         }
-        
+
+        break;
+    case "mostrar":
+        $datos = $tipo->get_tipo_x_id($_POST["tip_id"]);
+        if (is_array($datos) == true and count($datos) > 0) {
+            foreach ($datos as $row) {
+                $output["tip_id"] = $row["tip_id"];
+                $output["tip_nom"] = $row["tip_nom"];
+            }
+            echo json_encode($output);
+        }
+        break;
+    case "eliminar":
+        $tipo->eliminar_tipo($_POST["tip_id"]);
+        echo "1";
         break;
 }

@@ -40,4 +40,23 @@ class Tipo extends Conectar
         $sql->execute();
         return $sql->fetchAll();
     }
+    public function get_tipo_x_id($tip_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "SELECT * FROM tm_tipo WHERE tip_id=?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $tip_id);
+        $sql->execute();
+        return $sql->fetchAll();
+    }
+    public function eliminar_tipo($tip_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "UPDATE tm_tipo SET est=0,fech_elim=Now() WHERE tip_id=?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $tip_id);
+        $sql->execute();
+    }
 }

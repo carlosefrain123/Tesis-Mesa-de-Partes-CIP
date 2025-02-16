@@ -18,22 +18,32 @@ function guardaryeditar(e) {
       /* data=JSON.parse(data); */
       console.log(datos);
       if (datos == 1) {
+        $("#tip_id").val("");
         $("#mnt_form")[0].reset();
         $("#listado_table").DataTable().ajax.reload();
         $("#mnt_modal").modal("hide");
         Swal.fire({
           title: "Mesa de Partes",
-          html:
-            "Se registro con éxito",
+          html: "Se registro con éxito",
           icon: "success",
           confirmButtonColor: "#5156be",
         });
       } else if (datos == 0) {
         Swal.fire({
           title: "Mesa de Partes",
-          html:
-            "Registro ya existe, por favor validar",
+          html: "Registro ya existe, por favor validar",
           icon: "error",
+          confirmButtonColor: "#5156be",
+        });
+      }else if(datos==2){
+        $("#tip_id").val("");
+        $("#mnt_form")[0].reset();
+        $("#listado_table").DataTable().ajax.reload();
+        $("#mnt_modal").modal("hide");
+        Swal.fire({
+          title: "Mesa de Partes",
+          html: "Se actualizó con éxito",
+          icon: "success",
           confirmButtonColor: "#5156be",
         });
       }
@@ -93,13 +103,49 @@ $(document).ready(function () {
     .DataTable();
 });
 $(document).on("click", "#btnnuevo", function () {
+  $("#tip_id").val("");
   $("#mnt_form")[0].reset();
+  $("#myModalLabel").html("Nuevo Registro");
   $("#mnt_modal").modal("show");
 });
-function editar(doc_id) {
-  console.log(doc_id);
+function editar(tip_id) {
+  $("#myModalLabel").html("Editar Registro");
+  $.post(
+    "../../controller/tipo.php?op=mostrar",
+    { tip_id: tip_id },
+    function (data) {
+      data = JSON.parse(data);
+      console.log(data);
+      $("#tip_id").val(data.tip_id);
+      $("#tip_nom").val(data.tip_nom);
+      $("#mnt_modal").modal("show");
+    }
+  );
 }
-function eliminar(doc_id) {
-  console.log(doc_id);
+function eliminar(tip_id) {
+  Swal.fire({
+    title: "Esta seguro de eliminar el registro?",
+    icon: "question",
+    showDenyButton: true,
+    confirmButtonText: "Si",
+    denyButtonText: `No`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      $.post(
+    "../../controller/tipo.php?op=eliminar",
+    { tip_id: tip_id },
+    function (data) {
+      $("#listado_table").DataTable().ajax.reload();
+      Swal.fire({
+        title: "Mesa de Partes",
+        html: "Se eliminó con éxito",
+        icon: "success",
+        confirmButtonColor: "#5156be",
+      });
+    }
+  );
+    }
+  });
 }
 init();
