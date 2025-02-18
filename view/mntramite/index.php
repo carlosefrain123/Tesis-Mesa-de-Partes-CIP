@@ -45,6 +45,36 @@
 
                             </div>
                         </div>
+                        <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Tramite.</h4>
+                                            <p class="card-title-desc">(*)Vista para Registrar, Modificar, Listar y Eliminar</p>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <button type="button" id="btnnuevo" class="btn btn-primary waves-effect waves-light">Nuevo Registro</button>
+                                            <br>
+                                            <br>
+                                            <table id="listado_table" class="table table-bordered dt-responsive  nowrap w-100">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nombre</th>
+                                                        <th>Descripción</th>
+                                                        <th>Fech.Creación</th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
 
                 </div>
@@ -57,6 +87,7 @@
 
 
     </div>
+    <?php require_once("mnt.php") ?>
 
     <?php require_once("../html/sidebar.php") ?>
 
@@ -64,9 +95,7 @@
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
     <?php require_once("../html/js.php") ?>
-
-
-
+    <script type="text/javascript" src="mntramite.js"></script>
 </body>
 
 </html>
