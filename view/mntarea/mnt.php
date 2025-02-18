@@ -8,10 +8,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="tip_id" name="tip_id">
+                    <input type="hidden" id="area_id" name="area_id">
                     <div class="mb-3">
                         <label for="form-label" class="form-label">Nombre (*)</label>
-                        <input class="form-control" type="text" name="tip_nom" id="tip_nom" required>
+                        <input class="form-control" type="text" name="area_nom" id="area_nom" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="form-label" class="form-label">Correo Electrónico(*)</label>
+                        <input class="form-control" type="email" name="area_correo" id="area_correo" required>
                     </div>
                 </div>
                 <div class="modal-footer">
