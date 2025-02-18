@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3305
--- Tiempo de generación: 09-02-2025 a las 21:52:00
+-- Tiempo de generación: 18-02-2025 a las 05:30:18
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -130,7 +130,19 @@ INSERT INTO `td_documento_detalle` (`det_id`, `doc_id`, `det_nom`, `user_id`, `f
 (39, 28, 'Proyecto de Investigación final.docx.pdf', 71, '2025-02-08 14:21:04', NULL, NULL, 1),
 (40, 28, 'CIR_ALT_PFL_20131644524_48855575_1309202421185.pdf', 71, '2025-02-08 14:21:04', NULL, NULL, 1),
 (41, 29, 'Programa de Futuros Empresarios.pdf', 82, '2025-02-08 14:26:12', NULL, NULL, 1),
-(42, 29, 'Certificados Operadores Bomba de Concreto - CEMENTOS PACASMAYO (1).pdf', 82, '2025-02-08 14:26:12', NULL, NULL, 1);
+(42, 29, 'Certificados Operadores Bomba de Concreto - CEMENTOS PACASMAYO (1).pdf', 82, '2025-02-08 14:26:12', NULL, NULL, 1),
+(43, 30, 'EMO_CHAFLOQUE_LLONTOP__443633_88_removed.pdf', 71, '2025-02-09 16:21:44', NULL, NULL, 1),
+(44, 30, 'CAMO_CHAFLOQUE_LLONTOP_443633_81.PDF', 71, '2025-02-09 16:21:44', NULL, NULL, 1),
+(45, 31, 'CARGO DE ENTREGA _RISSO.pdf', 100, '2025-02-09 21:22:43', NULL, NULL, 1),
+(46, 32, 'RIT.pdf', 96, '2025-02-10 21:22:04', NULL, NULL, 1),
+(47, 32, 'CARGO DE ENTREGA _RISSO.pdf', 96, '2025-02-10 21:22:04', NULL, NULL, 1),
+(48, 33, 'cv con constancias de practicas_removed.pdf', 96, '2025-02-10 21:32:04', NULL, NULL, 1),
+(49, 33, 'S10-s01 RAID.pdf', 96, '2025-02-10 21:32:04', NULL, NULL, 1),
+(50, 34, '104b97d5-f3aa-4c5c-a345-799af415d6f2.pdf', 96, '2025-02-10 21:59:55', NULL, NULL, 1),
+(51, 35, 'Certificado ACI 2020 -2021 JIMMY PEREZ.pdf', 96, '2025-02-10 22:01:45', NULL, NULL, 1),
+(52, 37, 'S11-s01 SAN (1).pdf', 101, '2025-02-10 22:06:34', NULL, NULL, 1),
+(53, 38, 'applicant_1054524242_CV_1047880253.pdf', 103, '2025-02-12 02:05:47', NULL, NULL, 1),
+(54, 39, 'CAMO_CHAFLOQUE_LLONTOP_443633_81.PDF', 103, '2025-02-16 19:57:36', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -142,7 +154,7 @@ CREATE TABLE `tm_area` (
   `area_id` int(11) NOT NULL,
   `area_nom` varchar(50) NOT NULL,
   `area_correo` varchar(50) NOT NULL DEFAULT '1',
-  `fech_crea` datetime DEFAULT NULL,
+  `fech_crea` datetime DEFAULT current_timestamp(),
   `fech_modi` datetime DEFAULT NULL,
   `fech_elim` datetime DEFAULT NULL,
   `est` int(11) NOT NULL DEFAULT 1
@@ -153,7 +165,7 @@ CREATE TABLE `tm_area` (
 --
 
 INSERT INTO `tm_area` (`area_id`, `area_nom`, `area_correo`, `fech_crea`, `fech_modi`, `fech_elim`, `est`) VALUES
-(1, 'Recursos Humanos (RRHH)', 'Carloschallo1@hotmail.com', '2025-02-04 22:59:52', NULL, NULL, 1),
+(1, 'Recursos Humanos (RRHH)', 'seleccionchiclayo@dino.com.pe', '2025-02-04 22:59:52', '2025-02-16 19:55:43', NULL, 1),
 (2, 'Finanzas', 'Carloschallo1@hotmail.com', '2025-02-04 22:59:52', NULL, NULL, 1),
 (3, 'Marketing', 'Carloschallo1@hotmail.com', '2025-02-04 22:59:52', NULL, NULL, 1),
 (4, 'Producción/Operaciones', 'Carloschallo1@hotmail.com', '2025-02-04 22:59:52', NULL, NULL, 1),
@@ -162,7 +174,10 @@ INSERT INTO `tm_area` (`area_id`, `area_nom`, `area_correo`, `fech_crea`, `fech_
 (7, 'Tecnología de la Información (TI)', 'Carloschallo1@hotmail.com', '2025-02-04 22:59:52', NULL, NULL, 1),
 (8, 'Investigación y Desarrollo (I+D)', 'Carloschallo1@hotmail.com', '2025-02-04 22:59:52', NULL, NULL, 1),
 (9, 'Logística', 'Carloschallo1@hotmail.com', '2025-02-04 22:59:52', NULL, NULL, 1),
-(10, 'Legal y Cumplimiento', 'Carloschallo1@hotmail.com', '2025-02-04 22:59:52', NULL, NULL, 1);
+(10, 'Legal y Cumplimiento', 'Carloschallo1@hotmail.com', '2025-02-04 22:59:52', NULL, NULL, 1),
+(12, 'XD98', 'xd98@gmail.com', '2025-02-16 18:56:14', '2025-02-16 19:35:15', '2025-02-16 19:16:11', 1),
+(13, 'tipo18', 'tipo12@gmail.com', '2025-02-16 19:37:32', '2025-02-16 19:52:33', '2025-02-16 19:38:37', 1),
+(14, 'tipo21', 'tipocuaq@gmail.com', '2025-02-16 19:52:55', '2025-02-16 19:53:15', '2025-02-16 19:53:27', 0);
 
 -- --------------------------------------------------------
 
@@ -219,7 +234,41 @@ INSERT INTO `tm_documento` (`doc_id`, `area_id`, `tra_id`, `doc_externo`, `tip_i
 (26, 2, 2, '777', 1, '777', '777', 'Hola Efrain eres lo máximo.', 71, '2025-02-07 21:53:43', NULL, NULL, 1),
 (27, 7, 1, '777', 1, '81859635', 'Postulación', 'Hola, soy Efrain.', 71, '2025-02-08 13:53:07', NULL, NULL, 1),
 (28, 8, 1, 'abcd', 1, '777', 'ededde', 'deeded', 71, '2025-02-08 14:21:04', NULL, NULL, 1),
-(29, 1, 18, '787', 2, '897', 'Vacaciones Trujillo', 'Vacaciones con mi familia.', 82, '2025-02-08 14:26:12', NULL, NULL, 1);
+(29, 1, 18, '787', 2, '897', 'Vacaciones Trujillo', 'Vacaciones con mi familia.', 82, '2025-02-08 14:26:12', NULL, NULL, 1),
+(30, 7, 1, '184', 1, '84858689', 'Efra', 'Hola, soy Efra.', 71, '2025-02-09 16:21:44', NULL, NULL, 1),
+(31, 2, 1, '897', 1, '897', 'eddeed', 'eddedede', 100, '2025-02-09 21:22:43', NULL, NULL, 1),
+(32, 2, 2, '985623', 1, '81859586', 'Edita', 'Hola soy Edita', 96, '2025-02-10 21:22:04', NULL, NULL, 1),
+(33, 1, 13, '123de', 2, '89874565', 'eddeed', 'Hola soy Anita la huerfanita.', 96, '2025-02-10 21:32:04', NULL, NULL, 1),
+(34, 3, 13, '20285', 1, '85868982', 'Jose Carlos', 'Hola que tal, voy al de Marketing', 96, '2025-02-10 21:59:55', NULL, NULL, 1),
+(35, 8, 3, 'ededde', 2, 'deed', 'ededed', 'deeded', 96, '2025-02-10 22:01:45', NULL, NULL, 1),
+(36, 8, 3, 'deed', 1, 'deeded', 'eded', 'ededed', 96, '2025-02-10 22:02:25', NULL, NULL, 1),
+(37, 10, 2, '8459', 1, '895869', 'Edita', 'Hola, soy Edita.', 101, '2025-02-10 22:06:34', NULL, NULL, 1),
+(38, 2, 1, 'eededed', 2, 'deeded', 'ededed', 'edededed', 103, '2025-02-12 02:05:47', NULL, NULL, 1),
+(39, 1, 3, '77779', 1, '7777', 'buenasuertepapu', 'Buenasuertepapuprueba seeleccion', 103, '2025-02-16 19:57:36', NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tm_rol`
+--
+
+CREATE TABLE `tm_rol` (
+  `rol_id` int(10) NOT NULL,
+  `rol_nom` varchar(50) DEFAULT NULL,
+  `fech_crea` datetime DEFAULT current_timestamp(),
+  `fech_modi` datetime DEFAULT NULL,
+  `fech_elim` datetime DEFAULT NULL,
+  `est` int(10) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tm_rol`
+--
+
+INSERT INTO `tm_rol` (`rol_id`, `rol_nom`, `fech_crea`, `fech_modi`, `fech_elim`, `est`) VALUES
+(1, 'Uusario', '2025-02-09 16:12:59', NULL, NULL, 1),
+(2, 'Colaborador', '2025-02-09 16:12:59', NULL, NULL, 1),
+(3, 'Administrador', '2025-02-09 16:13:50', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -230,7 +279,7 @@ INSERT INTO `tm_documento` (`doc_id`, `area_id`, `tra_id`, `doc_externo`, `tip_i
 CREATE TABLE `tm_tipo` (
   `tip_id` int(10) NOT NULL,
   `tip_nom` varchar(50) DEFAULT NULL,
-  `fech_crea` datetime DEFAULT NULL,
+  `fech_crea` datetime DEFAULT current_timestamp(),
   `fech_modi` datetime DEFAULT NULL,
   `fech_elim` datetime DEFAULT NULL,
   `est` int(10) DEFAULT 1
@@ -241,9 +290,10 @@ CREATE TABLE `tm_tipo` (
 --
 
 INSERT INTO `tm_tipo` (`tip_id`, `tip_nom`, `fech_crea`, `fech_modi`, `fech_elim`, `est`) VALUES
-(1, 'Natural', NULL, NULL, NULL, 1),
-(2, 'Juridico', NULL, NULL, NULL, 1),
-(3, 'Otro', NULL, NULL, NULL, 1);
+(1, 'Natural', '2025-02-14 00:04:10', NULL, NULL, 1),
+(2, 'Juridico', '2025-02-14 00:04:10', NULL, NULL, 1),
+(3, 'Otro', '2025-02-14 00:04:10', NULL, NULL, 1),
+(11, 'test3', '2025-02-16 16:35:51', '2025-02-16 16:35:56', '2025-02-16 16:36:31', 0);
 
 -- --------------------------------------------------------
 
@@ -255,7 +305,7 @@ CREATE TABLE `tm_tramite` (
   `tra_id` int(11) NOT NULL,
   `tra_nom` varchar(150) NOT NULL,
   `tra_descrip` varchar(300) NOT NULL,
-  `fech_crea` datetime DEFAULT NULL,
+  `fech_crea` datetime DEFAULT current_timestamp(),
   `fech_modi` datetime DEFAULT NULL,
   `fech_elim` datetime DEFAULT NULL,
   `est` int(11) DEFAULT 1
@@ -266,27 +316,29 @@ CREATE TABLE `tm_tramite` (
 --
 
 INSERT INTO `tm_tramite` (`tra_id`, `tra_nom`, `tra_descrip`, `fech_crea`, `fech_modi`, `fech_elim`, `est`) VALUES
-(1, 'Recepción de Correspondencia Externa', 'Recepción y distribución de correspondencia externa a la empresa.', NULL, NULL, NULL, 1),
-(2, 'Registro de Quejas o Reclamos de Cliente', 'Proceso para registrar y gestionar quejas o reclamos de los clientes.', NULL, NULL, NULL, 1),
-(3, 'Solicitud de Información Pública', 'Trámite para la solicitud de información pública por parte de los ciudadanos.', NULL, NULL, NULL, 1),
-(4, 'Registro de Contratos y Acuerdos', 'Registro y almacenamiento de contratos y acuerdos firmados por la empresa.', NULL, NULL, NULL, 1),
-(5, 'Solicitud de Autorización para Eventos', 'Trámite para solicitar la autorización de la empresa para la realización de eventos.', NULL, NULL, NULL, 1),
-(6, 'Solicitud de Registro de Proveedores', 'Proceso para solicitar el registro de nuevos proveedores ante la empresa.', NULL, NULL, NULL, 1),
-(7, 'Solicitud de Certificaciones o Documentos', 'Trámite para solicitar certificaciones o documentos oficiales de la empresa.', NULL, NULL, NULL, 1),
-(8, 'Registro de Visitantes', 'Proceso para registrar y autorizar el ingreso de visitantes a las instalaciones de la empresa.', NULL, NULL, NULL, 1),
-(9, 'Solicitud de Facturas o Documentación', 'Trámite para solicitar la emisión de facturas o documentación relacionada.', NULL, NULL, NULL, 1),
-(10, 'Solicitud de Autorización para Viajes de Negocios', 'Solicitud formal para obtener autorización para realizar viajes de negocios.', NULL, NULL, NULL, 1),
-(11, 'Solicitud de Material de Oficina', 'Solicitud de materiales y suministros de oficina para el uso interno del Colegio de Ingenieros del Perú.', NULL, NULL, NULL, 1),
-(12, 'Solicitud de Permiso o Licencia', 'Proceso para solicitar permisos o licencias laborales para colaboradores del Colegio de Ingenieros del Perú.', NULL, NULL, NULL, 1),
-(13, 'Reclamo de Gastos', 'Registro y validación de reembolsos o reclamos de gastos operativos dentro del Colegio de Ingenieros del Perú.', NULL, NULL, NULL, 1),
-(14, 'Solicitud de Equipamientos o Tecnología', 'Trámite para solicitar equipos tecnológicos o herramientas necesarias para el desempeño laboral en el Colegio de Ingenieros del Perú.', NULL, NULL, NULL, 1),
-(15, 'Solicitud de Mantenimiento o Tecnología', 'Gestión de solicitudes de mantenimiento de equipos o infraestructura tecnológica dentro del Colegio de Ingenieros del Perú.', NULL, NULL, NULL, 1),
-(16, 'Solicitud de Capacitación', 'Proceso para solicitar capacitaciones o programas de formación profesional dentro del Colegio de Ingenieros del Perú.', NULL, NULL, NULL, 1),
-(17, 'Solicitud de Cambio de Turno o Horario', 'Trámite interno para solicitar modificaciones en el turno o horario laboral de los colaboradores.', NULL, NULL, NULL, 1),
-(18, 'Solicitud de Vacaciones', 'Gestión de solicitudes de vacaciones para el personal del Colegio de Ingenieros del Perú.', NULL, NULL, NULL, 1),
-(19, 'Reclamos de Incidentes Laborales', 'Registro y seguimiento de incidentes laborales reportados por los trabajadores del Colegio de Ingenieros del Perú.', NULL, NULL, NULL, 1),
-(20, 'Solicitud de Insumos', 'Solicitud de insumos específicos para el desarrollo de actividades dentro del Colegio de Ingenieros del Perú.', NULL, NULL, NULL, 1),
-(21, 'Otro', 'Otro', NULL, NULL, NULL, 1);
+(1, 'Recepción de Correspondencia Externa', 'Recepción y distribución de correspondencia externa a la empresa.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(2, 'Registro de Quejas o Reclamos de Cliente', 'Proceso para registrar y gestionar quejas o reclamos de los clientes.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(3, 'Solicitud de Información Pública', 'Trámite para la solicitud de información pública por parte de los ciudadanos.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(4, 'Registro de Contratos y Acuerdos', 'Registro y almacenamiento de contratos y acuerdos firmados por la empresa.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(5, 'Solicitud de Autorización para Eventos', 'Trámite para solicitar la autorización de la empresa para la realización de eventos.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(6, 'Solicitud de Registro de Proveedores', 'Proceso para solicitar el registro de nuevos proveedores ante la empresa.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(7, 'Solicitud de Certificaciones o Documentos', 'Trámite para solicitar certificaciones o documentos oficiales de la empresa.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(8, 'Registro de Visitantes', 'Proceso para registrar y autorizar el ingreso de visitantes a las instalaciones de la empresa.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(9, 'Solicitud de Facturas o Documentación', 'Trámite para solicitar la emisión de facturas o documentación relacionada.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(10, 'Solicitud de Autorización para Viajes de Negocios', 'Solicitud formal para obtener autorización para realizar viajes de negocios.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(11, 'Solicitud de Material de Oficina', 'Solicitud de materiales y suministros de oficina para el uso interno del Colegio de Ingenieros del Perú.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(12, 'Solicitud de Permiso o Licencia', 'Proceso para solicitar permisos o licencias laborales para colaboradores del Colegio de Ingenieros del Perú.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(13, 'Reclamo de Gastos', 'Registro y validación de reembolsos o reclamos de gastos operativos dentro del Colegio de Ingenieros del Perú.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(14, 'Solicitud de Equipamientos o Tecnología', 'Trámite para solicitar equipos tecnológicos o herramientas necesarias para el desempeño laboral en el Colegio de Ingenieros del Perú.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(15, 'Solicitud de Mantenimiento o Tecnología', 'Gestión de solicitudes de mantenimiento de equipos o infraestructura tecnológica dentro del Colegio de Ingenieros del Perú.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(16, 'Solicitud de Capacitación', 'Proceso para solicitar capacitaciones o programas de formación profesional dentro del Colegio de Ingenieros del Perú.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(17, 'Solicitud de Cambio de Turno o Horario', 'Trámite interno para solicitar modificaciones en el turno o horario laboral de los colaboradores.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(18, 'Solicitud de Vacaciones', 'Gestión de solicitudes de vacaciones para el personal del Colegio de Ingenieros del Perú.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(19, 'Reclamos de Incidentes Laborales', 'Registro y seguimiento de incidentes laborales reportados por los trabajadores del Colegio de Ingenieros del Perú.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(20, 'Solicitud de Insumos', 'Solicitud de insumos específicos para el desarrollo de actividades dentro del Colegio de Ingenieros del Perú.', '2025-02-17 22:31:49', NULL, NULL, 1),
+(21, 'Otro', 'Otro', '2025-02-17 22:31:49', NULL, NULL, 1),
+(22, 'Hola 8', 'Tramite prueba XD', '2025-02-17 22:56:57', '2025-02-17 22:58:18', '2025-02-17 22:58:37', 0),
+(23, 'Hola 1', 'edededeedde', '2025-02-17 22:58:48', '2025-02-17 22:59:07', '2025-02-17 22:59:13', 0);
 
 -- --------------------------------------------------------
 
@@ -298,9 +350,10 @@ CREATE TABLE `tm_usuario` (
   `user_id` int(10) NOT NULL,
   `usu_nomape` varchar(90) NOT NULL,
   `usu_correo` varchar(50) NOT NULL,
-  `usu_pass` varchar(200) NOT NULL,
+  `usu_pass` varchar(200) DEFAULT NULL,
   `fech_crea` datetime NOT NULL DEFAULT current_timestamp(),
   `usu_img` varchar(500) DEFAULT NULL,
+  `rol_id` int(11) DEFAULT NULL,
   `fech_modi` datetime DEFAULT NULL,
   `fech_elim` datetime DEFAULT NULL,
   `fech_acti` datetime DEFAULT NULL,
@@ -311,25 +364,29 @@ CREATE TABLE `tm_usuario` (
 -- Volcado de datos para la tabla `tm_usuario`
 --
 
-INSERT INTO `tm_usuario` (`user_id`, `usu_nomape`, `usu_correo`, `usu_pass`, `fech_crea`, `usu_img`, `fech_modi`, `fech_elim`, `fech_acti`, `est`) VALUES
-(39, 'prueba', 'prueba@gmail.com', 'kKDynpCO1BS6vWHdf5diHbAIH4Dxic1IKMbeTxjDAR0=', '2024-11-10 01:32:40', NULL, NULL, NULL, NULL, 2),
-(40, 'prueba2', 'prueba2@gmail.com', '12345678', '2024-11-10 01:34:40', NULL, NULL, NULL, NULL, 2),
-(41, 'prueba3', 'prueba4@gmail.com', '12345678', '2024-11-10 01:39:40', NULL, NULL, NULL, NULL, 2),
-(42, 'prueba3', 'prueba5@gmail.com', '987654321', '2024-11-10 01:39:54', NULL, NULL, NULL, NULL, 2),
-(43, 'prueba7', 'prueba7@gmail.com', '12345678', '2024-11-10 01:43:05', NULL, NULL, NULL, NULL, 2),
-(44, 'prueba3', 'prueba8@gmail.com', '12345678', '2024-11-10 01:48:45', NULL, NULL, NULL, NULL, 2),
-(45, 'prueba9', 'prueba9@gmail.com', '12345678', '2024-11-10 02:15:27', NULL, NULL, NULL, NULL, 2),
-(46, 'prueba10', 'prueba10@gmail.com', '12345678', '2024-11-10 02:16:24', NULL, NULL, NULL, NULL, 2),
-(47, 'prueba15', 'prueba15@gmail.com', '12345678', '2024-11-11 21:12:34', NULL, NULL, NULL, NULL, 2),
-(48, 'prueba16', 'prueba16@gmail.com', '12345678', '2024-11-11 21:15:19', NULL, NULL, NULL, '2024-11-27 00:35:45', 1),
-(49, 'prueba11', 'prueba11@gmail.com', '12345678', '2024-11-11 21:21:52', NULL, NULL, NULL, NULL, 2),
-(50, 'prueba12', 'prueba12@gmail.com', '12345678', '2024-11-19 23:40:00', NULL, NULL, NULL, '2024-11-27 00:32:55', 1),
-(63, 'prueba20', 'u19309934@utp.edu.pe', '12345678', '2024-11-27 01:19:12', NULL, NULL, NULL, NULL, 2),
-(67, 'prueba78', 'prueba78@gmail.com', 'Q1ehaxPLJqx2c5tQRLVK6Uw6xpg6abWgW6uufMD6irc=', '2025-01-02 21:00:12', NULL, NULL, NULL, NULL, 2),
-(71, 'Carlos Efrain', 'carlosefrainchallo1@gmail.com', '5iADPjXHEGq5/raAWEDtbSwVyavFTmTmV7o005LB5P4=', '2025-01-11 11:34:32', NULL, NULL, NULL, '2025-01-11 11:35:01', 1),
-(82, 'Carlos Efrain Chafloque Llontop', 'seleccionchiclayo@dino.com.pe', 'gbWbfPKjLttvAstUEKeNxvrslW7YPMwcF/IGzN9nNqg=', '2025-01-14 01:05:54', 'https://lh3.googleusercontent.com/a/ACg8ocKd_Zky6TYjMc-8UNJJPMOBcdcA9F4vOCer41nDneuE1PDbhltl=s96-c', NULL, NULL, NULL, 1),
-(85, 'Jose Carlos Guzman Perez', 'guzmanperezjosecarlos33@gmail.com', 'wKrWvCz7sfmS6NQKF5GQCE21lstsRdB7nbZocb5wAfI=', '2025-01-14 01:36:08', 'https://lh3.googleusercontent.com/a/ACg8ocKH3ZMrm2oG3vVbdQXyGg9ErisudMgfCW4r1fUkYTka8rESrg=s96-c', NULL, NULL, NULL, 1),
-(87, 'Groupsy', 'groupsy777@gmail.com', 'Hdh0ZSFBh0PxEfrtBhiRR1ngMopHItqnaQw4Dyn5Dd0=', '2025-01-16 23:58:16', 'https://lh3.googleusercontent.com/a/ACg8ocJPe5klMxSja5_GXW6Xe-vpi1zUUt9rSGLGsdkvyLJbw_kjfQ=s96-c', NULL, NULL, NULL, 1);
+INSERT INTO `tm_usuario` (`user_id`, `usu_nomape`, `usu_correo`, `usu_pass`, `fech_crea`, `usu_img`, `rol_id`, `fech_modi`, `fech_elim`, `fech_acti`, `est`) VALUES
+(39, 'prueba', 'prueba@gmail.com', 'kKDynpCO1BS6vWHdf5diHbAIH4Dxic1IKMbeTxjDAR0=', '2024-11-10 01:32:40', NULL, NULL, NULL, NULL, NULL, 2),
+(40, 'prueba2', 'prueba2@gmail.com', '12345678', '2024-11-10 01:34:40', NULL, NULL, NULL, NULL, NULL, 2),
+(41, 'prueba3', 'prueba4@gmail.com', '12345678', '2024-11-10 01:39:40', NULL, NULL, NULL, NULL, NULL, 2),
+(42, 'prueba3', 'prueba5@gmail.com', '987654321', '2024-11-10 01:39:54', NULL, NULL, NULL, NULL, NULL, 2),
+(43, 'prueba7', 'prueba7@gmail.com', '12345678', '2024-11-10 01:43:05', NULL, NULL, NULL, NULL, NULL, 2),
+(44, 'prueba3', 'prueba8@gmail.com', '12345678', '2024-11-10 01:48:45', NULL, NULL, NULL, NULL, NULL, 2),
+(45, 'prueba9', 'prueba9@gmail.com', '12345678', '2024-11-10 02:15:27', NULL, NULL, NULL, NULL, NULL, 2),
+(46, 'prueba10', 'prueba10@gmail.com', '12345678', '2024-11-10 02:16:24', NULL, NULL, NULL, NULL, NULL, 2),
+(47, 'prueba15', 'prueba15@gmail.com', '12345678', '2024-11-11 21:12:34', NULL, NULL, NULL, NULL, NULL, 2),
+(48, 'prueba16', 'prueba16@gmail.com', '12345678', '2024-11-11 21:15:19', NULL, NULL, NULL, NULL, '2024-11-27 00:35:45', 1),
+(49, 'prueba11', 'prueba11@gmail.com', '12345678', '2024-11-11 21:21:52', NULL, NULL, NULL, NULL, NULL, 2),
+(50, 'prueba12', 'prueba12@gmail.com', '12345678', '2024-11-19 23:40:00', NULL, NULL, NULL, NULL, '2024-11-27 00:32:55', 1),
+(63, 'prueba20', 'u19309934@utp.edu.pe', '12345678', '2024-11-27 01:19:12', NULL, NULL, NULL, NULL, NULL, 2),
+(67, 'prueba78', 'prueba78@gmail.com', 'Q1ehaxPLJqx2c5tQRLVK6Uw6xpg6abWgW6uufMD6irc=', '2025-01-02 21:00:12', NULL, NULL, NULL, NULL, NULL, 2),
+(87, 'Groupsy', 'groupsy777@gmail.com', 'Hdh0ZSFBh0PxEfrtBhiRR1ngMopHItqnaQw4Dyn5Dd0=', '2025-01-16 23:58:16', 'https://lh3.googleusercontent.com/a/ACg8ocJPe5klMxSja5_GXW6Xe-vpi1zUUt9rSGLGsdkvyLJbw_kjfQ=s96-c', NULL, NULL, NULL, NULL, 1),
+(88, 'Carlos Efra', 'prueba7777@gmail.com', 'lbOVzlHaJGybAfogB7gAHclUV/HDvHI0+7kTQX73vSg=', '2025-02-09 16:58:07', '', 2, NULL, NULL, NULL, 2),
+(101, 'Edita Chafloque', 'echafloquecajusol@gmail.com', 'zL47+NpEe2k6yH07qQmoyHSxpr9gKUoQ52UMCTgzsA4=', '2025-02-10 22:04:09', '', 1, NULL, NULL, NULL, 2),
+(102, 'Edita Cajusol', 'u20234626@utp.edu.pe', 'UQgStk/wNei0NNXdamOciH86OBIbF+ON17HXOSdh4Sg=', '2025-02-10 22:09:29', '', 1, NULL, NULL, NULL, 2),
+(103, 'Jose Carlos Guzman Perez', 'guzmanperezjosecarlos33@gmail.com', '1sZplGvNDleeeQMAF0v6cjPMqhoe1xwNZ1DmIl5vXMY=', '2025-02-12 00:35:55', 'https://lh3.googleusercontent.com/a/ACg8ocKH3ZMrm2oG3vVbdQXyGg9ErisudMgfCW4r1fUkYTka8rESrg=s96-c', 1, NULL, NULL, NULL, 1),
+(104, 'Carlos Efrain Chafloque Lllontop', 'carlosefrainchallo1@gmail.com', 'fJJYQHNZ4qTpVPyqBPobc/XTYa/CMKA/eOemqf+kL7s=', '2025-02-12 00:36:46', 'https://lh3.googleusercontent.com/a/ACg8ocIXAPS7fPlVdIejcDjDfBgg1Wc25rIzUtXy_IQvjXRFaXYSIL30=s96-c', 2, NULL, NULL, NULL, 1),
+(105, 'Carlos Efrain Chafloque Llontop', 'seleccionchiclayo@dino.com.pe', 'v1N2xjIW8zI28KN/KyEX1Ip+k3NiBo7DMXWI29rLT1g=', '2025-02-12 00:37:35', 'https://lh3.googleusercontent.com/a/ACg8ocKd_Zky6TYjMc-8UNJJPMOBcdcA9F4vOCer41nDneuE1PDbhltl=s96-c', 3, NULL, NULL, NULL, 1),
+(107, 'test', 'test@gmail.com', NULL, '2025-02-17 23:25:57', '../../assets/picture/avatar.png', 2, NULL, NULL, NULL, 1);
 
 --
 -- Índices para tablas volcadas
@@ -352,6 +409,12 @@ ALTER TABLE `tm_area`
 --
 ALTER TABLE `tm_documento`
   ADD PRIMARY KEY (`doc_id`);
+
+--
+-- Indices de la tabla `tm_rol`
+--
+ALTER TABLE `tm_rol`
+  ADD PRIMARY KEY (`rol_id`);
 
 --
 -- Indices de la tabla `tm_tipo`
@@ -379,37 +442,43 @@ ALTER TABLE `tm_usuario`
 -- AUTO_INCREMENT de la tabla `td_documento_detalle`
 --
 ALTER TABLE `td_documento_detalle`
-  MODIFY `det_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `det_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `tm_area`
 --
 ALTER TABLE `tm_area`
-  MODIFY `area_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `area_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `tm_documento`
 --
 ALTER TABLE `tm_documento`
-  MODIFY `doc_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `doc_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT de la tabla `tm_rol`
+--
+ALTER TABLE `tm_rol`
+  MODIFY `rol_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tm_tipo`
 --
 ALTER TABLE `tm_tipo`
-  MODIFY `tip_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `tip_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `tm_tramite`
 --
 ALTER TABLE `tm_tramite`
-  MODIFY `tra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `tra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `tm_usuario`
 --
 ALTER TABLE `tm_usuario`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

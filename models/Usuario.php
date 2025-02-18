@@ -167,4 +167,15 @@ class Usuario extends Conectar
         $sql->bindValue(2, $usu_correo);
         $sql->execute();
     }
+    public function insert_colaborador($usu_nomape, $usu_correo,$rol_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "INSERT INTO tm_usuario (usu_nomape,usu_correo,usu_img,rol_id,est) VALUES (?,?,'../../assets/picture/avatar.png',?,1)";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_nomape);
+        $sql->bindValue(2, $usu_correo);
+        $sql->bindValue(3, $rol_id);
+        $sql->execute();
+    }
 }
