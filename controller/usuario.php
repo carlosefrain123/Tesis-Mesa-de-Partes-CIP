@@ -119,15 +119,15 @@ switch ($_GET["op"]) {
             }
         }
         break;
-    case 'guardaryeditar':
+        /* case 'guardaryeditar':
         $datos = $usuario->get_usuario_correo($_POST["usu_correo"]);
         if (is_array($datos) == true and count($datos) == 0) {
             if (empty($_POST["user_id"])) {
-                $datos1 = $usuario->insert_colaborador($_POST["usu_nomape"], $_POST["usu_correo"],  $_POST["rol_id"]);
-                //Email
-                /* $email->registrar($datos1[0]["user_id"]);  */ //Reemplazar con el ID del usuario registrado. Tambien se cambio
-                //Identificado
-                echo "1";
+                $datos1 = $usuario->insert_colaborador($_POST["usu_nomape"], $_POST["usu_correo"],  $_POST["rol_id"]); */
+        //Email
+        /* $email->registrar($datos1[0]["user_id"]);  */ //Reemplazar con el ID del usuario registrado. Tambien se cambio
+        //Identificado
+        /* echo "1";
             } else {
                 $usuario->update_colaborador($_POST["user_id"], $_POST["usu_nomape"], $_POST["usu_correo"],  $_POST["rol_id"]);
                 echo "2"; // Actualizado con éxito
@@ -136,7 +136,35 @@ switch ($_GET["op"]) {
             //No identificado
             echo "0";
         }
+        break; */
+    case 'guardaryeditar':
+        $user_id = isset($_POST["user_id"]) ? trim($_POST["user_id"]) : "";
+        $usu_nomape = isset($_POST["usu_nomape"]) ? trim($_POST["usu_nomape"]) : "";
+        $usu_correo = isset($_POST["usu_correo"]) ? trim($_POST["usu_correo"]) : "";
+        $rol_id = isset($_POST["rol_id"]) ? trim($_POST["rol_id"]) : "";
+
+        // Verificamos si el correo ya existe en otro usuario
+        $datos = $usuario->get_usuario_correo($usu_correo);
+
+        if (empty($user_id)) {
+            // Registro nuevo
+            if (is_array($datos) && count($datos) == 0) {
+                $datos1 = $usuario->insert_colaborador($usu_nomape, $usu_correo, $rol_id);
+                echo "1"; // Insertado con éxito
+            } else {
+                echo "0"; // Correo ya existe
+            }
+        } else {
+            // Edición: validamos que el correo no esté en otro usuario
+            if (is_array($datos) && count($datos) > 0 && $datos[0]["user_id"] != $user_id) {
+                echo "0"; // Correo ya existe en otro usuario
+            } else {
+                $usuario->update_colaborador($user_id, $usu_nomape, $usu_correo, $rol_id);
+                echo "2"; // Actualizado con éxito
+            }
+        }
         break;
+
     case "mostrar":
         $datos = $usuario->get_usuario_id($_POST["user_id"]);
         if (is_array($datos) == true and count($datos) > 0) {
@@ -155,7 +183,7 @@ switch ($_GET["op"]) {
         break;
     case 'listar':
         $datos = $usuario->get_colaborador();
-        $data = Array();//Por sea caso
+        $data = array(); //Por sea caso
         foreach ($datos as $row) {
             $sub_array = array();
             $sub_array[] = $row["usu_nomape"];
