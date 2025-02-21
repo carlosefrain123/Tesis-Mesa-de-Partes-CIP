@@ -51,7 +51,7 @@ switch ($_GET["op"]) {
                 $datos = $usuario->get_usuario_correo($email);
 
                 if (is_array($datos) && count($datos) == 0) {
-                    $datos1=$usuario->registrar_usuario($nombre,$email,"",$imagen,1);
+                    $datos1 = $usuario->registrar_usuario($nombre, $email, "", $imagen, 1);
 
                     $_SESSION["user_id"] = $datos1[0]["user_id"];
                     $_SESSION["usu_nomape"] = $nombre;
@@ -61,7 +61,7 @@ switch ($_GET["op"]) {
 
                     echo "1"; // Acceso permitido
                 } else {
-                    $user_id=$datos[0]["user_id"];
+                    $user_id = $datos[0]["user_id"];
                     $_SESSION["user_id"] = $user_id;
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
@@ -105,7 +105,7 @@ switch ($_GET["op"]) {
                 if (is_array($datos) && count($datos) == 0) {
                     echo "1"; // Acceso permitido
                 } else {
-                    $user_id=$datos[0]["user_id"];
+                    $user_id = $datos[0]["user_id"];
                     $_SESSION["user_id"] = $user_id;
                     $_SESSION["usu_nomape"] = $nombre;
                     $_SESSION["usu_correo"] = $email;
@@ -117,6 +117,24 @@ switch ($_GET["op"]) {
             } else {
                 echo json_encode(['error' => '¡Los datos de la cuenta no están disponibles!']);
             }
+        }
+        break;
+    case 'guardaryeditar':
+        $datos = $usuario->get_usuario_correo($_POST["usu_correo"]);
+        if (is_array($datos) == true and count($datos) == 0) {
+            if (empty($_POST["user_id"])) {
+            $datos1 = $usuario->insert_colaborador($_POST["usu_nomape"], $_POST["usu_correo"],  $_POST["rol_id"]);
+            //Email
+            /* $email->registrar($datos1[0]["user_id"]);  *///Reemplazar con el ID del usuario registrado. Tambien se cambio
+            //Identificado
+            echo "1";
+            }else{
+                $usuario->update_colaborador($_POST["user_id"], $_POST["usu_nomape"], $_POST["usu_correo"],  $_POST["rol_id"]);
+                echo "2"; // Actualizado con éxito
+            }
+        } else {
+            //No identificado
+            echo "0";
         }
         break;
 }

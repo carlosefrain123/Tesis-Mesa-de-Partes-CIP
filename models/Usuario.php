@@ -177,5 +177,40 @@ class Usuario extends Conectar
         $sql->bindValue(2, $usu_correo);
         $sql->bindValue(3, $rol_id);
         $sql->execute();
+        $sql1 = "select last_insert_id() as 'user_id'";/* CAMBIO */
+        $sql1 = $conectar->prepare($sql1);
+        $sql1->execute();
+        return $sql1->fetchAll();
+    }
+    public function get_colaborador()
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "SELECT * FROM tm_usuario 
+        WHERE est=1 AND rol_id IN (2,3)";
+        $sql = $conectar->prepare($sql);
+        $sql->execute();
+        return $sql->fetchAll();
+    }
+    public function update_colaborador($user_id,$usu_nomape, $usu_correo,$rol_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "UPDATE tm_usuario SET usu_nomape=?,usu_correo=?,rol_id=? , fech_modi=NOW() WHERE user_id=?;";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_nomape);
+        $sql->bindValue(2, $usu_correo);
+        $sql->bindValue(3, $rol_id);
+        $sql->bindValue(3, $user_id);
+        $sql->execute();
+    }
+    public function eliminar_colaborador($user_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "UPDATE tm_usuario  SET est=0,fech_elim=Now() WHERE user_id=?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $user_id);
+        $sql->execute();
     }
 }
