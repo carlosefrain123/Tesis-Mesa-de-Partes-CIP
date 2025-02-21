@@ -167,7 +167,7 @@ class Usuario extends Conectar
         $sql->bindValue(2, $usu_correo);
         $sql->execute();
     }
-    public function insert_colaborador($usu_nomape, $usu_correo,$rol_id)
+    public function insert_colaborador($usu_nomape, $usu_correo, $rol_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -186,13 +186,21 @@ class Usuario extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tm_usuario 
-        WHERE est=1 AND rol_id IN (2,3)";
+        $sql = "SELECT tm_usuario.user_id,
+        tm_usuario.usu_nomape,
+        tm_usuario.usu_correo,
+        tm_usuario.rol_id,
+        tm_rol.rol_nom,
+        tm_usuario.fech_crea
+        FROM tm_usuario
+        INNER JOIN tm_rol ON tm_usuario.rol_id=tm_rol.rol_id
+        WHERE tm_usuario.est=1
+        AND tm_usuario.rol_id IN (2,3)";
         $sql = $conectar->prepare($sql);
         $sql->execute();
         return $sql->fetchAll();
     }
-    public function update_colaborador($user_id,$usu_nomape, $usu_correo,$rol_id)
+    public function update_colaborador($user_id, $usu_nomape, $usu_correo, $rol_id)
     {
         $conectar = parent::conexion();
         parent::set_names();

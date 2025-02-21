@@ -123,12 +123,12 @@ switch ($_GET["op"]) {
         $datos = $usuario->get_usuario_correo($_POST["usu_correo"]);
         if (is_array($datos) == true and count($datos) == 0) {
             if (empty($_POST["user_id"])) {
-            $datos1 = $usuario->insert_colaborador($_POST["usu_nomape"], $_POST["usu_correo"],  $_POST["rol_id"]);
-            //Email
-            /* $email->registrar($datos1[0]["user_id"]);  *///Reemplazar con el ID del usuario registrado. Tambien se cambio
-            //Identificado
-            echo "1";
-            }else{
+                $datos1 = $usuario->insert_colaborador($_POST["usu_nomape"], $_POST["usu_correo"],  $_POST["rol_id"]);
+                //Email
+                /* $email->registrar($datos1[0]["user_id"]);  */ //Reemplazar con el ID del usuario registrado. Tambien se cambio
+                //Identificado
+                echo "1";
+            } else {
                 $usuario->update_colaborador($_POST["user_id"], $_POST["usu_nomape"], $_POST["usu_correo"],  $_POST["rol_id"]);
                 echo "2"; // Actualizado con éxito
             }
@@ -136,5 +136,42 @@ switch ($_GET["op"]) {
             //No identificado
             echo "0";
         }
+        break;
+    case "mostrar":
+        $datos = $usuario->get_usuario_id($_POST["user_id"]);
+        if (is_array($datos) == true and count($datos) > 0) {
+            foreach ($datos as $row) {
+                $output["user_id"] = $row["user_id"];
+                $output["usu_nomape"] = $row["usu_nomape"];
+                $output["usu_correo"] = $row["usu_correo"];
+                $output["rol_id"] = $row["rol_id"];
+            }
+            echo json_encode($output);
+        }
+        break;
+    case "eliminar":
+        $usuario->eliminar_colaborador($_POST["user_id"]);
+        echo "1";
+        break;
+    case 'listar':
+        $datos = $usuario->get_colaborador();
+        $data = Array();//Por sea caso
+        foreach ($datos as $row) {
+            $sub_array = array();
+            $sub_array[] = $row["usu_nomape"];
+            $sub_array[] = $row["usu_correo"];
+            $sub_array[] = $row["rol_nom"];
+            $sub_array[] = $row["fech_crea"];
+            $sub_array[] = '<button type="button" class="btn btn-soft-warning waves-effect waves-light btn-sm" onclick="editar(' . $row["user_id"] . ')"><i class="bx bx-edit-alt font-size-16 align-middle"></i></button>';
+            $sub_array[] = '<button type="button" class="btn btn-soft-danger waves-effect waves-light btn-sm" onclick="eliminar(' . $row["user_id"] . ')"><i class="bx bx-trash-alt font-size-16 align-middle"></i></button>';
+            $data[] = $sub_array;
+        }
+        $results = array(
+            "sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData" => $data
+        );
+        echo json_encode($results);
         break;
 }
