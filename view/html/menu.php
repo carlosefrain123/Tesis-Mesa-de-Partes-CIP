@@ -61,7 +61,7 @@
                     ?>
                     <li>
                         <a href="../mntusuario/">
-                            <i data-feather="grid"></i>
+                            <i data-feather="users"></i>
                             <span data-key="t-apps">Mnt.Colaborador</span>
                         </a>
 

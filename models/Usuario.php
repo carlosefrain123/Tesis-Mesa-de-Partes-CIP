@@ -209,7 +209,7 @@ class Usuario extends Conectar
         $sql->bindValue(1, $usu_nomape);
         $sql->bindValue(2, $usu_correo);
         $sql->bindValue(3, $rol_id);
-        $sql->bindValue(3, $user_id);
+        $sql->bindValue(4, $user_id);
         $sql->execute();
     }
     public function eliminar_colaborador($user_id)
