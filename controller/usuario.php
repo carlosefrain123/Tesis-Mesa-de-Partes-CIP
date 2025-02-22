@@ -150,6 +150,7 @@ switch ($_GET["op"]) {
             // Registro nuevo
             if (is_array($datos) && count($datos) == 0) {
                 $datos1 = $usuario->insert_colaborador($usu_nomape, $usu_correo, $rol_id);
+                $email->nuevo_colaborador($datos1[0]["user_id"]);
                 echo "1"; // Insertado con éxito
             } else {
                 echo "0"; // Correo ya existe
