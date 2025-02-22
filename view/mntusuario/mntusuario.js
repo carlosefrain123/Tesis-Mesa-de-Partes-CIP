@@ -18,6 +18,9 @@ function guardaryeditar(e) {
       /* data=JSON.parse(data); */
       console.log(datos);
       if (datos == 1) {
+        $("#btnguardar").prop("disabled", false);
+        $("#btnguardar").html("Recuperar");
+        
         $("#user_id").val("");
         $("#mnt_form")[0].reset();
         $("#listado_table").DataTable().ajax.reload();
@@ -47,6 +50,11 @@ function guardaryeditar(e) {
           confirmButtonColor: "#5156be",
         });
       }
+    },beforeSend:function(){
+      $("#btnguardar").prop("disabled", true);
+      $("#btnguardar").html(
+        '<i class="bx bx-hourglass bx-spin font-size-16 align-middle me-2"></i>Espere..'
+      );
     },
   });
 }
