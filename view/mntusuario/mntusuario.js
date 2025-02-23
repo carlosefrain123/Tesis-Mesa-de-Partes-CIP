@@ -216,4 +216,22 @@ function permiso(user_id){
     .DataTable();
   $("#mnt_modal_permiso").modal("show");
 }
+function habilitar(aread_id) {
+  $.post(
+    "../../controller/area.php?op=habilitar",
+    { aread_id: aread_id },
+    function (data) {
+      $("#listado_table_permiso").DataTable().ajax.reload();
+    }
+  );
+}
+function deshabilitar(aread_id) {
+  $.post(
+    "../../controller/area.php?op=deshabilitar",
+    { aread_id: aread_id },
+    function (data) {
+      $("#listado_table_permiso").DataTable().ajax.reload();
+    }
+  );
+}
 init();

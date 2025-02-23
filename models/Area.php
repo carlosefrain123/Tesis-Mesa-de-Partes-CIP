@@ -11,7 +11,7 @@ class Area extends Conectar
         $sql->execute();
         return $sql->fetchAll();
     }
-    public function insert_area($area_nom,$area_correo)
+    public function insert_area($area_nom, $area_correo)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -21,7 +21,7 @@ class Area extends Conectar
         $sql->bindValue(2, $area_correo);
         $sql->execute();
     }
-    public function update_area($area_id,$area_nom,$area_correo)
+    public function update_area($area_id, $area_nom, $area_correo)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -61,13 +61,42 @@ class Area extends Conectar
         $sql->bindValue(1, $area_id);
         $sql->execute();
     }
-    public function get_area_usuario_permisos($user_id){
+    public function get_area_usuario_permisos($user_id)
+    {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "CALL sp_i_area_01(?);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $user_id);
-        $sql->execute(); 
-        return $sql->fetchAll(PDO::FETCH_ASSOC); 
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function habilitar_area_usuario($aread_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "UPDATE td_area_detalle
+                SET
+                    aread_permi='Si',
+                    fech_modi=NOw()
+                WHERE
+                    aread_id=?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $aread_id);
+        $sql->execute();
+    }
+    public function deshabilitar_area_usuario($aread_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "UPDATE td_area_detalle
+                SET
+                    aread_permi='No',
+                    fech_modi=NOw()
+                WHERE
+                    aread_id=?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $aread_id);
+        $sql->execute();
     }
 }

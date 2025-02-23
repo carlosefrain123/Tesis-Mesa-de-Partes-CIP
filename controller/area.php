@@ -96,9 +96,9 @@ switch ($_GET["op"]) {
             $sub_array = array();
             $sub_array[] = $row["area_nom"];
             if ($row["aread_permi"] == "Si") {
-                $sub_array[] = '<button type="button" class="btn btn-soft-success waves-effect waves-light btn-sm" onclick="deshabilitar(' . $row["aread_id"] . ')"><i class="bx bx-trash-alt font-size-16 align-middle"></i>Si</button>';
+                $sub_array[] = '<button type="button" class="btn btn-soft-success waves-effect waves-light btn-sm" onclick="deshabilitar(' . $row["aread_id"] . ')"><i class="bx bx-check-double font-size-16 align-middle"></i> Si</button>';
             } else {
-                $sub_array[] = '<button type="button" class="btn btn-soft-danger waves-effect waves-light btn-sm" onclick="habilitar(' . $row["aread_id"] . ')"><i class="bx bx-edit-alt font-size-16 align-middle"></i>No</button>';
+                $sub_array[] = '<button type="button" class="btn btn-soft-danger waves-effect waves-light btn-sm" onclick="habilitar(' . $row["aread_id"] . ')"><i class="bx bx-window-close font-size-16 align-middle"></i> No</button>';
             }
             $data[] = $sub_array;
         }
@@ -109,5 +109,13 @@ switch ($_GET["op"]) {
             "aaData" => $data
         );
         echo json_encode($results);
+        break;
+    case "habilitar":
+        $area->habilitar_area_usuario($_POST["aread_id"]);
+        echo "1";
+        break;
+    case "deshabilitar":
+        $area->deshabilitar_area_usuario($_POST["aread_id"]);
+        echo "1";
         break;
 }
