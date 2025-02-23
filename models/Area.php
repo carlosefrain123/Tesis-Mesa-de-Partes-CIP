@@ -61,4 +61,13 @@ class Area extends Conectar
         $sql->bindValue(1, $area_id);
         $sql->execute();
     }
+    public function get_area_usuario_permisos($user_id){
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "CALL sp_i_area_01(?);";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $user_id);
+        $sql->execute(); 
+        return $sql->fetchAll(PDO::FETCH_ASSOC); 
+    }
 }

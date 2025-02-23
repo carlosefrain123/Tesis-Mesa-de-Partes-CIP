@@ -89,4 +89,25 @@ switch ($_GET["op"]) {
         $area->eliminar_area($_POST["area_id"]);
         echo "1";
         break;
+    case 'permiso':
+        $datos = $area->get_area_usuario_permisos($_POST["user_id"]);
+        $data = array();
+        foreach ($datos as $row) {
+            $sub_array = array();
+            $sub_array[] = $row["area_nom"];
+            if ($row["aread_permi"] == "Si") {
+                $sub_array[] = '<button type="button" class="btn btn-soft-success waves-effect waves-light btn-sm" onclick="deshabilitar(' . $row["aread_id"] . ')"><i class="bx bx-trash-alt font-size-16 align-middle"></i>Si</button>';
+            } else {
+                $sub_array[] = '<button type="button" class="btn btn-soft-danger waves-effect waves-light btn-sm" onclick="habilitar(' . $row["aread_id"] . ')"><i class="bx bx-edit-alt font-size-16 align-middle"></i>No</button>';
+            }
+            $data[] = $sub_array;
+        }
+        $results = array(
+            "sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData" => $data
+        );
+        echo json_encode($results);
+        break;
 }

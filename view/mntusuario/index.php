@@ -64,6 +64,7 @@
                                                         <th>Correo</th>
                                                         <th>Rol</th>
                                                         <th>Fech.Creación</th>
+                                                        <th></th> 
                                                         <th></th>
                                                         <th></th>
                                                     </tr>
@@ -89,6 +90,7 @@
 
     </div>
     <?php require_once("mnt.php") ?>
+    <?php require_once("mntpermiso.php") ?>
     <?php require_once("../html/sidebar.php") ?>
 
 

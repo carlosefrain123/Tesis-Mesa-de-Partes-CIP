@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3305
--- Tiempo de generación: 18-02-2025 a las 05:30:18
+-- Tiempo de generación: 22-02-2025 a las 21:11:32
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -24,6 +24,42 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_i_area_01` (IN `xuser_id` INT)   BEGIN
+    DECLARE areaCount INT;
+
+    -- Obtener la cantidad de áreas del usuario
+    SELECT COUNT(*) INTO areaCount 
+    FROM td_area_detalle 
+    WHERE user_id = xuser_id;
+
+    -- Si no tiene áreas registradas, insertar todas las activas
+    IF areaCount = 0 THEN 
+        INSERT INTO td_area_detalle (user_id, area_id)
+        SELECT xuser_id, area_id 
+        FROM tm_area 
+        WHERE est = 1;
+    ELSE
+        -- Insertar solo las áreas que aún no tenga registradas
+        INSERT INTO td_area_detalle (user_id, area_id)
+        SELECT xuser_id, area_id 
+        FROM tm_area 
+        WHERE est = 1 
+        AND area_id NOT IN (
+            SELECT area_id FROM td_area_detalle WHERE user_id = xuser_id
+        );
+    END IF;
+    
+    SELECT 
+td_area_detalle.aread_id, td_area_detalle.area_id,td_area_detalle.aread_permi,
+tm_area.area_nom,
+tm_area.area_correo
+    FROM td_area_detalle
+    INNER JOIN tm_area ON tm_area.area_id=td_area_detalle.area_id
+    WHERE
+    td_area_detalle.user_id=xuser_id
+    AND tm_area.est=1;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_l_documento_01` (IN `xdoc_id` INT)   BEGIN
 SELECT tm_documento.doc_id,tm_documento.area_id, tm_area.area_nom, tm_area.area_correo,tm_documento.doc_externo,tm_documento.doc_dni,tm_documento.doc_nom,tm_documento.doc_descrip,tm_documento.tra_id,tm_tramite.tra_nom,tm_documento.tip_id,tm_tipo.tip_nom,tm_documento.user_id,tm_usuario.usu_nomape,tm_usuario.usu_correo,COALESCE(contador.cant,0)as cant, 
 CONCAT(DATE_FORMAT(tm_documento.fech_crea,'%m'),'-',DATE_FORMAT(tm_documento.fech_crea,'%Y'),'-',tm_documento.doc_id) AS nrotramite 
@@ -66,6 +102,42 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_l_documento_02` (IN `xuser_id` I
 END$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `td_area_detalle`
+--
+
+CREATE TABLE `td_area_detalle` (
+  `aread_id` int(10) NOT NULL,
+  `user_id` int(10) DEFAULT NULL,
+  `area_id` int(10) DEFAULT NULL,
+  `aread_permi` varchar(2) DEFAULT 'No',
+  `fech_crea` datetime DEFAULT current_timestamp(),
+  `fech_modi` datetime DEFAULT NULL,
+  `fech_elim` datetime DEFAULT NULL,
+  `est` int(10) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `td_area_detalle`
+--
+
+INSERT INTO `td_area_detalle` (`aread_id`, `user_id`, `area_id`, `aread_permi`, `fech_crea`, `fech_modi`, `fech_elim`, `est`) VALUES
+(16, 105, 1, 'No', '2025-02-22 13:26:34', NULL, NULL, 1),
+(17, 105, 2, 'No', '2025-02-22 13:26:34', NULL, NULL, 1),
+(18, 105, 3, 'No', '2025-02-22 13:26:34', NULL, NULL, 1),
+(19, 105, 4, 'No', '2025-02-22 13:26:34', NULL, NULL, 1),
+(20, 105, 5, 'No', '2025-02-22 13:26:34', NULL, NULL, 1),
+(21, 105, 6, 'No', '2025-02-22 13:26:34', NULL, NULL, 1),
+(22, 105, 7, 'No', '2025-02-22 13:26:34', NULL, NULL, 1),
+(23, 105, 8, 'No', '2025-02-22 13:26:34', NULL, NULL, 1),
+(24, 105, 9, 'No', '2025-02-22 13:26:34', NULL, NULL, 1),
+(25, 105, 10, 'No', '2025-02-22 13:26:34', NULL, NULL, 1),
+(26, 105, 12, 'No', '2025-02-22 13:26:34', NULL, NULL, 1),
+(27, 105, 13, 'No', '2025-02-22 13:26:34', NULL, NULL, 1),
+(31, 105, 15, 'No', '2025-02-22 13:54:08', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -142,7 +214,8 @@ INSERT INTO `td_documento_detalle` (`det_id`, `doc_id`, `det_nom`, `user_id`, `f
 (51, 35, 'Certificado ACI 2020 -2021 JIMMY PEREZ.pdf', 96, '2025-02-10 22:01:45', NULL, NULL, 1),
 (52, 37, 'S11-s01 SAN (1).pdf', 101, '2025-02-10 22:06:34', NULL, NULL, 1),
 (53, 38, 'applicant_1054524242_CV_1047880253.pdf', 103, '2025-02-12 02:05:47', NULL, NULL, 1),
-(54, 39, 'CAMO_CHAFLOQUE_LLONTOP_443633_81.PDF', 103, '2025-02-16 19:57:36', NULL, NULL, 1);
+(54, 39, 'CAMO_CHAFLOQUE_LLONTOP_443633_81.PDF', 103, '2025-02-16 19:57:36', NULL, NULL, 1),
+(55, 40, 'Certificado ACI 2020 -2021MIGUEL ESPINOZA.pdf', 103, '2025-02-21 01:20:35', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -177,7 +250,8 @@ INSERT INTO `tm_area` (`area_id`, `area_nom`, `area_correo`, `fech_crea`, `fech_
 (10, 'Legal y Cumplimiento', 'Carloschallo1@hotmail.com', '2025-02-04 22:59:52', NULL, NULL, 1),
 (12, 'XD98', 'xd98@gmail.com', '2025-02-16 18:56:14', '2025-02-16 19:35:15', '2025-02-16 19:16:11', 1),
 (13, 'tipo18', 'tipo12@gmail.com', '2025-02-16 19:37:32', '2025-02-16 19:52:33', '2025-02-16 19:38:37', 1),
-(14, 'tipo21', 'tipocuaq@gmail.com', '2025-02-16 19:52:55', '2025-02-16 19:53:15', '2025-02-16 19:53:27', 0);
+(14, 'tipo21', 'tipocuaq@gmail.com', '2025-02-16 19:52:55', '2025-02-16 19:53:15', '2025-02-16 19:53:27', 0),
+(15, 'nueva area', 'areanueva@gmail.com', '2025-02-22 13:53:50', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -244,7 +318,8 @@ INSERT INTO `tm_documento` (`doc_id`, `area_id`, `tra_id`, `doc_externo`, `tip_i
 (36, 8, 3, 'deed', 1, 'deeded', 'eded', 'ededed', 96, '2025-02-10 22:02:25', NULL, NULL, 1),
 (37, 10, 2, '8459', 1, '895869', 'Edita', 'Hola, soy Edita.', 101, '2025-02-10 22:06:34', NULL, NULL, 1),
 (38, 2, 1, 'eededed', 2, 'deeded', 'ededed', 'edededed', 103, '2025-02-12 02:05:47', NULL, NULL, 1),
-(39, 1, 3, '77779', 1, '7777', 'buenasuertepapu', 'Buenasuertepapuprueba seeleccion', 103, '2025-02-16 19:57:36', NULL, NULL, 1);
+(39, 1, 3, '77779', 1, '7777', 'buenasuertepapu', 'Buenasuertepapuprueba seeleccion', 103, '2025-02-16 19:57:36', NULL, NULL, 1),
+(40, 1, 1, '8985', 1, '789878', 'Hello word', 'Hola mundo', 103, '2025-02-21 01:20:35', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -365,7 +440,6 @@ CREATE TABLE `tm_usuario` (
 --
 
 INSERT INTO `tm_usuario` (`user_id`, `usu_nomape`, `usu_correo`, `usu_pass`, `fech_crea`, `usu_img`, `rol_id`, `fech_modi`, `fech_elim`, `fech_acti`, `est`) VALUES
-(39, 'prueba', 'prueba@gmail.com', 'kKDynpCO1BS6vWHdf5diHbAIH4Dxic1IKMbeTxjDAR0=', '2024-11-10 01:32:40', NULL, NULL, NULL, NULL, NULL, 2),
 (40, 'prueba2', 'prueba2@gmail.com', '12345678', '2024-11-10 01:34:40', NULL, NULL, NULL, NULL, NULL, 2),
 (41, 'prueba3', 'prueba4@gmail.com', '12345678', '2024-11-10 01:39:40', NULL, NULL, NULL, NULL, NULL, 2),
 (42, 'prueba3', 'prueba5@gmail.com', '987654321', '2024-11-10 01:39:54', NULL, NULL, NULL, NULL, NULL, 2),
@@ -376,21 +450,32 @@ INSERT INTO `tm_usuario` (`user_id`, `usu_nomape`, `usu_correo`, `usu_pass`, `fe
 (47, 'prueba15', 'prueba15@gmail.com', '12345678', '2024-11-11 21:12:34', NULL, NULL, NULL, NULL, NULL, 2),
 (48, 'prueba16', 'prueba16@gmail.com', '12345678', '2024-11-11 21:15:19', NULL, NULL, NULL, NULL, '2024-11-27 00:35:45', 1),
 (49, 'prueba11', 'prueba11@gmail.com', '12345678', '2024-11-11 21:21:52', NULL, NULL, NULL, NULL, NULL, 2),
-(50, 'prueba12', 'prueba12@gmail.com', '12345678', '2024-11-19 23:40:00', NULL, NULL, NULL, NULL, '2024-11-27 00:32:55', 1),
-(63, 'prueba20', 'u19309934@utp.edu.pe', '12345678', '2024-11-27 01:19:12', NULL, NULL, NULL, NULL, NULL, 2),
-(67, 'prueba78', 'prueba78@gmail.com', 'Q1ehaxPLJqx2c5tQRLVK6Uw6xpg6abWgW6uufMD6irc=', '2025-01-02 21:00:12', NULL, NULL, NULL, NULL, NULL, 2),
 (87, 'Groupsy', 'groupsy777@gmail.com', 'Hdh0ZSFBh0PxEfrtBhiRR1ngMopHItqnaQw4Dyn5Dd0=', '2025-01-16 23:58:16', 'https://lh3.googleusercontent.com/a/ACg8ocJPe5klMxSja5_GXW6Xe-vpi1zUUt9rSGLGsdkvyLJbw_kjfQ=s96-c', NULL, NULL, NULL, NULL, 1),
 (88, 'Carlos Efra', 'prueba7777@gmail.com', 'lbOVzlHaJGybAfogB7gAHclUV/HDvHI0+7kTQX73vSg=', '2025-02-09 16:58:07', '', 2, NULL, NULL, NULL, 2),
 (101, 'Edita Chafloque', 'echafloquecajusol@gmail.com', 'zL47+NpEe2k6yH07qQmoyHSxpr9gKUoQ52UMCTgzsA4=', '2025-02-10 22:04:09', '', 1, NULL, NULL, NULL, 2),
 (102, 'Edita Cajusol', 'u20234626@utp.edu.pe', 'UQgStk/wNei0NNXdamOciH86OBIbF+ON17HXOSdh4Sg=', '2025-02-10 22:09:29', '', 1, NULL, NULL, NULL, 2),
 (103, 'Jose Carlos Guzman Perez', 'guzmanperezjosecarlos33@gmail.com', '1sZplGvNDleeeQMAF0v6cjPMqhoe1xwNZ1DmIl5vXMY=', '2025-02-12 00:35:55', 'https://lh3.googleusercontent.com/a/ACg8ocKH3ZMrm2oG3vVbdQXyGg9ErisudMgfCW4r1fUkYTka8rESrg=s96-c', 1, NULL, NULL, NULL, 1),
 (104, 'Carlos Efrain Chafloque Lllontop', 'carlosefrainchallo1@gmail.com', 'fJJYQHNZ4qTpVPyqBPobc/XTYa/CMKA/eOemqf+kL7s=', '2025-02-12 00:36:46', 'https://lh3.googleusercontent.com/a/ACg8ocIXAPS7fPlVdIejcDjDfBgg1Wc25rIzUtXy_IQvjXRFaXYSIL30=s96-c', 2, NULL, NULL, NULL, 1),
-(105, 'Carlos Efrain Chafloque Llontop', 'seleccionchiclayo@dino.com.pe', 'v1N2xjIW8zI28KN/KyEX1Ip+k3NiBo7DMXWI29rLT1g=', '2025-02-12 00:37:35', 'https://lh3.googleusercontent.com/a/ACg8ocKd_Zky6TYjMc-8UNJJPMOBcdcA9F4vOCer41nDneuE1PDbhltl=s96-c', 3, NULL, NULL, NULL, 1),
-(107, 'test', 'test@gmail.com', NULL, '2025-02-17 23:25:57', '../../assets/picture/avatar.png', 2, NULL, NULL, NULL, 1);
+(105, 'Carlos Chafloque', 'seleccionchiclayo@dino.com.pe', 'v1N2xjIW8zI28KN/KyEX1Ip+k3NiBo7DMXWI29rLT1g=', '2025-02-12 00:37:35', 'https://lh3.googleusercontent.com/a/ACg8ocKd_Zky6TYjMc-8UNJJPMOBcdcA9F4vOCer41nDneuE1PDbhltl=s96-c', 3, '2025-02-21 01:15:10', NULL, NULL, 1),
+(107, 'test777', 'teste777@gmail.com', NULL, '2025-02-17 23:25:57', '../../assets/picture/avatar.png', 3, '2025-02-21 00:57:44', '2025-02-21 00:58:05', NULL, 0),
+(108, 'test1', 'test1@gmail.com', NULL, '2025-02-21 00:30:43', '../../assets/picture/avatar.png', 2, NULL, '2025-02-21 00:34:07', NULL, 0),
+(109, 'test89', 'test89@gmail.com', NULL, '2025-02-21 00:34:22', '../../assets/picture/avatar.png', 3, '2025-02-21 01:14:46', '2025-02-21 01:16:54', NULL, 0),
+(110, 'testefra', 'testefra@gmail.com', NULL, '2025-02-21 00:58:01', '../../assets/picture/avatar.png', 2, NULL, '2025-02-21 00:58:08', NULL, 0),
+(111, 'carlos efraincito', 'efraincito8@gmail.com', NULL, '2025-02-21 00:59:44', '../../assets/picture/avatar.png', 2, '2025-02-21 01:01:09', NULL, NULL, 1),
+(112, 'Cinthia', 'Cinthia@gmail.com', NULL, '2025-02-21 01:16:38', '../../assets/picture/avatar.png', 2, NULL, '2025-02-22 11:08:54', NULL, 0),
+(113, 'Diego Marquin', 'dm@gmail.com', NULL, '2025-02-21 01:17:15', '../../assets/picture/avatar.png', 3, '2025-02-21 01:17:20', '2025-02-22 11:08:58', NULL, 0),
+(116, 'Calin', 'u19309934@utp.edu.pe', 'rXf9kjfrsIJnMo8YjOKjlziyb4y355IcFoBeOKlim4Q=', '2025-02-22 12:18:53', '../../assets/picture/avatar.png', 3, NULL, NULL, NULL, 1),
+(118, 'Brenda', 'u23204320@utp.edu.pe', '4QZlTiBJe7BFwSLNf4wluq7Us+dbBRNOPI3AIqKoeJQ=', '2025-02-22 12:21:50', '../../assets/picture/avatar.png', 3, NULL, NULL, NULL, 1);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `td_area_detalle`
+--
+ALTER TABLE `td_area_detalle`
+  ADD PRIMARY KEY (`aread_id`);
 
 --
 -- Indices de la tabla `td_documento_detalle`
@@ -439,22 +524,28 @@ ALTER TABLE `tm_usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `td_area_detalle`
+--
+ALTER TABLE `td_area_detalle`
+  MODIFY `aread_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
 -- AUTO_INCREMENT de la tabla `td_documento_detalle`
 --
 ALTER TABLE `td_documento_detalle`
-  MODIFY `det_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `det_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de la tabla `tm_area`
 --
 ALTER TABLE `tm_area`
-  MODIFY `area_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `area_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `tm_documento`
 --
 ALTER TABLE `tm_documento`
-  MODIFY `doc_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `doc_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `tm_rol`
@@ -478,7 +569,7 @@ ALTER TABLE `tm_tramite`
 -- AUTO_INCREMENT de la tabla `tm_usuario`
 --
 ALTER TABLE `tm_usuario`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
