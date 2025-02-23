@@ -69,4 +69,32 @@ class Rol extends Conectar
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function habilitar_rol_menu($mend_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "UPDATE td_menu_detalle
+                SET
+                    mend_permi='Si',
+                    fech_modi=NOw()
+                WHERE
+                    mend_id=?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $mend_id);
+        $sql->execute();
+    }
+    public function deshabilitar_rol_menu($mend_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "UPDATE td_menu_detalle
+                SET
+                    mend_permi='No',
+                    fech_modi=NOw()
+                WHERE
+                    mend_id=?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $mend_id);
+        $sql->execute();
+    }
 }

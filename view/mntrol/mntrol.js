@@ -203,4 +203,22 @@ function permiso(rol_id){
     .DataTable();
   $("#mnt_modal_permiso").modal("show");
 }
+function habilitar(mend_id) {
+  $.post(
+    "../../controller/rol.php?op=habilitar",
+    { mend_id: mend_id },
+    function (data) {
+      $("#listado_table_permiso").DataTable().ajax.reload();
+    }
+  );
+}
+function deshabilitar(mend_id) {
+  $.post(
+    "../../controller/rol.php?op=deshabilitar",
+    { mend_id: mend_id },
+    function (data) {
+      $("#listado_table_permiso").DataTable().ajax.reload();
+    }
+  );
+}
 init();
