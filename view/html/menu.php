@@ -85,6 +85,12 @@
                             <span data-key="t-authentication">Mnt.Tipo</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="../mntrol/">
+                            <i data-feather="users"></i>
+                            <span data-key="t-authentication">Mnt.Rol</span>
+                        </a>
+                    </li>
                 <?php
                 }
                 ?>

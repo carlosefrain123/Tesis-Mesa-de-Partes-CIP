@@ -17,4 +17,53 @@ switch ($_GET["op"]) {
             echo $html;
         }
         break;
+        case 'listar':
+            $datos = $rol->get_rol();
+            $data = array();
+            foreach ($datos as $row) {
+                $sub_array = array();
+                $sub_array[] = $row["rol_nom"];
+                $sub_array[] = $row["fech_crea"];
+                $sub_array[] = '<button type="button" class="btn btn-soft-info waves-effect waves-light btn-sm" onclick="permiso(' . $row["user_id"] . ')"><i class="bx bx-shield-quarter font-size-16 align-middle"></i></button>';
+                $sub_array[] = '<button type="button" class="btn btn-soft-warning waves-effect waves-light btn-sm" onclick="editar(' . $row["rol_id"] . ')"><i class="bx bx-edit-alt font-size-16 align-middle"></i></button>';
+                $sub_array[] = '<button type="button" class="btn btn-soft-danger waves-effect waves-light btn-sm" onclick="eliminar(' . $row["rol_id"] . ')"><i class="bx bx-trash-alt font-size-16 align-middle"></i></button>';
+                $data[] = $sub_array;
+            }
+            $results = array(
+                "sEcho" => 1,
+                "iTotalRecords" => count($data),
+                "iTotalDisplayRecords" => count($data),
+                "aaData" => $data
+            );
+            echo json_encode($results);
+            break;
+        case "guardaryeditar":
+            $datos = $rol->get_rol_nombre($_POST["rol_nom"]);
+            if (is_array($datos) == true and count($datos) == 0) {
+                if (empty($_POST["rol_id"])) {
+                    $rol->insert_rol($_POST["rol_nom"]);
+                    echo "1";
+                } else {
+                    $rol->update_rol($_POST["rol_id"], $_POST["rol_nom"]);
+                    echo "2";
+                }
+            } else {
+                echo "0";
+            }
+    
+            break;
+        case "mostrar":
+            $datos = $rol->get_rol_x_id($_POST["rol_id"]);
+            if (is_array($datos) == true and count($datos) > 0) {
+                foreach ($datos as $row) {
+                    $output["rol_id"] = $row["rol_id"];
+                    $output["rol_nom"] = $row["rol_nom"];
+                }
+                echo json_encode($output);
+            }
+            break;
+        case "eliminar":
+            $rol->eliminar_rol($_POST["rol_id"]);
+            echo "1";
+            break;
 }
