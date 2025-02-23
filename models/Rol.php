@@ -59,4 +59,14 @@ class Rol extends Conectar
         $sql->bindValue(1, $rol_id);
         $sql->execute();
     }
+    public function get_rol_menu_permisos($rol_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "CALL sp_i_rol_01(?);";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $rol_id);
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

@@ -66,4 +66,25 @@ switch ($_GET["op"]) {
             $rol->eliminar_rol($_POST["rol_id"]);
             echo "1";
             break;
+        case 'permiso':
+            $datos = $rol->get_rol_menu_permisos($_POST["rol_id"]);
+            $data = array();
+            foreach ($datos as $row) {
+                $sub_array = array();
+                $sub_array[] = $row["men_nom_vista"];
+                if ($row["mend_permi"] == "Si") {
+                    $sub_array[] = '<button type="button" class="btn btn-soft-success waves-effect waves-light btn-sm" onclick="deshabilitar(' . $row["mend_id"] . ')"><i class="bx bx-check-double font-size-16 align-middle"></i> Si</button>';
+                } else {
+                    $sub_array[] = '<button type="button" class="btn btn-soft-danger waves-effect waves-light btn-sm" onclick="habilitar(' . $row["mend_id"] . ')"><i class="bx bx-window-close font-size-16 align-middle"></i> No</button>';
+                }
+                $data[] = $sub_array;
+            }
+            $results = array(
+                "sEcho" => 1,
+                "iTotalRecords" => count($data),
+                "iTotalDisplayRecords" => count($data),
+                "aaData" => $data
+            );
+            echo json_encode($results);
+            break;
 }

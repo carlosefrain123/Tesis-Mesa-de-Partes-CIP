@@ -88,6 +88,7 @@ if (isset($_SESSION["user_id"])) {
 
         </div>
         <?php require_once("mnt.php")?>
+        <?php require_once("mntpermiso.php")?>
 
         <?php require_once("../html/sidebar.php") ?>
 
