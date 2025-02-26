@@ -124,4 +124,33 @@ class Rol extends Conectar
         $sql->execute();
         return $sql->fetchAll(pdo::FETCH_ASSOC);
     }
+    public function validar_menu_x_rol($rol_id,$men_nom){
+        /* TODO: Obtener la conexión a la base de datos utilizando el método de la clase padre */
+        $conectar = parent::conexion();
+        /* TODO: Establecer el juego de caracteres a UTF-8 utilizando el método de la clase padre */
+        parent::set_names();
+        /* TODO: Consulta SQL para insertar un nuevo usuario en la tabla tm_usuario */
+        $sql="SELECT
+            td_menu_detalle.mend_id, 
+            tm_menu.men_id,
+            tm_menu.men_nom,
+            tm_menu.men_nom_vista,
+            tm_menu.men_icon,
+            tm_menu.men_ruta
+            FROM td_menu_detalle
+            INNER JOIN tm_menu ON td_menu_detalle.men_id = tm_menu.men_id
+            WHERE
+            td_menu_detalle.rol_id = ?
+            AND tm_menu.men_nom = ?
+            AND tm_menu.est = 1
+            AND td_menu_detalle.mend_permi = 'Si'";
+        /* TODO:Preparar la consulta SQL */
+        $sql=$conectar->prepare($sql);
+        /* TODO: Vincular los valores a los parámetros de la consulta */
+        $sql->bindValue(1,$rol_id);
+        $sql->bindValue(2,$men_nom);
+        /* TODO: Ejecutar la consulta SQL */
+        $sql->execute();
+        return $sql->fetchAll(pdo::FETCH_ASSOC);
+    }
 }
