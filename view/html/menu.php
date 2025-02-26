@@ -1,3 +1,8 @@
+<?php
+require_once("../../models/Rol.php");
+$rol = new Rol();
+$datos=$rol->get_menu_x_rol($_SESSION["rol_id"]);
+?>
 <!-- ========== Left Sidebar Start ========== -->
 <div class="vertical-menu">
 
@@ -9,92 +14,17 @@
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title" data-key="t-menu">Menu</li>
                 <?php
-                if ($_SESSION["rol_id"] == 1) {
+                foreach ($datos as $row) {
                 ?>
                     <li>
-                        <a href="../home/">
-                            <i data-feather="home"></i>
-                            <span data-key="t-dashboard">Inicio</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../NuevoTramite/">
-                            <i data-feather="grid"></i>
-                            <span data-key="t-apps">Nuevo Trámite</span>
-                        </a>
-
-                    </li>
-
-                    <li>
-                        <a href="../ConsultarTramite/">
-                            <i data-feather="users"></i>
-                            <span data-key="t-authentication">Consultar Trámite</span>
-                        </a>
-                    </li>
-                <?php
-                }elseif ($_SESSION["rol_id"]==2) {
-                    ?>
-                    <li>
-                        <a href="../homecolaborador/">
-                            <i data-feather="home"></i>
-                            <span data-key="t-dashboard">Inicio Colaborador</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../gestionartramite/">
-                            <i data-feather="grid"></i>
-                            <span data-key="t-apps">Gestionar Trámite</span>
-                        </a>
-
-                    </li>
-
-                    <li>
-                        <a href="../buscartramite/">
-                            <i data-feather="users"></i>
-                            <span data-key="t-authentication">Consultar Trámite</span>
-                        </a>
-                    </li>
-                <?php
-                }elseif ($_SESSION["rol_id"]==3) {
-                    ?>
-                    <li>
-                        <a href="../mntusuario/">
-                            <i data-feather="users"></i>
-                            <span data-key="t-apps">Mnt.Colaborador</span>
-                        </a>
-
-                    </li>
-
-                    <li>
-                        <a href="../mntarea/">
-                            <i data-feather="users"></i>
-                            <span data-key="t-authentication">Mnt.Area</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../mntramite/">
-                            <i data-feather="users"></i>
-                            <span data-key="t-authentication">Mnt.Tramite</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../mntipo/">
-                            <i data-feather="users"></i>
-                            <span data-key="t-authentication">Mnt.Tipo</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../mntrol/">
-                            <i data-feather="users"></i>
-                            <span data-key="t-authentication">Mnt.Rol</span>
+                        <a href="<?php echo $row["men_ruta"]?>">
+                            <i data-feather="<?php echo $row["men_icon"]?>"></i>
+                            <span data-key="t-dashboard"><?php echo $row["men_nom_vista"]?></span>
                         </a>
                     </li>
                 <?php
                 }
                 ?>
-
             </ul>
         </div>
         <!-- Sidebar -->
