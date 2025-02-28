@@ -1,5 +1,5 @@
 <?php
-    require_once("../../config/conexion.php");
+require_once("../../config/conexion.php");
 require_once("../../models/rol.php");
 $rol = new Rol();
 $datos = $rol->validar_menu_x_rol($_SESSION["rol_id"], "gestionartramite");
@@ -47,6 +47,44 @@ if (isset($_SESSION["user_id"]) and count($datos) > 0) {
 
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Gestionar Trámites.</h4>
+                                            <p class="card-title-desc">(*)Datos obligatorios</p>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="form-label" class="form-label">Seleccione Area (*)</label>
+                                                    <select class="form-select" name="area_id" id="area_id" placeholder="Seleccionar" requeridad>
+                                                        <option value="">Seleccionar</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <table id="listado_table" class="table table-bordered dt-responsive  nowrap w-100">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nro.Tramite</th>
+                                                        <th>Área</th>
+                                                        <th>Tramite</th>
+                                                        <th>Doc.Externo</th>
+                                                        <th>Tipo</th>
+                                                        <th>Doc.</th>
+                                                        <th>Nombre</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -66,6 +104,7 @@ if (isset($_SESSION["user_id"]) and count($datos) > 0) {
         <!-- Right bar overlay-->
         <div class="rightbar-overlay"></div>
         <?php require_once("../html/js.php") ?>
+        <script type="text/javascript" src="gestionartramite.js"></script>
 
 
 

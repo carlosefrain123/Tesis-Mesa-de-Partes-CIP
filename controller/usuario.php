@@ -204,4 +204,15 @@ switch ($_GET["op"]) {
         );
         echo json_encode($results);
         break;
+    case "comboarea":
+        $datos = $usuario->get_usuario_permiso_area($_SESSION["user_id"]);
+        $html = "";
+        $html .= "<option value=''>Seleccionar</option>";
+        if (is_array($datos) == true and count($datos) > 0) {
+            foreach ($datos as $row) {
+                $html .= "<option value='" . $row['area_id'] . "'>" . $row['area_nom'] . "</option>";
+            }
+            echo $html;
+        }
+        break;
 }
