@@ -4,10 +4,10 @@ $(document).ready(function() {
         $('#area_id').html(data);
     });
 
-    /* $("#area_id").change(function(){
+    $("#area_id").change(function(){
         $("#area_id").each(function(){
             area_id = $(this).val();
-
+            console.log(area_id);
             tabla = $("#listado_table").dataTable({
                 "aProcessing": true,
                 "aServerSide": true,
@@ -24,7 +24,7 @@ $(document).ready(function() {
                 "ajax":{
                     url: '../../controller/documento.php?op=listarxarea',
                     type : "post",
-                    data: {area_id:area_id,doc_estado:'Pendiente'},
+                    data: {area_id:area_id/* ,doc_estado:'Pendiente' */},
                     dataType : "json",
                     error:function(e){
                         console.log(e.responseText);
@@ -61,6 +61,6 @@ $(document).ready(function() {
                 }
             }).DataTable();
         })
-    }); */
+    });
 
 });

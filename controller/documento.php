@@ -47,25 +47,49 @@ switch ($_GET["op"]) {
         /* echo json_encode($datos); */
         break;
     case 'listarusuario':
-        $datos=$documento->get_documento_x_user($_SESSION["user_id"]);
-        $data=Array();
+        $datos = $documento->get_documento_x_user($_SESSION["user_id"]);
+        $data = array();
         foreach ($datos as $row) {
-            $sub_array=array();
-            $sub_array[]=$row["nrotramite"];
-            $sub_array[]=$row["area_nom"];
-            $sub_array[]=$row["tra_nom"];
-            $sub_array[]=$row["doc_externo"];
-            $sub_array[]=$row["tip_nom"];
-            $sub_array[]=$row["doc_dni"];
-            $sub_array[]=$row["doc_nom"];
-            $sub_array[]='<button type="button" class="btn btn-soft-primary waves-effect waves-light btn-sm" onclick="ver('.$row["doc_id"].')"><i class="bx bx-message-alt-dots font-size-16 align-middle"></i></button>';
-            $data[]=$sub_array;
+            $sub_array = array();
+            $sub_array[] = $row["nrotramite"];
+            $sub_array[] = $row["area_nom"];
+            $sub_array[] = $row["tra_nom"];
+            $sub_array[] = $row["doc_externo"];
+            $sub_array[] = $row["tip_nom"];
+            $sub_array[] = $row["doc_dni"];
+            $sub_array[] = $row["doc_nom"];
+            $sub_array[] = '<button type="button" class="btn btn-soft-primary waves-effect waves-light btn-sm" onclick="ver(' . $row["doc_id"] . ')"><i class="bx bx-message-alt-dots font-size-16 align-middle"></i></button>';
+            $data[] = $sub_array;
         }
-        $results=array(
-            "sEcho"=>1,
-            "iTotalRecords"=>count($data),
-            "iTotalDisplayRecords"=>count($data),
-            "aaData"=>$data);
+        $results = array(
+            "sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData" => $data
+        );
+        echo json_encode($results);
+        break;
+    case "listarxarea":
+        $datos = $documento->get_documento_x_area($_POST["area_id"]);
+        $data = array();
+        foreach ($datos as $row) {
+            $sub_array = array();
+            $sub_array[] = $row["nrotramite"];
+            $sub_array[] = $row["area_nom"];
+            $sub_array[] = $row["tra_nom"];
+            $sub_array[] = $row["doc_externo"];
+            $sub_array[] = $row["tip_nom"];
+            $sub_array[] = $row["doc_dni"];
+            $sub_array[] = $row["doc_nom"];
+            $sub_array[] = '<button type="button" class="btn btn-soft-primary waves-effect waves-light btn-sm" onclick="ver(' . $row["doc_id"] . ')"><i class="bx bx-message-alt-dots font-size-16 align-middle"></i></button>';
+            $data[] = $sub_array;
+        }
+        $results = array(
+            "sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData" => $data
+        );
         echo json_encode($results);
         break;
 }
