@@ -75,6 +75,8 @@ function ver(doc_id){
         $("#doc_dni").val(data.doc_dni);
         $("#doc_nom").val(data.doc_nom);
         $("#doc_descrip").val(data.doc_descrip);
+        $("#lbltramite").html("Nro Tramite: " + data.nrotramite +" | Usuario: " + data.usu_nomape + " | Correo: " + data.usu_correo  + " | Adjunto: " + data.cant + " | Estado: " + data.doc_estado);
+
     });
     $("#mnt_detalle").modal('show');
 }

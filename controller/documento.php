@@ -118,8 +118,8 @@ switch ($_GET["op"]) {
                 $output["usu_correo"] = $row["usu_correo"];
                 $output["cant"] = $row["cant"];
                 $output["nrotramite"] = $row["nrotramite"];
-                /* $output["doc_estado"] = $row["doc_estado"];
-                $output["doc_respuesta"] = $row["doc_respuesta"]; */
+                $output["doc_estado"] = $row["doc_estado"];
+                /*$output["doc_respuesta"] = $row["doc_respuesta"]; */
             }
             echo json_encode($output);
         }
