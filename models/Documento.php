@@ -90,4 +90,32 @@ class Documento extends Conectar
         $sql->execute();
         return $sql->fetchAll(pdo::FETCH_ASSOC);
     }
+    public function get_documento_detalle_x_doc_id($doc_id/* ,$det_tipo */){
+        /* TODO: Obtener la conexión a la base de datos utilizando el método de la clase padre */
+        $conectar = parent::conexion();
+        /* TODO: Establecer el juego de caracteres a UTF-8 utilizando el método de la clase padre */
+        parent::set_names();
+        /* TODO: Consulta SQL para insertar un nuevo usuario en la tabla tm_usuario */
+        $sql="SELECT 
+            td_documento_detalle.det_id,
+            td_documento_detalle.doc_id,
+            td_documento_detalle.det_nom,
+            td_documento_detalle.user_id,
+            tm_usuario.usu_nomape,
+            tm_usuario.usu_correo,
+            tm_usuario.usu_img,
+            td_documento_detalle.fech_crea 
+            FROM td_documento_detalle
+            INNER JOIN tm_usuario ON td_documento_detalle.user_id = tm_usuario.user_id
+            WHERE
+            td_documento_detalle.doc_id = ?";
+        /* TODO:Preparar la consulta SQL */
+        $sql=$conectar->prepare($sql);
+        /* TODO: Vincular los valores a los parámetros de la consulta */
+        $sql->bindValue(1,$doc_id);
+        /* $sql->bindValue(2,$det_tipo); */
+        /* TODO: Ejecutar la consulta SQL */
+        $sql->execute();
+        return $sql->fetchAll(pdo::FETCH_ASSOC);
+    }
 }

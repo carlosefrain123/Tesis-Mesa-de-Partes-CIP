@@ -97,6 +97,7 @@ switch ($_GET["op"]) {
         );
         echo json_encode($results);
         break;
+
     case "mostrar":
         $datos = $documento->get_documento_x_id($_POST["doc_id"]);
         if (is_array($datos) == true and count($datos) > 0) {
@@ -123,5 +124,27 @@ switch ($_GET["op"]) {
             }
             echo json_encode($output);
         }
+        break;
+    case "listardetalle":
+        $datos = $documento->get_documento_detalle_x_doc_id($_POST["doc_id"]/* , $_POST["det_tipo"] */);
+        $data = array();
+        foreach ($datos as $row) {
+            $sub_array = array();
+            $sub_array[] = $row["det_nom"];
+            $sub_array[] = $row["fech_crea"];
+            $sub_array[] = $row["usu_nomape"];
+            $sub_array[] = "<div class='avatar-sm flex-shrink-0 me-3'><img src='" . $row["usu_img"] . "' alt='' class='img-thumbnail rounded-circle'></div>";
+            $sub_array[] = '<a class="btn btn-soft-primary waves-effect waves-light btn-sm" href="../../assets/document/' . $row["doc_id"] . '/' . $row["det_nom"] . '" target="_blank" download><i class="bx bx-search-alt font-size-16 align-middle"></i></a>';
+            $data[] = $sub_array;
+        }
+
+        $results = array(
+            "sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData" => $data
+        );
+
+        echo json_encode($results);
         break;
 }
