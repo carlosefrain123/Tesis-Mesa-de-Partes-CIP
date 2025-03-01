@@ -64,3 +64,17 @@ $(document).ready(function() {
     });
 
 });
+function ver(doc_id){
+    $.post("../../controller/documento.php?op=mostrar",{doc_id:doc_id},function(data){
+        data=JSON.parse(data);
+        console.log(data);
+        $("#area_nom").val(data.area_nom);
+        $("#tra_nom").val(data.tra_nom);
+        $("#doc_externo").val(data.doc_externo);
+        $("#tip_nom").val(data.tip_nom);
+        $("#doc_dni").val(data.doc_dni);
+        $("#doc_nom").val(data.doc_nom);
+        $("#doc_descrip").val(data.doc_descrip);
+    });
+    $("#mnt_detalle").modal('show');
+}

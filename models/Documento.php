@@ -73,6 +73,7 @@ class Documento extends Conectar
             tm_documento.user_id,
             tm_usuario.usu_nomape,
             tm_usuario.usu_correo,
+            tm_documento.doc_estado,
             CONCAT(DATE_FORMAT(tm_documento.fech_crea,'%m'),'-',DATE_FORMAT(tm_documento.fech_crea,'%Y'),'-',tm_documento.doc_id) 
         AS nrotramite
             FROM tm_documento
