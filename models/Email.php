@@ -213,4 +213,48 @@ class Email extends PHPMailer
             return false;
         }
     }
+    public function respuesta_registro($doc_id){
+
+        $conexion = new Conectar();
+
+        $documento = new Documento();
+        $datos = $documento -> get_documento_x_id($doc_id);
+
+        $this->IsSMTP();
+        $this->Host = 'smtp.hostinger.com';
+        $this->Port = 587;//Aqui el puerto
+        $this->SMTPAuth = true;
+        $this->SMTPSecure = 'tls';
+
+        $this->Username = $this->gCorreo;
+        $this->Password = $this->gContrasena;
+        $this->setFrom($this->gCorreo,"Respuesta Tramite Mesa de Partes AnderCode");
+
+        $this->CharSet = 'UTF8';
+        $this->addAddress($datos[0]["usu_correo"]);
+        $this->IsHTML(true);
+        $this->Subject = "Mesa de Partes";
+
+        $url = $conexion->ruta();
+
+        $cuerpo = file_get_contents("../assets/email/respuesta.html");
+        $cuerpo = str_replace("xlinksistema",$url,$cuerpo);
+
+        $cuerpo = str_replace("xnrotramite",$datos[0]["nrotramite"],$cuerpo);
+        $cuerpo = str_replace("xarea",$datos[0]["area_nom"],$cuerpo);
+        $cuerpo = str_replace("xtramite",$datos[0]["tra_nom"],$cuerpo);
+        $cuerpo = str_replace("xnroexterno",$datos[0]["doc_externo"],$cuerpo);
+        $cuerpo = str_replace("xtipo",$datos[0]["tip_nom"],$cuerpo);
+        $cuerpo = str_replace("xcant",$datos[0]["cant"],$cuerpo);
+
+        $this->Body = $cuerpo;
+        $this->AltBody = strip_tags("Respuesta Registro");
+
+        try{
+            $this->send();
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
 }

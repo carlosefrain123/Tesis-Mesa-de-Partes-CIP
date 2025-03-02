@@ -170,8 +170,7 @@ switch ($_GET["op"]) {
                 move_uploaded_file($nombre, $destino);
             }
             //TODO: Enviar alerta por Email
-            /*             $email->enviar_registro($datos[0]["doc_id"]);
- */
+            $email->respuesta_registro($_POST["doc_id"]);
         }
         $mes = date("m");
         $anio = date("Y");
