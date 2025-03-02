@@ -120,4 +120,27 @@ class Documento extends Conectar
         $sql->execute();
         return $sql->fetchAll(pdo::FETCH_ASSOC);
     }
+    public function actualizar_respuesta_documento($doc_id,$doc_respuesta,$doc_usu_terminado){
+        /* TODO: Obtener la conexión a la base de datos utilizando el método de la clase padre */
+        $conectar = parent::conexion();
+        /* TODO: Establecer el juego de caracteres a UTF-8 utilizando el método de la clase padre */
+        parent::set_names();
+        /* TODO: Consulta SQL para insertar un nuevo usuario en la tabla tm_usuario */
+        $sql="UPDATE tm_documento
+            SET
+                doc_respuesta = ?,
+                doc_usu_terminado = ?,
+                fech_terminado = NOW(),
+                doc_estado='Terminado'
+            WHERE
+                doc_id = ?";
+        /* TODO:Preparar la consulta SQL */
+        $sql=$conectar->prepare($sql);
+        /* TODO: Vincular los valores a los parámetros de la consulta */
+        $sql->bindValue(1,$doc_respuesta);
+        $sql->bindValue(2,$doc_usu_terminado);
+        $sql->bindValue(3,$doc_id);
+        /* TODO: Ejecutar la consulta SQL */
+        $sql->execute();
+    }
 }

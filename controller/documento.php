@@ -24,7 +24,7 @@ switch ($_GET["op"]) {
             /* echo json_encode($datos); */
             $mes = date("m");
             $anio = date("Y");
-            echo $mes . "." . $anio . "-" . $datos[0]["doc_id"];
+            echo $mes . "-" . $anio . "-" . $datos[0]["doc_id"];
             if (empty($_FILES['file']['name'])) {
             } else {
                 $countfiles = count($_FILES['file']['name']);
@@ -32,13 +32,14 @@ switch ($_GET["op"]) {
                 $file_arr = array();
                 if (!file_exists($ruta)) {
                     mkdir($ruta, 0777, true);
-                    for ($index = 0; $index < $countfiles; $index++) {
-                        $nombre = $_FILES['file']['tmp_name'][$index];
-                        $destino = $ruta . $_FILES['file']['name'][$index];
-                        $documento->insert_documento_detalle($datos[0]["doc_id"], $_FILES['file']['name'][$index], $_SESSION["user_id"],'Pendiente');
+                }
 
-                        move_uploaded_file($nombre, $destino);
-                    }
+                for ($index = 0; $index < $countfiles; $index++) {
+                    $nombre = $_FILES['file']['tmp_name'][$index];
+                    $destino = $ruta . $_FILES['file']['name'][$index];
+                    $documento->insert_documento_detalle($datos[0]["doc_id"], $_FILES['file']['name'][$index], $_SESSION["user_id"], 'Pendiente');
+
+                    move_uploaded_file($nombre, $destino);
                 }
                 //TODO: Enviar alerta por Email
                 $email->enviar_registro($datos[0]["doc_id"]);
@@ -126,7 +127,7 @@ switch ($_GET["op"]) {
         }
         break;
     case "listardetalle":
-        $datos = $documento->get_documento_detalle_x_doc_id($_POST["doc_id"] , $_POST["det_tipo"] );
+        $datos = $documento->get_documento_detalle_x_doc_id($_POST["doc_id"], $_POST["det_tipo"]);
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
@@ -146,5 +147,35 @@ switch ($_GET["op"]) {
         );
 
         echo json_encode($results);
+        break;
+    case 'respuesta':
+        $documento->actualizar_respuesta_documento($_POST["doc_id"], $_POST["doc_respuesta"], $_SESSION["user_id"]);
+
+        //Identificado
+        /* echo json_encode($datos); */
+        if (empty($_FILES['file']['name'])) {
+        } else {
+            $countfiles = count($_FILES['file']['name']);
+            $ruta = "../assets/document/" . $_POST["doc_id"] . "/";
+            $file_arr = array();
+            if (!file_exists($ruta)) {
+                mkdir($ruta, 0777, true);
+            }
+
+            for ($index = 0; $index < $countfiles; $index++) {
+                $nombre = $_FILES['file']['tmp_name'][$index];
+                $destino = $ruta . $_FILES['file']['name'][$index];
+                $documento->insert_documento_detalle($_POST["doc_id"], $_FILES['file']['name'][$index], $_SESSION["user_id"], 'Terminado');
+
+                move_uploaded_file($nombre, $destino);
+            }
+            //TODO: Enviar alerta por Email
+            /*             $email->enviar_registro($datos[0]["doc_id"]);
+ */
+        }
+        $mes = date("m");
+        $anio = date("Y");
+        echo $mes . "-" . $anio . "-" . $_POST["doc_id"];
+        /* echo json_encode($datos); */
         break;
 }
