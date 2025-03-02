@@ -35,7 +35,7 @@ switch ($_GET["op"]) {
                     for ($index = 0; $index < $countfiles; $index++) {
                         $nombre = $_FILES['file']['tmp_name'][$index];
                         $destino = $ruta . $_FILES['file']['name'][$index];
-                        $documento->insert_documento_detalle($datos[0]["doc_id"], $_FILES['file']['name'][$index], $_SESSION["user_id"]);
+                        $documento->insert_documento_detalle($datos[0]["doc_id"], $_FILES['file']['name'][$index], $_SESSION["user_id"],'Pendiente');
 
                         move_uploaded_file($nombre, $destino);
                     }
@@ -126,7 +126,7 @@ switch ($_GET["op"]) {
         }
         break;
     case "listardetalle":
-        $datos = $documento->get_documento_detalle_x_doc_id($_POST["doc_id"]/* , $_POST["det_tipo"] */);
+        $datos = $documento->get_documento_detalle_x_doc_id($_POST["doc_id"] , $_POST["det_tipo"] );
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();

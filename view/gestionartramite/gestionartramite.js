@@ -108,7 +108,7 @@ function ver(doc_id) {
         "ajax":{
             url: '../../controller/documento.php?op=listardetalle',
             type : "post",
-            data: {doc_id:doc_id/* ,det_tipo:'Pendiente' */},
+            data: {doc_id:doc_id,det_tipo:'Pendiente'},
             dataType : "json",
             error:function(e){
                 console.log(e.responseText);

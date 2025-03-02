@@ -22,15 +22,16 @@ class Documento extends Conectar
         $sql1->execute();
         return $sql1->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function insert_documento_detalle($doc_id,$det_nom,$user_id)
+    public function insert_documento_detalle($doc_id,$det_nom,$user_id,$det_tipo)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO td_documento_detalle(doc_id,det_nom,user_id) VALUES (?,?,?);";
+        $sql = "INSERT INTO td_documento_detalle(doc_id,det_nom,user_id,det_tipo) VALUES (?,?,?,?);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $doc_id);
         $sql->bindValue(2, $det_nom);
         $sql->bindValue(3, $user_id);
+        $sql->bindValue(4, $det_tipo);
         $sql->execute();
     }
     public function get_documento_x_id($doc_id){
@@ -90,7 +91,7 @@ class Documento extends Conectar
         $sql->execute();
         return $sql->fetchAll(pdo::FETCH_ASSOC);
     }
-    public function get_documento_detalle_x_doc_id($doc_id/* ,$det_tipo */){
+    public function get_documento_detalle_x_doc_id($doc_id,$det_tipo){
         /* TODO: Obtener la conexión a la base de datos utilizando el método de la clase padre */
         $conectar = parent::conexion();
         /* TODO: Establecer el juego de caracteres a UTF-8 utilizando el método de la clase padre */
@@ -108,12 +109,13 @@ class Documento extends Conectar
             FROM td_documento_detalle
             INNER JOIN tm_usuario ON td_documento_detalle.user_id = tm_usuario.user_id
             WHERE
-            td_documento_detalle.doc_id = ?";
+            td_documento_detalle.doc_id = ?
+            AND td_documento_detalle.det_tipo = ?";
         /* TODO:Preparar la consulta SQL */
         $sql=$conectar->prepare($sql);
         /* TODO: Vincular los valores a los parámetros de la consulta */
         $sql->bindValue(1,$doc_id);
-        /* $sql->bindValue(2,$det_tipo); */
+        $sql->bindValue(2,$det_tipo);
         /* TODO: Ejecutar la consulta SQL */
         $sql->execute();
         return $sql->fetchAll(pdo::FETCH_ASSOC);
