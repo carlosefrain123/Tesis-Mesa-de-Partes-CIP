@@ -1,5 +1,42 @@
 var tabla;
 var tabla_detalle;
+let arrDocument = [];
+Dropzone.autoDiscover = false;
+let myDropzone = new Dropzone(".dropzone", {
+  url: "../../assets/document",
+  maxFilesize: 2,
+  maxFiles: 5,
+  acceptedFiles: "application/pdf",
+  addRemoveLinks: true,
+  dictRemoveFile: "Quitar",
+});
+myDropzone.on("maxfilesexceeded", function (file) {
+  Swal.fire({
+    title: "Mesa de Partes",
+    text: "Solo se permiten un máximo de 5 archivos",
+    icon: "error",
+    confirmButtonColor: "#5156be",
+  });
+  myDropzone.removeFile(file);
+});
+myDropzone.on("addedfile", function (file) {
+  if (file.size > 2 * 1024 * 1024) {
+    swal.fire({
+      title: "Mesa de Partes",
+      text: 'El archivo"' + file.name + '" excede el tamaño máximo de 2 mb',
+      icon: "error",
+      confirmButtonColor: "#5156be",
+    });
+    myDropzone.removeFile(file);
+  }
+});
+myDropzone.on("addedfile", (file) => {
+  arrDocument.push(file);
+});
+myDropzone.on("removedfile", (file) => {
+  let i = arrDocument.indexOf(file);
+  arrDocument.splice(i, 1); //ACA
+});
 $(document).ready(function () {
   $.post("../../controller/usuario.php?op=comboarea", function (data) {
     $("#area_id").html(data);
