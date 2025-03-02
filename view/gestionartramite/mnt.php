@@ -85,16 +85,16 @@
                         </div>
                     </div>
 
-                    <!-- <div class="col-lg-12">
-                            <div class="dropzone">
-                                <div class="dz-default dz-message">
-                                    <button class="dz-button" type="button">
-                                        <img src="../../assets/image/upload.png" alt="">
-                                    </button>
-                                    <div class="dz-message" data-dz-message><span>Arrastra y suelta archivos aquí o haz click para seleccionar archivos <br> Maximo 5 archivos de tipo *.PDF, y solo de peso maximo de 2MB </span></div>
-                                </div>
+                    <div class="col-lg-12">
+                        <div class="dropzone">
+                            <div class="dz-default dz-message">
+                                <button class="dz-button" type="button">
+                                    <img src="../../assets/image/upload.png" alt="">
+                                </button>
+                                <div class="dz-message" data-dz-message><span>Arrastra y suelta archivos aquí o haz click para seleccionar archivos <br> Maximo 5 archivos de tipo *.PDF, y solo de peso maximo de 2MB </span></div>
                             </div>
-                        </div> -->
+                        </div>
+                    </div>
 
                 </div>
             </div>
