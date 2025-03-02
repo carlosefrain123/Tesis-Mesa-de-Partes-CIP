@@ -58,7 +58,7 @@ $(document).ready(function () {
           ajax: {
             url: "../../controller/documento.php?op=listarxarea",
             type: "post",
-            data: { area_id: area_id /* ,doc_estado:'Pendiente' */ },
+            data: { area_id: area_id ,doc_estado:'Pendiente' },
             dataType: "json",
             error: function (e) {
               console.log(e.responseText);

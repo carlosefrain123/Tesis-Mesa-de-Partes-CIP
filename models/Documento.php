@@ -52,7 +52,7 @@ class Documento extends Conectar
         $sql->execute(); 
         return $sql->fetchAll(PDO::FETCH_ASSOC); 
     }
-    public function get_documento_x_area($area_id){
+    public function get_documento_x_area($area_id,$doc_estado){
         /* TODO: Obtener la conexión a la base de datos utilizando el método de la clase padre */
         $conectar = parent::conexion();
         /* TODO: Establecer el juego de caracteres a UTF-8 utilizando el método de la clase padre */
@@ -82,11 +82,13 @@ class Documento extends Conectar
             INNER JOIN tm_tramite ON tm_documento.tra_id = tm_tramite.tra_id
             INNER JOIN tm_tipo ON tm_documento.tip_id = tm_tipo.tip_id
             INNER JOIN tm_usuario ON tm_documento.user_id = tm_usuario.user_id
-            WHERE tm_documento.area_id = ?";
+            WHERE tm_documento.area_id = ?
+            AND tm_documento.doc_estado=?";
         /* TODO:Preparar la consulta SQL */
         $sql=$conectar->prepare($sql);
         /* TODO: Vincular los valores a los parámetros de la consulta */
         $sql->bindValue(1,$area_id);
+        $sql->bindValue(2,$doc_estado);
         /* TODO: Ejecutar la consulta SQL */
         $sql->execute();
         return $sql->fetchAll(pdo::FETCH_ASSOC);

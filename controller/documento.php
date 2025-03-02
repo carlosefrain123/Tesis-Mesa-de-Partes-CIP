@@ -71,7 +71,7 @@ switch ($_GET["op"]) {
         echo json_encode($results);
         break;
     case "listarxarea":
-        $datos = $documento->get_documento_x_area($_POST["area_id"]);
+        $datos = $documento->get_documento_x_area($_POST["area_id"],$_POST["doc_estado"]);
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
