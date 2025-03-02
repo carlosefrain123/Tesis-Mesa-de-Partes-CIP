@@ -16,23 +16,23 @@ function guardaryeditar(e) {
     contentType: false,
     processData: false,
     success: function (datos) {
-      /* data=JSON.parse(data); */
       console.log(datos);
       if (datos == 1) {
         $("#btnguardar").prop("disabled", false);
-        $("#btnguardar").html("Recuperar");
-        
+        $("#btnguardar").html("Guardar");
         $("#user_id").val("");
         $("#mnt_form")[0].reset();
         $("#listado_table").DataTable().ajax.reload();
         $("#mnt_modal").modal("hide");
         Swal.fire({
           title: "Mesa de Partes",
-          html: "Se registro con éxito",
+          html: "Se registró con éxito",
           icon: "success",
           confirmButtonColor: "#5156be",
         });
       } else if (datos == 0) {
+        $("#btnguardar").prop("disabled", false);
+        $("#btnguardar").html("Guardar");
         Swal.fire({
           title: "Mesa de Partes",
           html: "Registro ya existe, por favor validar",
@@ -40,6 +40,8 @@ function guardaryeditar(e) {
           confirmButtonColor: "#5156be",
         });
       } else if (datos == 2) {
+        $("#btnguardar").prop("disabled", false);
+        $("#btnguardar").html("Guardar");
         $("#user_id").val("");
         $("#mnt_form")[0].reset();
         $("#listado_table").DataTable().ajax.reload();
@@ -51,7 +53,18 @@ function guardaryeditar(e) {
           confirmButtonColor: "#5156be",
         });
       }
-    },beforeSend:function(){
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      $("#btnguardar").prop("disabled", false);
+      $("#btnguardar").html("Guardar");
+      Swal.fire({
+        title: "Error",
+        html: "Ocurrió un error al procesar la solicitud",
+        icon: "error",
+        confirmButtonColor: "#5156be",
+      });
+    },
+    beforeSend: function () {
       $("#btnguardar").prop("disabled", true);
       $("#btnguardar").html(
         '<i class="bx bx-hourglass bx-spin font-size-16 align-middle me-2"></i>Espere..'
