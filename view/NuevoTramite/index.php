@@ -113,8 +113,7 @@ if (isset($_SESSION["user_id"]) and count($datos)>0) {
                                                                 <button class="dz-button" type="button">
                                                                     <img src="../../assets/image/upload.png" alt="">
                                                                 </button>
-                                                                <div class="dz-message" data-dz-dz-message><span> Arrastra y suelta archivos aqui o haz click para seleccionar archivos.,
-                                                                    </span></div>
+                                                                <div class="dz-message" data-dz-dz-message><span>Arrastra y suelta archivos aquí o haz click para seleccionar archivos <br> Maximo 5 archivos de tipo *.PDF, y solo de peso maximo de 2MB </span></div>
                                                             </div>
                                                         </div>
                                                         <!-- <form action="#" class="dropzone"> -->
