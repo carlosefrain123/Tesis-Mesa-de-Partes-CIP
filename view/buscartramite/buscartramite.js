@@ -121,6 +121,7 @@ function ver(doc_id){
           }
       }).DataTable();
 
+      
       tabla_detalle_respuesta = $("#respuesta_table_detalle").dataTable({
           "aProcessing": true,
           "aServerSide": true,
