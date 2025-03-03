@@ -59,6 +59,11 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["tip_nom"];
             $sub_array[] = $row["doc_dni"];
             $sub_array[] = $row["doc_nom"];
+            if ($row["doc_estado"]=='Pendiente'){
+                $sub_array[]= "<span class='badge bg-warning'>Pendiente</span>";
+            }else if($row["doc_estado"]=='Terminado'){
+                $sub_array[]= "<span class='badge bg-primary'>Terminado</span>";
+            }
             $sub_array[] = '<button type="button" class="btn btn-soft-primary waves-effect waves-light btn-sm" onclick="ver(' . $row["doc_id"] . ')"><i class="bx bx-message-alt-dots font-size-16 align-middle"></i></button>';
             $data[] = $sub_array;
         }
